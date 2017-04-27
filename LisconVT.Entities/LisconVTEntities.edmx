@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LisconVT.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DevGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DevGroupID" Type="int" />
+          <Property Name="DevGroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="IDNO" />
+          </Key>
+          <Property Name="IDNO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Plate" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DevGroupID" Type="int" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogTime" Type="datetime" Nullable="false" />
+          <Property Name="LogType" Type="int" Nullable="false" />
+          <Property Name="DevIDNO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Latitude" Type="numeric" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="numeric" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Altitude" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Speed" Type="int" Nullable="false" />
+          <Property Name="Course" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceRuntime">
+          <Key>
+            <PropertyRef Name="DevIDNO" />
+          </Key>
+          <Property Name="DevIDNO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsOnline" Type="bit" Nullable="false" />
+          <Property Name="GpsTime" Type="datetime" Nullable="false" />
+          <Property Name="Latitude" Type="numeric" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="numeric" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Altitude" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Speed" Type="int" Nullable="false" />
+          <Property Name="Course" Type="int" Nullable="false" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DevGroup_DevGroup">
+          <End Role="DevGroup" Type="Self.DevGroup" Multiplicity="0..1" />
+          <End Role="DevGroup1" Type="Self.DevGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DevGroup1">
+              <PropertyRef Name="DevGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_DevGroup">
+          <End Role="DevGroup" Type="Self.DevGroup" Multiplicity="0..1" />
+          <End Role="Device" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="DevGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceLog_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1" />
+          <End Role="DeviceLog" Type="Self.DeviceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="IDNO" />
+            </Principal>
+            <Dependent Role="DeviceLog">
+              <PropertyRef Name="DevIDNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceRuntime_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1" />
+          <End Role="DeviceRuntime" Type="Self.DeviceRuntime" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="IDNO" />
+            </Principal>
+            <Dependent Role="DeviceRuntime">
+              <PropertyRef Name="DevIDNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LisconVTDBModelStoreContainer">
+          <EntitySet Name="DevGroup" EntityType="Self.DevGroup" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="Device" EntityType="Self.Device" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="DeviceLog" EntityType="Self.DeviceLog" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="DeviceRuntime" EntityType="Self.DeviceRuntime" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="USR" store:Type="Tables" />
+          <AssociationSet Name="FK_DevGroup_DevGroup" Association="Self.FK_DevGroup_DevGroup">
+            <End Role="DevGroup" EntitySet="DevGroup" />
+            <End Role="DevGroup1" EntitySet="DevGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_DevGroup" Association="Self.FK_Device_DevGroup">
+            <End Role="DevGroup" EntitySet="DevGroup" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceLog_Device" Association="Self.FK_DeviceLog_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceLog" EntitySet="DeviceLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceRuntime_Device" Association="Self.FK_DeviceRuntime_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceRuntime" EntitySet="DeviceRuntime" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LisconVT.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LisconDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DevGroup" EntityType="LisconVT.DBModel.DevGroup" />
+          <EntitySet Name="Device" EntityType="LisconVT.DBModel.Device" />
+          <EntitySet Name="DeviceLog" EntityType="LisconVT.DBModel.DeviceLog" />
+          <EntitySet Name="DeviceRuntime" EntityType="LisconVT.DBModel.DeviceRuntime" />
+          <EntitySet Name="User" EntityType="LisconVT.DBModel.User" />
+          <AssociationSet Name="FK_DevGroup_DevGroup" Association="LisconVT.DBModel.FK_DevGroup_DevGroup">
+            <End Role="DevGroup" EntitySet="DevGroup" />
+            <End Role="DevGroup1" EntitySet="DevGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_DevGroup" Association="LisconVT.DBModel.FK_Device_DevGroup">
+            <End Role="DevGroup" EntitySet="DevGroup" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceLog_Device" Association="LisconVT.DBModel.FK_DeviceLog_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceLog" EntitySet="DeviceLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceRuntime_Device" Association="LisconVT.DBModel.FK_DeviceRuntime_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="DeviceRuntime" EntitySet="DeviceRuntime" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DevGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DevGroupID" Type="Int32" />
+          <Property Name="DevGroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DevGroup1" Relationship="LisconVT.DBModel.FK_DevGroup_DevGroup" FromRole="DevGroup" ToRole="DevGroup1" />
+          <NavigationProperty Name="DevGroup2" Relationship="LisconVT.DBModel.FK_DevGroup_DevGroup" FromRole="DevGroup1" ToRole="DevGroup" />
+          <NavigationProperty Name="Device" Relationship="LisconVT.DBModel.FK_Device_DevGroup" FromRole="DevGroup" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="IDNO" />
+          </Key>
+          <Property Name="IDNO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Plate" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DevGroupID" Type="Int32" />
+          <Property Name="CreateUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DevGroup" Relationship="LisconVT.DBModel.FK_Device_DevGroup" FromRole="Device" ToRole="DevGroup" />
+          <NavigationProperty Name="DeviceLog" Relationship="LisconVT.DBModel.FK_DeviceLog_Device" FromRole="Device" ToRole="DeviceLog" />
+          <NavigationProperty Name="DeviceRuntime" Relationship="LisconVT.DBModel.FK_DeviceRuntime_Device" FromRole="Device" ToRole="DeviceRuntime" />
+        </EntityType>
+        <EntityType Name="DeviceLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LogType" Type="Int32" Nullable="false" />
+          <Property Name="DevIDNO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Altitude" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Speed" Type="Int32" Nullable="false" />
+          <Property Name="Course" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Device" Relationship="LisconVT.DBModel.FK_DeviceLog_Device" FromRole="DeviceLog" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="DeviceRuntime">
+          <Key>
+            <PropertyRef Name="DevIDNO" />
+          </Key>
+          <Property Name="DevIDNO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsOnline" Type="Boolean" Nullable="false" />
+          <Property Name="GpsTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Altitude" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Speed" Type="Int32" Nullable="false" />
+          <Property Name="Course" Type="Int32" Nullable="false" />
+          <Property Name="CreateUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Device" Relationship="LisconVT.DBModel.FK_DeviceRuntime_Device" FromRole="DeviceRuntime" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_DevGroup_DevGroup">
+          <End Type="LisconVT.DBModel.DevGroup" Role="DevGroup" Multiplicity="0..1" />
+          <End Type="LisconVT.DBModel.DevGroup" Role="DevGroup1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DevGroup1">
+              <PropertyRef Name="DevGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_DevGroup">
+          <End Type="LisconVT.DBModel.DevGroup" Role="DevGroup" Multiplicity="0..1" />
+          <End Type="LisconVT.DBModel.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="DevGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceLog_Device">
+          <End Type="LisconVT.DBModel.Device" Role="Device" Multiplicity="1" />
+          <End Type="LisconVT.DBModel.DeviceLog" Role="DeviceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="IDNO" />
+            </Principal>
+            <Dependent Role="DeviceLog">
+              <PropertyRef Name="DevIDNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceRuntime_Device">
+          <End Type="LisconVT.DBModel.Device" Role="Device" Multiplicity="1" />
+          <End Type="LisconVT.DBModel.DeviceRuntime" Role="DeviceRuntime" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="IDNO" />
+            </Principal>
+            <Dependent Role="DeviceRuntime">
+              <PropertyRef Name="DevIDNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LisconVTDBModelStoreContainer" CdmEntityContainer="LisconDbEntities">
+          <EntitySetMapping Name="DevGroup">
+            <EntityTypeMapping TypeName="LisconVT.DBModel.DevGroup">
+              <MappingFragment StoreEntitySet="DevGroup">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="DevGroupName" ColumnName="DevGroupName" />
+                <ScalarProperty Name="DevGroupID" ColumnName="DevGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Device">
+            <EntityTypeMapping TypeName="LisconVT.DBModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="DevGroupID" ColumnName="DevGroupID" />
+                <ScalarProperty Name="Plate" ColumnName="Plate" />
+                <ScalarProperty Name="IDNO" ColumnName="IDNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceLog">
+            <EntityTypeMapping TypeName="LisconVT.DBModel.DeviceLog">
+              <MappingFragment StoreEntitySet="DeviceLog">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Altitude" ColumnName="Altitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="DevIDNO" ColumnName="DevIDNO" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceRuntime">
+            <EntityTypeMapping TypeName="LisconVT.DBModel.DeviceRuntime">
+              <MappingFragment StoreEntitySet="DeviceRuntime">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Altitude" ColumnName="Altitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="GpsTime" ColumnName="GpsTime" />
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+                <ScalarProperty Name="DevIDNO" ColumnName="DevIDNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="LisconVT.DBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
