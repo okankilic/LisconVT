@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace LisconVT.Domain.Helpers
 
         public event OnMdvrMessageReceived MessageReceived = null;
 
-        public void Read(string ip, int port, byte[] bytes)
+        public void Read(IPAddress ip, int port, byte[] bytes)
         {
             bytes = MdvrMessageHelper.Escape(bytes);
 

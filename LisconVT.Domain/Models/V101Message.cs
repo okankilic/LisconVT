@@ -25,5 +25,12 @@ namespace LisconVT.Domain.Models
         public int RestartCnt { get; set; }
         public int ConnectionCnt { get; set; }
         public string Plate { get; set; }
+
+        public V101Message(string messageKey, string devIDNO, DateTime messageTime): base()
+        {
+            MessageKey = messageKey;
+            DevIDNO = devIDNO;
+            MessageTime = messageTime;
+        }
     }
 }

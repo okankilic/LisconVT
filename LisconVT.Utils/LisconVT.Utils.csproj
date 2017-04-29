@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Network\OragonTcpClient.cs" />
     <Compile Include="Network\OragonTcpListener.cs" />
     <Compile Include="Network\OragonUdpClient.cs" />

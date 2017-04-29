@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LisconVT.Utils.Extensions;
 
 namespace LisconVT.Domain.Helpers
 {
@@ -94,20 +95,15 @@ namespace LisconVT.Domain.Helpers
             var messageString = GetString(bytes.ToArray());
             var args = messageString.Split(Delimeter);
 
-            string messageKey = args[2];
+            var messageKey = args[2];
+            var devIDNO = args[3];
+            var messageTime = args[5].ToDateTime();
 
             if (messageKey == MdvrMessageKeys.V101)
             {
-                var message = new V101Message();
-
-                //message.TransmissionNo = args[1];
-                message.MessageKey = messageKey;
-                message.DevIDNO = args[3];
-                //message.StationNo = args[4];
-                message.MessageTime = DateTime.ParseExact(args[5], "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                var message = new V101Message(messageKey, devIDNO, messageTime);
 
                 message.LocationAndStatus = ParseLocationAndStatus(args);
-
                 message.ProtocolVersion = args[25];
                 message.DeviceType = int.Parse(args[26]);
                 message.ServerIpAddress = args[27];
@@ -119,15 +115,41 @@ namespace LisconVT.Domain.Helpers
             }
             else if (messageKey == MdvrMessageKeys.V114)
             {
-                var message = new V114Message();
-
-                //message.TransmissionNo = args[1];
-                message.MessageKey = messageKey;
-                message.DevIDNO = args[3];
-                //message.StationNo = args[4];
-                message.MessageTime = DateTime.ParseExact(args[5], "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                var message = new V114Message(messageKey, devIDNO, messageTime);
 
                 message.LocationAndStatus = ParseLocationAndStatus(args);
+
+                return message;
+            }
+            else if(messageKey == MdvrMessageKeys.V201)
+            {
+                var message = new V201Message(messageKey, devIDNO, messageTime);
+
+                message.LocationAndStatus = ParseLocationAndStatus(args);
+                message.AlarmTime = args[25].ToDateTime();
+                message.AlarmUID = args[26];
+                message.IsImageCaptureEnabled = args[27].ToBool();
+                message.ImagePath = args[28];
+                message.IsVideoRecordEnabled = args[29].ToBool();
+                message.VideoPath = args[30];
+                message.AlarmSource = args[31];
+                message.AlarmName = args[32];
+
+                return message;
+            }
+            else if (messageKey == MdvrMessageKeys.V251)
+            {
+                var message = new V251Message(messageKey, devIDNO, messageTime);
+
+                message.LocationAndStatus = ParseLocationAndStatus(args);
+                message.AlarmTime = args[25].ToDateTime();
+                message.AlarmUID = args[26];
+                message.IsImageCaptureEnabled = args[27].ToBool();
+                message.ImagePath = args[28];
+                message.IsVideoRecordEnabled = args[29].ToBool();
+                message.VideoPath = args[30];
+                message.AlarmSource = args[31];
+                message.AlarmName = args[32];
 
                 return message;
             }

@@ -16,6 +16,8 @@ namespace LisconVT.Domain.Enums
         public const string V107 = "V107";
         public const string V109 = "V109";
         public const string V114 = "V114";
+        public const string V201 = "V201";
+        public const string V251 = "V251";
 
         // center message types
         public const string C100 = "C100";

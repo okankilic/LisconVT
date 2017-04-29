@@ -13,9 +13,11 @@ namespace LisconVT.Domain.Models
     {
         public int DriveFlag { get; set; }
 
-        public V114Message(): base()
+        public V114Message(string messageKey, string devIDNO, DateTime messageTime): base()
         {
-
+            MessageKey = messageKey;
+            DevIDNO = devIDNO;
+            MessageTime = messageTime;
         }
     }
 }

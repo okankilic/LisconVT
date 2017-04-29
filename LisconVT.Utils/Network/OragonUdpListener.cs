@@ -3,63 +3,109 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace LisconVT.Utils.Network
 {
-    public delegate void OnUdpMessageReceived(string ip, int port, byte[] bytes);
-
-    public class OragonUdpListener
+    public abstract class OragonUdpListener
     {
+        abstract public byte[] Parse(UdpReceiveResult result);
+        abstract public void OnTimerElapsed();
+
         static Logger _logger = LogManager.GetCurrentClassLogger();
         
         int _port;
 
         bool _isRunning = false;
 
-        public event OnUdpMessageReceived DataReceived = null;
+        UdpClient _server;
 
-        public OragonUdpListener(int port)
+        System.Timers.Timer _timer;
+
+        public OragonUdpListener(int port, double timerInterval)
         {
             _port = port;
+
+            if(timerInterval > 0)
+            {
+                _timer = new System.Timers.Timer(timerInterval);
+
+                _timer.Elapsed += _timer_Elapsed;
+                _timer.AutoReset = true;
+                _timer.Start();
+            }
         }
 
-        void Listen(object args)
+        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var server = new UdpClient(_port);
-            var ep = new IPEndPoint(IPAddress.Any, _port);
-
-            try
+            Task.Run(() =>
             {
-                while (_isRunning)
-                {
-                    if (server.Available == 0)
-                        continue;
-
-                    var bytes = server.Receive(ref ep);
-                    DataReceived?.Invoke(ep.Address.ToString(), ep.Port, bytes);
-
-                    Thread.Sleep(10);
-                }
-            }
-            catch(Exception ex)
-            {
-                _logger.Error(ex);
-            }
-            finally
-            {
-                server.Close();
-            }
+                OnTimerElapsed();
+            });
         }
 
         public void Start()
         {
             _isRunning = true;
-            ThreadPool.QueueUserWorkItem(Listen);
+
+            _server = new UdpClient(_port);
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    while (_isRunning)
+                    {
+                        var receiveResult = await _server.ReceiveAsync();
+                        var sendBytes = Parse(receiveResult);
+                        Send(receiveResult.RemoteEndPoint, sendBytes);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+                finally
+                {
+                    if (_isRunning == true)
+                    {
+                        _isRunning = false;
+                        _server.Close();
+                    }
+                }
+            });
+        }
+
+        public void Send(IPEndPoint ep, byte[] bytes)
+        {
+            if (bytes == null)
+                return;
+
+            if (bytes.Length == 0)
+                return;
+
+            try
+            {
+                _server.Send(bytes, bytes.Length, ep);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
         }
 
         public void Stop()
         {
             _isRunning = false;
+
+            try
+            {
+                _server.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace LisconVT.Utils.Network
         static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public string DevIDNO { get; private set; }
-        public IPAddress Ip { get; private set; }
+        public string Ip { get; private set; }
         public int Port { get; private set; }
 
         UdpClient _client = null;
@@ -22,23 +22,10 @@ namespace LisconVT.Utils.Network
         public OragonUdpClient(string devIDNO, string ip, int port)
         {
             DevIDNO = devIDNO;
-            Ip = IPAddress.Parse(ip);
+            Ip = ip;
             Port = port;
 
             _client = new UdpClient();
-        }
-
-        public void Send(byte[] bytes)
-        {
-            try
-            {
-                var ep = new IPEndPoint(Ip, Port);
-                _client.Send(bytes, bytes.Length, ep);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-            }
         }
     }
 }
