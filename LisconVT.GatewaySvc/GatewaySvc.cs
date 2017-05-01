@@ -22,7 +22,7 @@ namespace LisconVT.GatewaySvc
 
         protected override void OnStart(string[] args)
         {
-            _server = new OragonTcpListener("Gateway Svc", 1234);
+
         }
 
         protected override void OnStop()

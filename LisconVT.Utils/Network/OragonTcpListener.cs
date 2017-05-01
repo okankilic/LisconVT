@@ -11,87 +11,69 @@ using System.Threading.Tasks;
 
 namespace LisconVT.Utils.Network
 {
-    public class OragonTcpListener
+    public abstract class OragonTcpListener
     {
-        IPAddress _ip = IPAddress.Parse("127.0.0.1");
-        TcpListener _server = null;
+        public abstract void OnClientConnected(Socket client);
+
         static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public string Name { get; private set; }
-        public int Port { get; private set; }
-        
-        public ConcurrentDictionary<Guid, string> ClientIDs { get; private set; }
-        public ConcurrentDictionary<Guid, OragonTcpClient> Clients { get; private set; }
+        string _name;
+        bool _isRunning = false;
+        TcpListener _server = null;
 
-        public event OnDataReceived DataReceived = null;
+        public int Port { get; private set; }
 
         public OragonTcpListener(string name, int port)
         {
-            this.ClientIDs = new ConcurrentDictionary<Guid, string>();
-            this.Clients = new ConcurrentDictionary<Guid, OragonTcpClient>();
-
-            Name = name;
+            _name = name;
             Port = port;
         }
 
         public void Start()
         {
-            ThreadPool.QueueUserWorkItem(Listen);
-        }
+            _isRunning = true;
 
-        private void Listen(Object x)
-        {
-            if (_server == null)
-                _server = new TcpListener(_ip, Port);
+            _server = new TcpListener(IPAddress.Any, Port);
 
-            _server.Start();
-            _logger.Info("Server: {0} started listening port: {1}", Name, Port);
-
-            while (true)
+            Task.Run(async () =>
             {
-                try 
+                try
                 {
-                    var tcpClient = _server.AcceptTcpClient();
+                    _server.Start();
+                    _logger.Info("Server: {0} started listening port: {1}", _name, Port);
 
-                    var client = new OragonTcpClient(tcpClient);
-                    client.DataReceived += Client_DataReceived;
-
-                    if (ClientIDs.TryAdd(client.Guid, client.ID))
+                    while(_isRunning)
                     {
-                        if (Clients.TryAdd(client.Guid, client) == true)
-                        {
-                            _logger.Info("Client {0} connected", client.Guid);
-                            client.ReadAsync();
-                        }
+                        var client = await _server.AcceptSocketAsync();
+                        OnClientConnected(client);
                     }
                 }
                 catch (Exception ex)
                 {
                     _logger.Error(ex);
                 }
-            }
-        }
-
-        public void Send(string clientID, byte[] bytes)
-        {
-            var clientKey = ClientIDs.Single(q => q.Value == clientID).Key;
-            Clients[clientKey].Write(bytes);
-        }
-
-        private void Client_DataReceived(string clientID, byte[] bytes)
-        {
-            DataReceived?.Invoke(clientID, bytes);
+                finally
+                {
+                    if(_isRunning == true)
+                    {
+                        _isRunning = false;
+                        _server.Stop();
+                    }
+                }
+            });
         }
 
         public void Stop()
         {
+            _isRunning = false;
+
             try
             {
                 _server.Stop();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _logger.Error(ex);
+                throw;
             }
         }
 

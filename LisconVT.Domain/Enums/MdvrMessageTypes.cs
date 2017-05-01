@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LisconVT.Domain.Enums
 {
-    public class MdvrMessageKeys
+    public class MdvrMessageTypes
     {
         // Vehicle message types
         public const string V100 = "V100";

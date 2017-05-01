@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LisconVT.BL.Tests", "Liscon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LisconVT.Entities", "LisconVT.Entities\LisconVT.Entities.csproj", "{FD3B1380-03E2-40D4-A745-BFC62944CD5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LisconVT.UI.Web", "LisconVT.UI.Web\LisconVT.UI.Web.csproj", "{D191890F-A625-4641-B86F-AC9A3F4D8CFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{FD3B1380-03E2-40D4-A745-BFC62944CD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD3B1380-03E2-40D4-A745-BFC62944CD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD3B1380-03E2-40D4-A745-BFC62944CD5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D191890F-A625-4641-B86F-AC9A3F4D8CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D191890F-A625-4641-B86F-AC9A3F4D8CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D191890F-A625-4641-B86F-AC9A3F4D8CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D191890F-A625-4641-B86F-AC9A3F4D8CFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

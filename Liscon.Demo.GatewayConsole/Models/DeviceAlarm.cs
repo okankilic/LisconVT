@@ -9,7 +9,6 @@ namespace Liscon.Demo.GatewayConsole.Models
     public class DeviceAlarm
     {
         public string Name { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime AlarmTime { get; set; }
     }
 }

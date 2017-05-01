@@ -9,65 +9,88 @@ using System.Threading.Tasks;
 
 namespace LisconVT.Utils.Network
 {
-    public delegate void OnDataReceived(string id, byte[] bytes);
-
-    public class OragonTcpClient
+    public abstract class OragonTcpClient
     {
-        TcpClient _client = null;
-        NetworkStream _stream = null;
+        public abstract byte[] GetResponse(byte[] bytes, int byteCnt);
+
         static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        const int MaxDataBufferLength = 256;
+        TcpClient _client = null;
+        NetworkStream _stream = null;
+        bool _isRunning = false;
 
-        public Guid Guid { get; private set; }
-        public string ID { get; private set; }
+        const int MaxDataBufferLength = 2048;
 
-        public event OnDataReceived DataReceived = null;
-
-        public OragonTcpClient(TcpClient client)
+        public OragonTcpClient(Socket socket)
         {
-            Guid = Guid.NewGuid();
-            ID = "0";
-
-            _client = client;
+            _client = new TcpClient();
+            _client.Client = socket;
             _stream = _client.GetStream();
         }
 
-        public void ReadAsync()
+        public void Start()
         {
-            ThreadPool.QueueUserWorkItem(Read);
+            _isRunning = true;
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    while (_isRunning)
+                    {
+                        var receiveBytes = new Byte[MaxDataBufferLength];
+                        int receiveByteCnt = await _stream.ReadAsync(receiveBytes, 0, MaxDataBufferLength);
+
+                        if (receiveByteCnt == 0)
+                            continue;
+
+                        var responseBytes = GetResponse(receiveBytes, receiveByteCnt);
+                        Send(responseBytes);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+                finally
+                {
+                    if(_isRunning == true)
+                    {
+                        _isRunning = false;
+                        _client.Close();
+                    }
+                }
+            });
         }
 
-        private async void Read(object x)
+        public void Stop()
         {
+            _isRunning = false;
+
             try
             {
-                while (true)
-                {
-                    var bytes = new Byte[MaxDataBufferLength];
-
-                    int byteCnt = await _stream.ReadAsync(bytes, 0, MaxDataBufferLength);
-                    if (byteCnt > 0)
-                        DataReceived?.Invoke(ID, bytes);
-
-#if DEBUG
-                    string msg = Encoding.ASCII.GetString(bytes, 0, bytes.Length);
-                    _logger.Info(msg);
-#endif
-
-                }
+                _client.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _logger.Error(ex);
+
+                throw;
             }
         }
 
-        public async void Write(byte[] buffer)
+        public void Send(byte[] bytes)
         {
-            await _stream.WriteAsync(buffer, 0, buffer.Length);
+            if (bytes == null)
+                return;
 
-            _logger.Info(Encoding.ASCII.GetString(buffer));
+            if (bytes.Length == 0)
+                return;
+
+            Task.Run(async () =>
+            {
+                await _stream.WriteAsync(bytes, 0, bytes.Length);
+            });
         }
     }
 }

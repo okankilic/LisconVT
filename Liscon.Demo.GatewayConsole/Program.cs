@@ -1,4 +1,5 @@
 ﻿using Liscon.Demo.GatewayConsole.Models;
+using Liscon.Demo.GatewayConsole.Servers;
 using LisconVT.BL;
 using LisconVT.Domain.Enums;
 using LisconVT.Domain.Helpers;
@@ -19,7 +20,10 @@ namespace Liscon.Demo.GatewayConsole
 {
     class Program
     {
-        static GatewayUdpServer GatewayUdpServer = null;
+        static string ServerIp = "176.240.208.9";
+
+        static GatewayServer GatewayServer = null;
+        static MediaServer MediaServer = null;
 
         static void Main(string[] args)
         {
@@ -33,35 +37,63 @@ namespace Liscon.Demo.GatewayConsole
 
                 if(cmd == "start")
                 {
-                    if (GatewayUdpServer == null)
+                    if (GatewayServer == null)
                     {
-                        GatewayUdpServer = new GatewayUdpServer(6608, 10000);
-                        GatewayUdpServer.ClientConnected += GatewayUdpServer_ClientConnected;
-                        GatewayUdpServer.ClientDisconnected += GatewayUdpServer_ClientDisconnected;
-                        GatewayUdpServer.ClientRuntimeUpdated += GatewayUdpServer_ClientRuntimeUpdated;
+                        GatewayServer = new GatewayServer(6608, 10000);
+                        GatewayServer.ClientConnected += GatewayServer_ClientConnected;
+                        GatewayServer.ClientDisconnected += GatewayServer_ClientDisconnected;
+                        GatewayServer.ClientRuntimeUpdated += GatewayServer_ClientRuntimeUpdated;
                     }
+                    GatewayServer.Start();
 
-                    GatewayUdpServer.Start();
+                    if (MediaServer == null)
+                    {
+                        MediaServer = new MediaServer("Media Server", 6602);
+                        MediaServer.ClientConnected += MediaServer_ClientConnected;
+                    }
+                    MediaServer.Start();
                 }
                 else if(cmd == "stop")
                 {
-                    if (GatewayUdpServer != null)
-                        GatewayUdpServer.Stop();
+                    if (GatewayServer != null)
+                        GatewayServer.Stop();
+
+                    if (MediaServer != null)
+                        MediaServer.Stop();
+                }
+                else if(cmd == "open")
+                {
+                    var devIDNO = args[1];
+                    var channelNo = int.Parse(args[2]);
+
+                    GatewayServer.SendStartVideo(devIDNO, channelNo, ServerIp, 6602);
+                }
+                else if (cmd == "close")
+                {
+                    var devIDNO = args[1];
+                    var channelNo = int.Parse(args[2]);
+
+                    GatewayServer.SendStopVideo(devIDNO, channelNo, ServerIp, 6602);
                 }
             }
         }
 
-        private static void GatewayUdpServer_ClientRuntimeUpdated()
+        private static void MediaServer_ClientConnected(string devIDNO)
         {
             RefreshConsole();
         }
 
-        private static void GatewayUdpServer_ClientDisconnected()
+        private static void GatewayServer_ClientRuntimeUpdated()
         {
             RefreshConsole();
         }
 
-        private static void GatewayUdpServer_ClientConnected()
+        private static void GatewayServer_ClientDisconnected()
+        {
+            RefreshConsole();
+        }
+
+        private static void GatewayServer_ClientConnected(string devIDNO)
         {
             RefreshConsole();
         }
@@ -70,20 +102,30 @@ namespace Liscon.Demo.GatewayConsole
         {
             Console.Clear();
 
-            Console.WriteLine("Clients");
-            var clientLineFormat = "{0,-8} {1,-20:yyyy-MM-dd HH:mm:ss} {2,-10:F6} {3,-10:F6} {4, -16} {5, -6}";
-            Console.WriteLine(clientLineFormat, "IDNO", "Datetime", "Latitude", "Longitude", "Ip Address", "Port");
-            foreach (var client in GatewayUdpServer.Clients.Values)
+            Console.WriteLine("Gateway Server Clients");
+            var gatewaySvcFormat = "{0,-8} {1,-20:yyyy-MM-dd HH:mm:ss} {2,-10:F6} {3,-10:F6} {4, -16} {5, -6}";
+            Console.WriteLine(gatewaySvcFormat, "IDNO", "Datetime", "Latitude", "Longitude", "Ip Address", "Port");
+            foreach (var client in GatewayServer.Clients.Values)
             {
-                Console.WriteLine(clientLineFormat, client.DevIDNO, client.Runtime.GpsTime, client.Runtime.Latitude, client.Runtime.Longitude, client.Ip, client.Port);
+                Console.WriteLine(gatewaySvcFormat, client.DevIDNO, client.Runtime.GpsTime, client.Runtime.Latitude, client.Runtime.Longitude, client.Ip, client.Port);
             }
 
-            Console.WriteLine("Alarms");
-            var alarmLineFormat = "{0, -32} {1, -20} {2,-20:yyyy-MM-dd HH:mm:ss} {3,-20:yyyy-MM-dd HH:mm:ss}";
-            Console.WriteLine(alarmLineFormat, "Key", "Name", "Start", "End");
-            foreach (var alarm in GatewayUdpServer.Alarms)
+            Console.WriteLine("\r\n");
+            Console.WriteLine("Media Server Clients");
+            var mediaSvcFormat = "{0,-8} {1, -16} {2, -6}";
+            Console.WriteLine(mediaSvcFormat, "IDNO", "Ip Address", "Port");
+            foreach (var client in MediaServer.Clients.Values)
             {
-                Console.WriteLine(alarmLineFormat, alarm.Key, alarm.Value.Name, alarm.Value.StartTime, alarm.Value.EndTime);
+                Console.WriteLine(mediaSvcFormat, client.DevIDNO, "", "");
+            }
+
+            Console.WriteLine("\r\n");
+            Console.WriteLine("Alarms");
+            var alarmLineFormat = "{0, -32} {1, -20} {2,-20:yyyy-MM-dd HH:mm:ss}";
+            Console.WriteLine(alarmLineFormat, "Key", "Name", "Start");
+            foreach (var alarm in GatewayServer.Alarms)
+            {
+                Console.WriteLine(alarmLineFormat, alarm.Key, alarm.Value.Name, alarm.Value.AlarmTime);
             }
         }
     }

@@ -9,15 +9,16 @@ namespace LisconVT.Utils.Network
 {
     public abstract class OragonUdpListener
     {
-        abstract public byte[] Parse(UdpReceiveResult result);
+
+        abstract public void OnMessageReceived(UdpReceiveResult result);
+
+        //abstract public byte[] Parse(UdpReceiveResult result);
         abstract public void OnTimerElapsed();
 
         static Logger _logger = LogManager.GetCurrentClassLogger();
         
         int _port;
-
         bool _isRunning = false;
-
         UdpClient _server;
 
         System.Timers.Timer _timer;
@@ -52,28 +53,34 @@ namespace LisconVT.Utils.Network
 
             Task.Run(async () =>
             {
-                try
-                {
-                    while (_isRunning)
-                    {
-                        var receiveResult = await _server.ReceiveAsync();
-                        var sendBytes = Parse(receiveResult);
-                        Send(receiveResult.RemoteEndPoint, sendBytes);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-                finally
-                {
-                    if (_isRunning == true)
-                    {
-                        _isRunning = false;
-                        _server.Close();
-                    }
-                }
+                await ReceiveMsgAsync();
             });
+        }
+
+        private async Task ReceiveMsgAsync()
+        {
+            try
+            {
+                while (_isRunning)
+                {
+                    var receiveResult = await _server.ReceiveAsync();
+                    OnMessageReceived(receiveResult);
+                    //var sendBytes = Parse(receiveResult);
+                    //Send(receiveResult.RemoteEndPoint, sendBytes);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+            finally
+            {
+                if (_isRunning == true)
+                {
+                    _isRunning = false;
+                    _server.Close();
+                }
+            }
         }
 
         public void Send(IPEndPoint ep, byte[] bytes)
@@ -84,15 +91,40 @@ namespace LisconVT.Utils.Network
             if (bytes.Length == 0)
                 return;
 
-            try
+            Task.Run(async () =>
             {
-                _server.Send(bytes, bytes.Length, ep);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-            }
+                try
+                {
+                    await _server.SendAsync(bytes, bytes.Length, ep);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+            });
         }
+
+        //public async Task<int> SendAsync(IPEndPoint ep, byte[] bytes)
+        //{
+        //    int sentByteCnt = 0;
+
+        //    if (bytes == null)
+        //        return sentByteCnt;
+
+        //    if (bytes.Length == 0)
+        //        return sentByteCnt;
+            
+        //    try
+        //    {
+        //        sentByteCnt = await _server.SendAsync(bytes, bytes.Length, ep);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.Error(ex);
+        //    }
+
+        //    return sentByteCnt;
+        //}
 
         public void Stop()
         {
@@ -106,6 +138,11 @@ namespace LisconVT.Utils.Network
             {
                 throw;
             }
+        }
+
+        public void TriggerEvent()
+        {
+
         }
     }
 }

@@ -54,9 +54,11 @@
   <ItemGroup>
     <Compile Include="Models\DeviceAlarm.cs" />
     <Compile Include="Models\DeviceClient.cs" />
-    <Compile Include="Models\GatewayUdpServer.cs" />
+    <Compile Include="Models\MediaClient.cs" />
+    <Compile Include="Servers\GatewayServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servers\MediaServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

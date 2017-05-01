@@ -1,5 +1,4 @@
-﻿using LisconVT.Domain.Delegates;
-using LisconVT.Domain.Models;
+﻿using LisconVT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,83 +9,81 @@ using System.Threading.Tasks;
 
 namespace LisconVT.Domain.Helpers
 {
+    public delegate void OnMessageRead( MdvrMessageBase message);
+
     public class MdvrMessageReader
     {
-        MDVRMessageFields Field { get; set; }
+        MessageFields _field = MessageFields.Start;
+        MdvrMessage _msg = null;
 
-        List<byte> ByteList { get; set; }
-        int DataLength { get; set; }
-        int DataIndex { get; set; }
+        public event OnMessageRead MessageReceived = null;
 
-        public event OnMdvrMessageReceived MessageReceived = null;
-
-        public void Read(IPAddress ip, int port, byte[] bytes)
+        public void Read(byte[] bytes, int byteCnt)
         {
-            bytes = MdvrMessageHelper.Escape(bytes);
+            //bytes = MdvrMessageHelper.Escape(bytes);
 
             using (var ms = new MemoryStream(bytes))
             {
                 using (var br = new BinaryReader(ms))
                 {
-                    while (br.BaseStream.Position < br.BaseStream.Length)
+                    while (ms.Position < byteCnt)
                     {
-                        switch (Field)
+                        switch (_field)
                         {
-                            case MDVRMessageFields.Start:
+                            case MessageFields.Start:
                                 {
-                                    var fieldString = MdvrMessageHelper.GetString(br.ReadBytes(4));
-                                    if (fieldString == MdvrMessageHelper.MessageStart)
-                                        Field = MDVRMessageFields.Length;
+                                    if (MdvrMessageHelper.GetString(br.ReadBytes(4)) == MdvrMessageHelper.MessageStart)
+                                    {
+                                        _msg = new MdvrMessage();
+                                        _field = MessageFields.Length;
+                                    }
                                 }
                                 break;
 
-                            case MDVRMessageFields.Length:
+                            case MessageFields.Length:
                                 {
                                     var fieldString = MdvrMessageHelper.GetString(br.ReadBytes(4));
-                                    DataLength = int.Parse(fieldString);
-                                    if (DataLength > 0)
-                                    {
-                                        ByteList = new List<byte>();
-                                        DataIndex = 0;
-                                        Field = MDVRMessageFields.Data;
-                                    }
+                                    _msg.MessageLength = int.Parse(fieldString);
+
+                                    if (_msg.MessageLength > 0)
+                                        _field = MessageFields.Data;
                                     else
-                                        Field = MDVRMessageFields.End;
+                                        _field = MessageFields.End;
                                 }
                                 break;
 
-                            case MDVRMessageFields.Data:
+                            case MessageFields.Data:
                                 {
-                                    if (DataIndex < DataLength)
+                                    if (_msg.ByteList.Count < _msg.MessageLength)
                                     {
-                                        ByteList.Add(br.ReadByte());
-                                        DataIndex++;
-                                        if (DataIndex == DataLength)
-                                            Field = MDVRMessageFields.End;
+                                        _msg.ByteList.Add(br.ReadByte());
+                                        if (_msg.ByteList.Count == _msg.MessageLength)
+                                            _field = MessageFields.End;
                                     }
                                 }
                                 break;
 
-                            case MDVRMessageFields.End:
+                            case MessageFields.End:
                                 {
-                                    var fieldString = MdvrMessageHelper.GetString(br.ReadBytes(1));
-                                    if (fieldString == MdvrMessageHelper.MessageEnd)
+                                    if (MdvrMessageHelper.GetString(br.ReadBytes(1)) == MdvrMessageHelper.MessageEnd)
                                     {
-                                        var message = MdvrMessageHelper.Parse(ByteList);
-                                        if(message is MdvrMessageBase)
-                                        {
-                                            MdvrMessageReceivedArgs args = new MdvrMessageReceivedArgs()
-                                            {
-                                                DevIDNO = (message as MdvrMessageBase).DevIDNO,
-                                                IpAddress = ip,
-                                                Port = port,
-                                                Message = message
-                                            };
+                                        var mdvrMessage = MdvrMessageHelper.Parse(_msg.ByteList);
+                                        MessageReceived?.Invoke(mdvrMessage);
+                                        //var message = MdvrMessageHelper.Parse(_msg.ByteList);
+                                        //if(message is MdvrMessageBase)
+                                        //{
+                                        //    MdvrMessageReceivedArgs args = new MdvrMessageReceivedArgs()
+                                        //    {
+                                        //        DevIDNO = (message as MdvrMessageBase).DevIDNO,
+                                        //        IpAddress = ip,
+                                        //        Port = port,
+                                        //        Message = message
+                                        //    };
 
-                                            MessageReceived?.Invoke(args);
-                                        }
+                                        //    MessageReceived?.Invoke(args);
+                                        //}
                                     }
-                                    Field = MDVRMessageFields.Start;
+                                    _field = MessageFields.Start;
                                 }
                                 break;
                         }
@@ -94,5 +91,13 @@ namespace LisconVT.Domain.Helpers
                 }
             }
         }
+    }
+
+    enum MessageFields
+    {
+        Start,
+        Length,
+        Data,
+        End
     }
 }

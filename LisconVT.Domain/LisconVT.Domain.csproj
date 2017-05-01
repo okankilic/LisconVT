@@ -40,18 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Delegates\Delegates.cs" />
+    <Compile Include="Enums\ConnectionTypes.cs" />
     <Compile Include="Enums\LogTypes.cs" />
-    <Compile Include="Enums\MdvrMessageKeys.cs" />
+    <Compile Include="Enums\MdvrMediaMessageTypes.cs" />
+    <Compile Include="Enums\MdvrMessageTypes.cs" />
     <Compile Include="Enums\MdvrResponseTypes.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
+    <Compile Include="Helpers\MdvrMediaMessageReader.cs" />
     <Compile Include="Helpers\MdvrMessageHelper.cs" />
     <Compile Include="Helpers\MdvrMessageReader.cs" />
     <Compile Include="Helpers\MDVRMessageWriter.cs" />
+    <Compile Include="Models\C508Message.cs" />
+    <Compile Include="Models\C7212Message.cs" />
     <Compile Include="Models\DmsLocation.cs" />
     <Compile Include="Models\LocationAndStatusModel.cs" />
+    <Compile Include="Models\MdvrMediaMessage.cs" />
+    <Compile Include="Models\MdvrMessage.cs" />
     <Compile Include="Models\MdvrMessageBase.cs" />
-    <Compile Include="Models\MdvrMessageReceivedArgs.cs" />
+    <Compile Include="Models\V100Message.cs" />
+    <Compile Include="Models\V102Message.cs" />
     <Compile Include="Models\V114Message.cs" />
     <Compile Include="Models\V101Message.cs" />
     <Compile Include="Models\V201Message.cs" />
@@ -59,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Delegates\" />
     <Folder Include="Protocols\" />
   </ItemGroup>
   <ItemGroup>

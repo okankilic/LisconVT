@@ -16,7 +16,18 @@ namespace LisconVT.Utils.Extensions
 
         public static DateTime ToDateTime(this string str)
         {
-            return DateTime.ParseExact(str, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+            var datetime = DateTime.MinValue;
+
+            try
+            {
+                datetime = DateTime.ParseExact(str, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return datetime;
         }
     }
 }

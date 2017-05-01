@@ -46,7 +46,6 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Network\OragonTcpClient.cs" />
     <Compile Include="Network\OragonTcpListener.cs" />
-    <Compile Include="Network\OragonUdpClient.cs" />
     <Compile Include="Network\OragonUdpListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
