@@ -24,6 +24,7 @@ namespace Liscon.Demo.GatewayConsole
 
         static GatewayServer GatewayServer = null;
         static MediaServer MediaServer = null;
+        static MediaRtspServer MediaRtspServer = null;
 
         static void Main(string[] args)
         {
@@ -52,6 +53,12 @@ namespace Liscon.Demo.GatewayConsole
                         MediaServer.ClientConnected += MediaServer_ClientConnected;
                     }
                     MediaServer.Start();
+
+                    if(MediaRtspServer == null)
+                    {
+                        MediaRtspServer = new MediaRtspServer(6601);
+                    }
+                    MediaRtspServer.Start();
                 }
                 else if(cmd == "stop")
                 {
@@ -100,33 +107,33 @@ namespace Liscon.Demo.GatewayConsole
 
         private static void RefreshConsole()
         {
-            Console.Clear();
+            //Console.Clear();
 
-            Console.WriteLine("Gateway Server Clients");
-            var gatewaySvcFormat = "{0,-8} {1,-20:yyyy-MM-dd HH:mm:ss} {2,-10:F6} {3,-10:F6} {4, -16} {5, -6}";
-            Console.WriteLine(gatewaySvcFormat, "IDNO", "Datetime", "Latitude", "Longitude", "Ip Address", "Port");
-            foreach (var client in GatewayServer.Clients.Values)
-            {
-                Console.WriteLine(gatewaySvcFormat, client.DevIDNO, client.Runtime.GpsTime, client.Runtime.Latitude, client.Runtime.Longitude, client.Ip, client.Port);
-            }
+            //Console.WriteLine("Gateway Server Clients");
+            //var gatewaySvcFormat = "{0,-8} {1,-20:yyyy-MM-dd HH:mm:ss} {2,-10:F6} {3,-10:F6} {4, -16} {5, -6}";
+            //Console.WriteLine(gatewaySvcFormat, "IDNO", "Datetime", "Latitude", "Longitude", "Ip Address", "Port");
+            //foreach (var client in GatewayServer.Clients.Values)
+            //{
+            //    Console.WriteLine(gatewaySvcFormat, client.DevIDNO, client.Runtime.GpsTime, client.Runtime.Latitude, client.Runtime.Longitude, client.Ip, client.Port);
+            //}
 
-            Console.WriteLine("\r\n");
-            Console.WriteLine("Media Server Clients");
-            var mediaSvcFormat = "{0,-8} {1, -16} {2, -6}";
-            Console.WriteLine(mediaSvcFormat, "IDNO", "Ip Address", "Port");
-            foreach (var client in MediaServer.Clients.Values)
-            {
-                Console.WriteLine(mediaSvcFormat, client.DevIDNO, "", "");
-            }
+            //Console.WriteLine("\r\n");
+            //Console.WriteLine("Media Server Clients");
+            //var mediaSvcFormat = "{0,-8} {1, -16} {2, -6}";
+            //Console.WriteLine(mediaSvcFormat, "IDNO", "Ip Address", "Port");
+            //foreach (var client in MediaServer.Clients.Values)
+            //{
+            //    Console.WriteLine(mediaSvcFormat, client.DevIDNO, "", "");
+            //}
 
-            Console.WriteLine("\r\n");
-            Console.WriteLine("Alarms");
-            var alarmLineFormat = "{0, -32} {1, -20} {2,-20:yyyy-MM-dd HH:mm:ss}";
-            Console.WriteLine(alarmLineFormat, "Key", "Name", "Start");
-            foreach (var alarm in GatewayServer.Alarms)
-            {
-                Console.WriteLine(alarmLineFormat, alarm.Key, alarm.Value.Name, alarm.Value.AlarmTime);
-            }
+            //Console.WriteLine("\r\n");
+            //Console.WriteLine("Alarms");
+            //var alarmLineFormat = "{0, -32} {1, -20} {2,-20:yyyy-MM-dd HH:mm:ss}";
+            //Console.WriteLine(alarmLineFormat, "Key", "Name", "Start");
+            //foreach (var alarm in GatewayServer.Alarms)
+            //{
+            //    Console.WriteLine(alarmLineFormat, alarm.Key, alarm.Value.Name, alarm.Value.AlarmTime);
+            //}
         }
     }
 }

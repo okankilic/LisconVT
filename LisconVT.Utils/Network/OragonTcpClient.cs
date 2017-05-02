@@ -19,7 +19,7 @@ namespace LisconVT.Utils.Network
         NetworkStream _stream = null;
         bool _isRunning = false;
 
-        const int MaxDataBufferLength = 2048;
+        const int MaxDataBufferLength = 1024;
 
         public OragonTcpClient(Socket socket)
         {

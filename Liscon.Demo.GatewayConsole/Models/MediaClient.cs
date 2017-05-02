@@ -40,11 +40,35 @@ namespace Liscon.Demo.GatewayConsole.Models
         {
             if(message.MessageType == MdvrMediaMessageTypes.RealTimeVideo)
             {
-                using(var fs = File.Create(string.Format("{0}.h264", Guid.NewGuid())))
+                using (var ms = new MemoryStream(message.ByteList.ToArray()))
                 {
-                    using(var br = new BinaryWriter(fs))
+                    using (var br = new BinaryReader(ms))
                     {
-                        br.Write(message.ByteList.ToArray());
+                        var videoData = new RealTimeVideoModel();
+
+                        videoData.FrameType = br.ReadInt32();
+                        videoData.DataLength = br.ReadInt32();
+                        videoData.Timestamp = br.ReadInt64();
+                        videoData.Buffer = br.ReadBytes(videoData.DataLength);
+
+                        if (Directory.Exists("Test") == false)
+                            Directory.CreateDirectory("Test");
+
+                        using (var fs = File.Create(string.Format("Test/{0}.bin", Guid.NewGuid())))
+                        {
+                            using (var bw = new BinaryWriter(fs))
+                            {
+                                bw.Write(videoData.Buffer);
+                            }
+                        }
+
+                        using (var fs = File.OpenWrite(string.Format("Test/{0}.264", DevIDNO)))
+                        {
+                            using (var bw = new BinaryWriter(fs))
+                            {
+                                bw.Write(videoData.Buffer);
+                            }
+                        }
                     }
                 }
             }
