@@ -36,6 +36,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Extensions
 {
     public static class ThreadExtensions
@@ -50,7 +52,7 @@ namespace Oragon.Extensions
         /// </summary>
         public const int MinimumStackSize = 1;
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsRunning(System.Threading.Thread thread)
         {
             return false.Equals(object.ReferenceEquals(thread, null)) && 
@@ -62,7 +64,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="thread">The thread to interrupt</param>
         /// <returns>True if the <see cref="System.Threading.ThreadInterruptedException"/> was recieved.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool InterruptThread(ref System.Threading.Thread thread)
         {
             if (thread == null) return false;

@@ -37,6 +37,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #endregion
 
 using Oragon.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Extensions
 {
@@ -147,7 +148,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="networkInterface"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double GetSpeedInMBytesPerSecond(this System.Net.NetworkInformation.NetworkInterface networkInterface)
         {
             if (object.ReferenceEquals(networkInterface, null)) return 0;
@@ -170,7 +171,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="speedAsBitsPerSecond">A speed on a network interface in the terms bits per second.</param>
         /// <returns>The amount of Nanoseconds which corresponds to the interframe gap.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double CaulculateInterframeGapNanoseconds(long speedAsBitsPerSecond)
         {
             //Speed can be 0 or -1 if not connected.

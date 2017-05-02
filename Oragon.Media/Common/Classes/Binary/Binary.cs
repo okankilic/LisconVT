@@ -43,6 +43,7 @@ using Oragon.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -402,14 +403,14 @@ namespace Oragon.Classes.Binary
         public static int Abs(int value) { return Abs(ref value); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Abs(ref int value) { long v = value; return(int)Abs(ref v); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Abs(long value) { return Abs(ref value); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Abs(ref long value)
         {
             long mask = value >> 28;//BytesPerInteger * Binary.Septem;
@@ -427,7 +428,7 @@ namespace Oragon.Classes.Binary
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
         /// <returns>The value.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte Min(ref byte min, ref byte max)
         {
             return (byte)(max ^ ((min ^ max) & -(min < max ? 1 : 0)));
@@ -440,7 +441,7 @@ namespace Oragon.Classes.Binary
             return Min(ref min, ref max);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Min(ref int min, ref int max)
         {
             return (int)(max ^ ((min ^ max) & -(min < max ? 1 : 0)));
@@ -454,7 +455,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Min(ref uint min, ref uint max)
         {
             return (uint)(max ^ ((min ^ max) & (uint)(-(min < max ? 1 : 0))));
@@ -467,7 +468,7 @@ namespace Oragon.Classes.Binary
             return Min(ref min, ref max);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Min(ref long min, ref long max)
         {
             return (long)(max ^ ((min ^ max) & -(min < max ? 1 : 0)));
@@ -481,7 +482,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Min(ref ulong min, ref ulong max)
         {
             return (ulong)(max ^ ((min ^ max) & (ulong)(-(min < max ? 1 : 0))));
@@ -502,7 +503,7 @@ namespace Oragon.Classes.Binary
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
         /// <returns>The value</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte Max(ref byte min, ref byte max)
         {
             return (byte)(min ^ ((min ^ max) & -(min < max ? 1 : 0)));
@@ -514,7 +515,7 @@ namespace Oragon.Classes.Binary
             return Max(ref min, ref max);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static uint Max(ref uint min, ref uint max)
         {
@@ -527,7 +528,7 @@ namespace Oragon.Classes.Binary
             return Max(ref min, ref max);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Max(ref int min, ref int max)
         {
             return min ^ ((min ^ max) & -(min < max ? 1 : 0));
@@ -539,14 +540,14 @@ namespace Oragon.Classes.Binary
             return Max(ref min, ref max);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Max(ref long min, ref long max)
         {
             return (long)(min ^ ((min ^ max) & -(min < max ? 1 : 0)));
 
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static ulong Max(ref ulong min, ref ulong max)
         {
@@ -570,7 +571,7 @@ namespace Oragon.Classes.Binary
 
         #region Clamp
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
         public static byte Clamp(ref byte value, ref byte min, ref byte max)
         {
@@ -583,7 +584,7 @@ namespace Oragon.Classes.Binary
             return Clamp(ref value, ref min, ref max);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Clamp(ref int value, ref int min, ref int max)
         {
             return Binary.Min(Binary.Max(ref min, ref value), max);
@@ -595,7 +596,7 @@ namespace Oragon.Classes.Binary
             return Clamp(ref value, ref min, ref max);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Clamp(ref long value, ref long min, ref long max)
         {
             return Binary.Min(Binary.Max(ref min, ref value), max);
@@ -614,7 +615,7 @@ namespace Oragon.Classes.Binary
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
         /// <returns>The bound value</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Clamp(ref double value, ref double min, ref double max)
         {
             return BitConverter.Int64BitsToDouble(Binary.Min(Binary.Max(BitConverter.DoubleToInt64Bits(min), BitConverter.DoubleToInt64Bits(value)), BitConverter.DoubleToInt64Bits(max)));
@@ -631,11 +632,11 @@ namespace Oragon.Classes.Binary
         #region IsPowerOfTwo
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPowerOfTwo(ref long x) { return Binary.Nihil == (x & (x - Binary.Ūnus)); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPowerOfTwo(ref int x) { return Binary.Nihil == (x & (x - Binary.Ūnus)); }
 
         public static bool IsPowerOfTwo(long x) { return IsPowerOfTwo(ref x); }
@@ -651,26 +652,26 @@ namespace Oragon.Classes.Binary
         #region IsEven
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEven(ref int x) { return Binary.Nihil == (x & Binary.Ūnus); }
 
         public static bool IsEven(int x) { return IsEven(ref x); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEven(ref uint x) { return Binary.Nihil == (x & Binary.Ūnus); }
 
         [CLSCompliant(false)]
         public static bool IsEven(uint x) { return IsEven(ref x); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEven(ref long x) { return Binary.Nihil == (x & Binary.Ūnus); }
 
         public static bool IsEven(long x) { return IsEven(ref x); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEven(ref ulong x) { return Binary.Nihil == (x & Binary.Ūnus); }
 
         public static bool IsEven(ulong x) { return IsEven(ref x); }
@@ -680,27 +681,27 @@ namespace Oragon.Classes.Binary
         #region IsOdd
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOdd(ref int x) { return Binary.Ūnus == (x & Binary.Ūnus); }
 
         public static bool IsOdd(int x) { return IsOdd(ref x); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOdd(ref uint x) { return Binary.Ūnus == (x & Binary.Ūnus); }
 
         [CLSCompliant(false)]
         public static bool IsOdd(uint x) { return IsOdd(ref x); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOdd(ref long x) { return Binary.Ūnus == (x & Binary.Ūnus); }
 
         [CLSCompliant(false)]
         public static bool IsOdd(long x) { return IsOdd(ref x); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOdd(ref ulong x) { return Binary.Ūnus == (x & Binary.Ūnus); }
 
         [CLSCompliant(false)]
@@ -717,7 +718,7 @@ namespace Oragon.Classes.Binary
         /// <param name="arg"></param>
         /// <returns>True if the value is negative, otherwise false</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegative(ref int arg) { return (arg & SignMask) == SignMask; }
 
         public static bool IsNegative(int arg) { return IsNegative(ref arg); }
@@ -728,7 +729,7 @@ namespace Oragon.Classes.Binary
         /// <param name="arg"></param>
         /// <returns>True if the value is negative, otherwise false</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegative(ref long arg) { return (arg & SignMask) == SignMask; }
 
         public static bool IsNegative(long arg) { return IsNegative(ref arg); }
@@ -743,7 +744,7 @@ namespace Oragon.Classes.Binary
         /// <param name="arg"></param>
         /// <returns>True if the value is positive, otherwise false</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPositive(ref int arg) { return (BitConverter.DoubleToInt64Bits(arg) & SignMask) != SignMask; }
 
         public static bool IsPositive(int arg) { return IsPositive(ref arg); }
@@ -754,7 +755,7 @@ namespace Oragon.Classes.Binary
         /// <param name="arg"></param>
         /// <returns>True if the value is positive, otherwise false</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPositive(ref long arg) { return (BitConverter.DoubleToInt64Bits(arg) & SignMask) != SignMask; }
 
         public static bool IsPositive(long arg) { return IsPositive(ref arg); }
@@ -766,7 +767,7 @@ namespace Oragon.Classes.Binary
         public static int Sign(int value) { return Sign(ref value); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sign(ref int value)
         {
             return ((value > Binary.Nihil) ? Binary.Ūnus : Binary.Nihil) - ((value < Binary.Nihil) ? Binary.Ūnus : Binary.Nihil);
@@ -778,7 +779,7 @@ namespace Oragon.Classes.Binary
         public static int Sign(long value) { return Sign(ref value); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sign(ref long value)
         {
             return ((value > Binary.Nihil) ? Binary.Ūnus : Binary.Nihil) - ((value < Binary.Nihil) ? Binary.Ūnus : Binary.Nihil);
@@ -802,7 +803,7 @@ namespace Oragon.Classes.Binary
         public static uint BitsToBytes(uint bitCount, uint bitsPerByte = Binary.BitsPerByte) { return BitsToBytes(ref bitCount, bitsPerByte); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint BitsToBytes(ref uint bitCount, uint bitsPerByte = Binary.BitsPerByte)
         {
             if(bitCount == Binary.Nihil) return Binary.Nihil;
@@ -813,7 +814,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitsToBytes(ref int bitCount)
         {
             int remainder = bitCount & Binary.Septem; return (bitCount >> Binary.Tres) + (remainder & Binary.Ūnus);
@@ -835,11 +836,11 @@ namespace Oragon.Classes.Binary
         /// <param name="bitSize"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint BytesToBits(ref uint byteCount, uint bitSize = Binary.BitsPerByte) { return byteCount * bitSize; }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BytesToBits(ref int byteCount){ return byteCount << Binary.Tres;}
 
         #endregion
@@ -852,7 +853,7 @@ namespace Oragon.Classes.Binary
         public static uint BytesToMachineWords(uint byteCount, uint bytesPerMachineWord = Binary.BytesPerInteger) { return BytesToMachineWords(ref byteCount, bytesPerMachineWord); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint BytesToMachineWords(ref uint byteCount, uint bytesPerMachineWord = Binary.BytesPerInteger)
         {
             if (byteCount == Binary.Nihil) return Binary.Nihil;
@@ -863,7 +864,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BytesToMachineWords(ref int byteCount)
         {
             int remainder = byteCount & Binary.Tres; return (byteCount >> Binary.Quinque) + (remainder & Binary.Ūnus);
@@ -880,14 +881,14 @@ namespace Oragon.Classes.Binary
 
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint MachineWordsToBytes(ref uint machineWords, uint bytesPerMachineWord = Binary.BytesPerInteger)
         {
             return machineWords * bytesPerMachineWord;
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int MachineWordsToBytes(ref int machineWords) { return machineWords << Binary.Duo; }
 
         #endregion
@@ -923,7 +924,7 @@ namespace Oragon.Classes.Binary
         /// <param name="arg"></param>
         /// <returns>True if the value is negative, otherwise false</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegative(ref double arg) { return (BitConverter.DoubleToInt64Bits(arg) & SignMask) == SignMask; }
 
         public static bool IsNegative(double arg) { return IsNegative(ref arg); }
@@ -934,7 +935,7 @@ namespace Oragon.Classes.Binary
         /// <param name="arg"></param>
         /// <returns>True if the value is positive, otherwise false</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPositive(ref double arg) { return (BitConverter.DoubleToInt64Bits(arg) & SignMask) != SignMask; }
 
         public static bool IsPositive(double arg) { return IsPositive(ref arg); }
@@ -951,7 +952,7 @@ namespace Oragon.Classes.Binary
         /// <param name="b"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPalindrome(ref byte b)
         {
             switch (b)
@@ -977,7 +978,7 @@ namespace Oragon.Classes.Binary
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPalindrome(byte b) { return IsPalindrome(ref b); }
 
         /// <summary>
@@ -1025,7 +1026,7 @@ namespace Oragon.Classes.Binary
         /// </summary>
         public static int MostSignificantBit
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MostSignificantBit; }
         }
 
@@ -1034,7 +1035,7 @@ namespace Oragon.Classes.Binary
         /// </summary>
         public static int LeastSignificantBit
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_LeastSignificantBit; }
         }
 
@@ -1043,7 +1044,7 @@ namespace Oragon.Classes.Binary
         /// </summary>
         public static ByteOrder SystemByteOrder
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_SystemByteOrder; }
         }
 
@@ -1052,7 +1053,7 @@ namespace Oragon.Classes.Binary
         /// </summary>
         public static BitOrder SystemBitOrder
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_SystemBitOrder; }
         }
 
@@ -1061,7 +1062,7 @@ namespace Oragon.Classes.Binary
         /// </summary>
         public static bool IsBigEndian
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_SystemByteOrder == ByteOrder.Big; }
         }
 
@@ -1070,7 +1071,7 @@ namespace Oragon.Classes.Binary
         /// </summary>
         public static bool IsLittleEndian
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_SystemByteOrder == ByteOrder.Little; }
         }
 
@@ -1081,7 +1082,7 @@ namespace Oragon.Classes.Binary
         /// <summary>
         /// Determine BitOrder, ByteOrder and Build Bit Tables
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized | System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.Synchronized | MethodImplOptions.AggressiveInlining)]
         static Binary()
         {
             //ensure not already called.
@@ -1269,7 +1270,7 @@ namespace Oragon.Classes.Binary
         /// <param name="value"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountTrailingZeros(ref uint value)
         {
             switch (value)
@@ -1301,7 +1302,7 @@ namespace Oragon.Classes.Binary
         [CLSCompliant(false)]
         public static int CountTrailingZeros(uint value) { return CountTrailingZeros(ref value); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountTrailingZeros(int value)
         {
             uint temp = (uint)value; return Binary.Max(0, CountTrailingZeros(ref temp) - 1);
@@ -1313,7 +1314,7 @@ namespace Oragon.Classes.Binary
         /// <param name="value"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountTrailingZeros(ref ulong value)
         {
             switch (value)
@@ -1338,7 +1339,7 @@ namespace Oragon.Classes.Binary
         [CLSCompliant(false)]
         public static int CountTrailingZeros(ulong value) { return CountTrailingZeros(ref value); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountTrailingZeros(long value)
         {
             ulong temp = (ulong)value; return Binary.Max(0, CountTrailingZeros(ref temp) - 1);
@@ -1350,7 +1351,7 @@ namespace Oragon.Classes.Binary
         /// <param name="value"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountLeadingZeros(ref uint value)
         {
             switch (value)
@@ -1393,7 +1394,7 @@ namespace Oragon.Classes.Binary
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountLeadingZeros(int value)
         {
             uint temp = (uint)value; return Max(0, CountLeadingZeros(ref temp) - 1);
@@ -1408,7 +1409,7 @@ namespace Oragon.Classes.Binary
         /// <param name="value"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountLeadingZeros(ref ulong value)
         {
             switch (value)
@@ -1430,7 +1431,7 @@ namespace Oragon.Classes.Binary
         [CLSCompliant(false)]
         public static int CountLeadingZeros(ulong value) { return CountLeadingZeros(ref value); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountLeadingZeros(long value)
         {
             ulong temp = (ulong)value; return Max(0, CountLeadingZeros(ref temp) - 1);
@@ -1442,7 +1443,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong GreatestCommonDivisor(ulong a, ulong b)
         {
 
@@ -1481,7 +1482,7 @@ namespace Oragon.Classes.Binary
         /// <param name="value">The input</param>
         /// <returns>The hamming weight for the given input</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int HammingWeight(ref int value)
         {
             value = value - ((value >> 1) & 0x55555555);
@@ -1501,7 +1502,7 @@ namespace Oragon.Classes.Binary
         /// <param name="b"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitsSet(ref byte b) { return BitsSetTable[b]; }
 
         public static int BitsSet(byte b) { return BitsSet(ref b); }
@@ -1512,32 +1513,32 @@ namespace Oragon.Classes.Binary
         /// <param name="b"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitsUnSet(ref byte b) { return Binary.BitsPerByte - BitsSetTable[b]; }
 
         public static int BitsUnSet(byte b) { return BitsUnSet(ref b); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitsSet(ref int i) { return Binary.GetBytes(i).Sum(b => BitsSet(b)); }
 
         public static int BitsSet(int i) { return BitsSet(ref i); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitsSet(ref uint i) { return Binary.GetBytes(i).Sum(b => BitsSet(b)); }
 
         [CLSCompliant(false)]
         public static int BitsSet(uint i) { return BitsSet(ref i); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitsUnSet(ref int i) { return QuadrupleBitSize - Binary.GetBytes(i).Sum(b => BitsSet(b)); }
 
         public static int BitsUnSet(int i) { return BitsUnSet(ref i); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitsUnSet(ref uint i) { return QuadrupleBitSize - Binary.GetBytes(i).Sum(b => BitsSet(b)); }
 
         [CLSCompliant(false)]
@@ -1554,7 +1555,7 @@ namespace Oragon.Classes.Binary
         /// <param name="index">The non 0 based index of the octet to retrieve a bit from</param>
         /// <returns>True if the bit field is set, otherwise false.</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetBit(ref byte source, int index)
         {
 
@@ -1579,7 +1580,7 @@ namespace Oragon.Classes.Binary
         /// <param name="index">The non 0 based index of the octet to retrieve a bit from</param>
         /// <returns>True if the bit field is set, otherwise false.</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetBitReverse(ref byte source, int index)
         {
 
@@ -1603,7 +1604,7 @@ namespace Oragon.Classes.Binary
         /// <param name="newValue">The value to put in the bit, where true = 1 and false = 0</param>
         /// <returns>The value which was previously set in the bit where true = 1 and false = 0</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool ExchangeBit(ref byte source, int index, bool newValue)
         {
             if (index < Binary.Nihil || index > Binary.BitsPerByte) throw new ArgumentOutOfRangeException("index", "Must be a value 0 - 8");
@@ -1624,7 +1625,7 @@ namespace Oragon.Classes.Binary
         public static bool SetBit(byte source, int index, bool newValue) { return ExchangeBit(ref source, index, newValue); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool ExchangeBitReverse(ref byte source, int index, bool newValue)
         {
             if (index < Binary.Nihil || index > Binary.BitsPerByte) throw new ArgumentOutOfRangeException("index", "Must be a value 0 - 8");
@@ -1655,7 +1656,7 @@ namespace Oragon.Classes.Binary
         /// <param name="newValue">The value to put in the bit, where true = 1 and false = 0</param>
         /// <returns>The value which was previously set in the bit where true = 1 and false = 0</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBitReverse(ref byte source, int index)
         {
             if (index < Binary.Nihil || index > Binary.BitsPerByte) throw new ArgumentOutOfRangeException("index", "Must be a value 0 - 8");
@@ -1670,7 +1671,7 @@ namespace Oragon.Classes.Binary
         /// <param name="source"></param>
         /// <param name="index"></param>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBit(ref byte source, int index)
         {
             if (index < Binary.Nihil || index > Binary.BitsPerByte) throw new ArgumentOutOfRangeException("index", "Must be a value 0 - 8");
@@ -1686,7 +1687,7 @@ namespace Oragon.Classes.Binary
         /// <param name="source"></param>
         /// <param name="index"></param>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClearBit(ref byte source, int index)
         {
             if (index < Binary.Nihil || index > Binary.BitsPerByte) throw new ArgumentOutOfRangeException("index", "Must be a value 0 - 8");
@@ -1702,7 +1703,7 @@ namespace Oragon.Classes.Binary
         /// <param name="source"></param>
         /// <param name="index"></param>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClearBitReverse(ref byte source, int index)
         {
             if (index < Binary.Nihil || index > Binary.BitsPerByte) throw new ArgumentOutOfRangeException("index", "Must be a value 0 - 8");
@@ -1722,7 +1723,7 @@ namespace Oragon.Classes.Binary
         /// http://stackoverflow.com/questions/2605913/invert-1-bit-in-c-sharp
         /// </remarks>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ToggleBit(ref byte source, int index)
         {
             if (index < Binary.Nihil || index > Binary.BitsPerByte) throw new ArgumentOutOfRangeException("index", "Must be a value 0 - 8");
@@ -1734,7 +1735,7 @@ namespace Oragon.Classes.Binary
 
         //----- Array Overloads use the above calls.
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] ExchangeBit(byte[] self, int index, bool value)
         {
             //int bitIndex, byteIndex = Math.DivRem(index, Binary.BitsPerByte, out bitIndex);
@@ -1761,7 +1762,7 @@ namespace Oragon.Classes.Binary
             return self;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] ToggleBit(byte[] self, int index)
         {
             //int bitIndex, byteIndex = Math.DivRem(index, Binary.BitsPerByte, out bitIndex);
@@ -1786,7 +1787,7 @@ namespace Oragon.Classes.Binary
             return self;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetBit(byte[] self, int index)
         {
             //int bitIndex, byteIndex = Math.DivRem(index, Binary.BitsPerByte, out bitIndex);
@@ -1806,7 +1807,7 @@ namespace Oragon.Classes.Binary
 #endif
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] ClearBit(byte[] self, int index)
         {
             //int bitIndex, byteIndex = Math.DivRem(index, Binary.BitsPerByte, out bitIndex);
@@ -1875,7 +1876,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ReadBitsMSB(byte[] bytes, int bitOffset, int bitCount) //ref/out byteOffset
         {
             if (bytes == null || bitCount <= 0) return Binary.Nihil;
@@ -1934,7 +1935,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ReadBitsLSB(byte[] bytes, int bitOffset, int bitCount) //ref byteOffset
         {
             if (bytes == null || bitCount <= 0) return Binary.Nihil;
@@ -2023,7 +2024,7 @@ namespace Oragon.Classes.Binary
         //ByteOrder overloads?
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void WriteBitsLSB(byte[] bytes, int bitOffset, ulong value, int bitCount)
         {
             if (bytes == null || bitCount <= 0) return;
@@ -2096,7 +2097,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void WriteBitsMSB(byte[] bytes, int bitOffset, ulong value, int bitCount)
         {
             if (bytes == null || bitCount <= 0) return;
@@ -2414,7 +2415,7 @@ namespace Oragon.Classes.Binary
         /// <param name="sign">The value to use as a sign</param>
         /// <param name="shift">The amount of bits to shift the sign for each byte</param>
         /// <returns>The calculated result</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         //IList<byte> could be better suited
         public static long ReadInteger(IEnumerable<byte> octets, int offset, int sizeInBytes, bool reverse, long sign = Binary.Ūnus, int shift = Binary.BitsPerByte)
         {
@@ -2674,7 +2675,7 @@ namespace Oragon.Classes.Binary
         //Could take value by ref to reduce copies and help with offset tracking.
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void WriteInteger(byte[] buffer, int index, int count, ulong value, int shift = Binary.BitsPerByte)
         {
             if (buffer == null || count == 0) return;
@@ -2722,7 +2723,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void WriteReversedInteger(byte[] buffer, int index, int count, ulong value, int shift = Binary.BitsPerByte)
         {
             if (buffer == null || count == 0) return;
@@ -2759,7 +2760,7 @@ namespace Oragon.Classes.Binary
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void WriteU8(byte[] buffer, int index, bool reverse, byte value)
         {
 #if UNSAFE
@@ -2772,7 +2773,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Write8(byte[] buffer, int index, bool reverse, sbyte value)
         {
 #if UNSAFE
@@ -2854,7 +2855,7 @@ namespace Oragon.Classes.Binary
 
         //ref..
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static byte[] GetBytes(Guid value, bool reverse = false)
         {
             byte[] result = value.ToByteArray();
@@ -2871,7 +2872,7 @@ namespace Oragon.Classes.Binary
             return result;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] GetBytes(short i, bool reverse = false)
         {
             byte[] result = new byte[Binary.BytesPerShort];
@@ -2879,7 +2880,7 @@ namespace Oragon.Classes.Binary
             return result;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] GetBytes(int i, bool reverse = false)
         {
             byte[] result = new byte[Binary.BytesPerInteger];
@@ -2888,7 +2889,7 @@ namespace Oragon.Classes.Binary
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] GetBytes(uint i, bool reverse = false)
         {
             byte[] result = new byte[Binary.BytesPerInteger];
@@ -2896,7 +2897,7 @@ namespace Oragon.Classes.Binary
             return result;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] GetBytes(long i, bool reverse = false)
         {
             byte[] result = new byte[Binary.BytesPerLong];
@@ -2916,7 +2917,7 @@ namespace Oragon.Classes.Binary
         /// <param name="source">The unsigned 8 bit value which is requried to be reversed</param>
         /// <returns>The reversed unsigned 8 bit value</returns>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte ReverseU8(ref byte source) { return BitsReverseTable[source]; }
 
         public static byte ReverseU8(byte source) { return ReverseU8(ref source); }
@@ -2926,14 +2927,14 @@ namespace Oragon.Classes.Binary
         /// </summary>
         /// <notes><see href="http://graphics.stanford.edu/~seander/bithacks.html">Bit Twiddling Hacks</see></notes>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MultiplyReverseU8_64(ref byte source)
         {
             return (byte)(((source * 0x80200802UL) & 0x0884422110UL) * 0x0101010101UL >> QuadrupleBitSize);
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MultiplyReverseU8_32(ref byte source)
         {
             return (byte)(((source * 0x0802LU & 0x22110LU) | (source * 0x8020LU & 0x88440LU)) * 0x10101LU >> DoubleBitSize);
@@ -2950,7 +2951,7 @@ namespace Oragon.Classes.Binary
         public static ushort ReverseUnsignedShort(ushort source) { return ReverseUnsignedShort(ref source); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort ReverseUnsignedShort(ref ushort source)
         {
             if (source == ushort.MinValue || source == ushort.MaxValue) return source;
@@ -2961,7 +2962,7 @@ namespace Oragon.Classes.Binary
         public static uint ReverseUnsignedInt(uint source) { return ReverseUnsignedInt(ref source); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ReverseUnsignedInt(ref uint source)
         {
             if (source == uint.MinValue || source == uint.MaxValue) return source;
@@ -2973,7 +2974,7 @@ namespace Oragon.Classes.Binary
         public static ulong ReverseUnsignedLong(ulong source) { return ReverseUnsignedLong(ref source); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ReverseUnsignedLong(ref ulong source)
         {
             if (source == ulong.MinValue || source == ulong.MaxValue) return source;
@@ -3045,7 +3046,7 @@ namespace Oragon.Classes.Binary
         /// On 32 bit Architectures two registers are beging used to perform this operation and on some optomized a single instruction is unsed
         /// </remarks>
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong RollU64(ulong source, int amount)
         {
             switch (source)
@@ -3057,7 +3058,7 @@ namespace Oragon.Classes.Binary
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Roll64(long source, int amount)
         {
             switch (source)

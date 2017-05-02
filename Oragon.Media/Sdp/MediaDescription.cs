@@ -41,6 +41,7 @@ using System.Text;
 using Oragon.Classes.Disposables;
 using Oragon.Media.Common.Extensions;
 using Oragon.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.Sdp
 {
@@ -287,7 +288,7 @@ namespace Oragon.Media.Sdp
 
         public static bool operator !=(MediaDescription a, MediaDescription b) { return (a == b).Equals(false); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(MediaDescription other)
         {
             return EnumerableExtensions.SequenceEquals(this, other);

@@ -44,6 +44,7 @@ using Oragon.Interfaces;
 using Oragon.Extensions;
 using Oragon.Classes.Disposables;
 using Oragon.Media.Common.Extensions;
+using System.Runtime.CompilerServices;
 #endregion
 
 namespace Oragon.Classes
@@ -82,10 +83,10 @@ namespace Oragon.Classes
 
         #region Constructor
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SegmentStream() { Segments = new System.Collections.Generic.List<MemorySegment>(); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SegmentStream(IList<MemorySegment> existing)
         {
             if (existing == null) throw new ArgumentNullException();
@@ -96,7 +97,7 @@ namespace Oragon.Classes
             m_Count = Segments.Sum(s => IDisposedExtensions.IsNullOrDisposed(s) ? 0 : s.m_Length);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SegmentStream(IEnumerable<MemorySegment> existing)
         {
             //Create a new list.
@@ -110,7 +111,7 @@ namespace Oragon.Classes
         #region Methods
 
         //Write without copy
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddMemory(MemorySegment segment)
         {
             if (IDisposedExtensions.IsNullOrDisposed(segment)) segment = MemorySegment.Empty;
@@ -121,7 +122,7 @@ namespace Oragon.Classes
         }
 
         //Write with copy
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddPersistedMemory(MemorySegment segment)
         {
             //Allow dead space...
@@ -151,7 +152,7 @@ namespace Oragon.Classes
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void WritePersisted(byte[] buffer, int offset, int count)
         {
             if (IsDisposed || count <= 0) return;
@@ -163,7 +164,7 @@ namespace Oragon.Classes
         public void InsertMemory(int index, MemorySegment toInsert) { InsertMemory(ref index, toInsert); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InsertMemory(ref int index, MemorySegment toInsert)
         {
             if (IDisposedExtensions.IsNullOrDisposed(toInsert)) toInsert = MemorySegment.Empty;
@@ -183,11 +184,11 @@ namespace Oragon.Classes
             m_Count += toInsert.m_Length;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InsertPersistedMemory(int index, MemorySegment toInsert) { InsertPersistedMemory(ref index, toInsert); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InsertPersistedMemory(ref int index, MemorySegment toInsert)
         {
 
@@ -233,7 +234,7 @@ namespace Oragon.Classes
         public void Free(int index) { Free(ref index); }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void Free(ref int index)
         {
             //Some lists are read only.
@@ -266,7 +267,7 @@ namespace Oragon.Classes
         /// <param name="destination">The destination</param>
         /// <param name="offset">The offset in <paramref name="destination"/> to start copying</param>
         /// <returns>The amount of bytes copied to <paramref name="destination"/>, usually equal to <see cref="Length"/></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int CopyTo(byte[] destination, int offset)
         {
             return CopyTo(destination, offset, (int)m_Count);
@@ -280,7 +281,7 @@ namespace Oragon.Classes
         /// <param name="offset">The offset in <paramref name="destination"/> to start copying</param>
         /// <param name="count">The amount of bytes to copy</param>
         /// <returns>The amount of bytes copied to <paramref name="destination"/></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int CopyTo(byte[] destination, int offset, int count)
         {
             if (IsDisposed) return 0;
@@ -305,10 +306,10 @@ namespace Oragon.Classes
             return total;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public new void CopyTo(System.IO.Stream s) { CopyToStream(s); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public new void CopyTo(System.IO.Stream s, int bufferSize) { CopyToStream(s); }
 
         /// <summary>
@@ -316,7 +317,7 @@ namespace Oragon.Classes
         /// <see cref="Position"/> is not moved.
         /// </summary>
         /// <returns>The array created which will have a size equal to <see cref="Length"/></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public byte[] ToArray()
         {
             if (IsDisposed) return null;
@@ -333,7 +334,7 @@ namespace Oragon.Classes
         /// Note, this implementation does not use an intermediate buffer allocation.
         /// </summary>
         /// <param name="destination">The stream to which the contents of the current stream will be copied.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CopyToStream(System.IO.Stream destination)
         {
             if (IsDisposed) return;
@@ -379,7 +380,7 @@ namespace Oragon.Classes
         /// <param name="bufferOffset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadAt(long streamOffset, byte[] buffer, int bufferOffset, int count)
         {
             //Use a temp stream to allow for threading...
@@ -411,7 +412,7 @@ namespace Oragon.Classes
         /// <param name="buffer"></param>
         /// <param name="bufferOffset"></param>
         /// <param name="count"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void WriteAt(long streamOffset, byte[] buffer, int bufferOffset, int count)
         {
             //Use a temp stream to allow for threading...
@@ -432,7 +433,7 @@ namespace Oragon.Classes
         /// <summary>
         /// Calls <see cref="Free"/> for each entry in <see cref="Segments"/>
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void Clear()
         {
             for (int i = 0, e = Segments.Count - 1; e >= i; --e) Free(ref e);
@@ -450,19 +451,19 @@ namespace Oragon.Classes
 
         public override bool CanRead
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false == IsDisposed; }
         }
 
         public override bool CanSeek
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false == IsDisposed; }
         }
 
         public override bool CanWrite
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false == IsDisposed; }
         }
 
@@ -473,18 +474,18 @@ namespace Oragon.Classes
 
         public override long Length
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (long)m_Count; }
         }
 
         public override long Position
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return (long)m_Position; // + m_Cursor causes a calc for each position but makes it slightly more accurate and makes individual movement faster in some cases.. (Determine how much)
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 Seek(value, System.IO.SeekOrigin.Begin);
@@ -498,7 +499,7 @@ namespace Oragon.Classes
         /// </summary>
         public long Remains
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Count - m_Position; }
         }
 
@@ -510,7 +511,7 @@ namespace Oragon.Classes
         /// Reads a single byte from the underlying stream without an intermediate allocation.
         /// </summary>
         /// <returns>-1 if at the end of stream or <see cref="IsDisposed"/>, otherwise the byte read.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int ReadByte()
         {
             //If at the end of data return 0 unless closed...
@@ -545,7 +546,7 @@ namespace Oragon.Classes
         /// If before the end of the stream the byte is written directly to the segment available, otherwise a new segment is added to <see cref="Segments"/> with only one byte.
         /// </summary>
         /// <param name="value"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void WriteByte(byte value)
         {
             //If at the end of data return 0 unless closed...
@@ -603,7 +604,7 @@ namespace Oragon.Classes
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int Read(byte[] buffer, int offset, int count)
         {
             //If at the end of data return 0 unless closed...
@@ -654,7 +655,7 @@ namespace Oragon.Classes
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void Write(byte[] buffer, int offset, int count)
         {
             //If there is no way to write or nothing to write then do nothing.
@@ -735,7 +736,7 @@ namespace Oragon.Classes
         /// <param name="offset">The offset to seek to</param>
         /// <param name="origin">The seeking style to use</param>
         /// <returns>The <see cref="Position"/> after seeking.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override long Seek(long offset, System.IO.SeekOrigin origin)
         {
             if (IsDisposed) return -1;
@@ -927,7 +928,7 @@ namespace Oragon.Classes
         /// Sets the length of the stream and sets <see cref="Position"/> to the end. If the value is greater than or equal to <see cref="Length"/> no change is performed.
         /// </summary>
         /// <param name="value"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void SetLength(long value)
         {
             if (IsDisposed || value >= m_Count) return;
@@ -962,7 +963,7 @@ namespace Oragon.Classes
         /// <summary>
         /// Calls <see cref="Dispose"/> with the value of ShouldDispose. Called by base Dispose.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void Close()
         {
             //IsClosed = true;
@@ -1065,13 +1066,13 @@ namespace Oragon.Classes
 
         bool IDisposed.IsDisposed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IsDisposed; }
         }
 
         bool IDisposed.ShouldDispose
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return ShouldDispose; }
         }
 

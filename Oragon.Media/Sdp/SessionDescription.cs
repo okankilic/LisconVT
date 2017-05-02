@@ -350,9 +350,9 @@ namespace Oragon.Media.Sdp
         /// </summary>
         public int SessionDescriptionVersion
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return object.ReferenceEquals(m_SessionVersionLine, null) ? -1 : m_SessionVersionLine.Version; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private set
             {
                 if (IsDisposed || UnderModification) return;
@@ -373,9 +373,9 @@ namespace Oragon.Media.Sdp
         /// </summary>
         public string OriginatorAndSessionIdentifier
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_OriginatorLine.ToString(); }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification) return;
@@ -401,9 +401,9 @@ namespace Oragon.Media.Sdp
         /// </summary>
         public string SessionName
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_NameLine.SessionName; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed) return;
@@ -425,12 +425,12 @@ namespace Oragon.Media.Sdp
         /// </summary>
         public string SessionId
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return object.ReferenceEquals(m_OriginatorLine, null) ? string.Empty : m_OriginatorLine.SessionId;
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification) return;
@@ -449,12 +449,12 @@ namespace Oragon.Media.Sdp
 
         public long DocumentVersion
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return object.ReferenceEquals(m_OriginatorLine, null) ? 0 : m_OriginatorLine.SessionVersion;
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification || object.ReferenceEquals(m_OriginatorLine, null)) return;
@@ -469,15 +469,15 @@ namespace Oragon.Media.Sdp
 
         public int TimeDescriptionsCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_TimeDescriptions.Count; }
         }
 
         public IEnumerable<TimeDescription> TimeDescriptions
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_TimeDescriptions; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification) return;
@@ -497,15 +497,15 @@ namespace Oragon.Media.Sdp
 
         public int MediaDescriptionsCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MediaDescriptions.Count; }
         }
 
         public IEnumerable<MediaDescription> MediaDescriptions
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MediaDescriptions; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification) return;
@@ -525,9 +525,9 @@ namespace Oragon.Media.Sdp
 
         public Sdp.Lines.SessionVersionLine SessionVersionLine
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_SessionVersionLine; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification || object.ReferenceEquals(value, null)) return;
@@ -542,9 +542,9 @@ namespace Oragon.Media.Sdp
 
         public Sdp.Lines.SessionOriginLine SessionOriginatorLine
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_OriginatorLine; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification) return;
@@ -569,9 +569,9 @@ namespace Oragon.Media.Sdp
 
         public Sdp.Lines.SessionNameLine SessionNameLine
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_NameLine; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed || UnderModification) return;
@@ -599,12 +599,12 @@ namespace Oragon.Media.Sdp
         /// </summary>
         public IEnumerable<SessionDescriptionLine> Lines
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return ((IEnumerable<SessionDescriptionLine>)this);
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set
             {
                 if (UnderModification) return;
@@ -633,18 +633,18 @@ namespace Oragon.Media.Sdp
         /// </summary>
         public bool UnderModification
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Update.IsSet.Equals(false) || m_UpdateTokenSource.IsCancellationRequested; } //When requested may already be cancelled and no longer under modification...
         }
 
         public SessionDescriptionLine ConnectionLine
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return Lines.FirstOrDefault(l => l.m_Type.Equals(Sdp.Lines.SessionConnectionLine.ConnectionType));
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (object.ReferenceEquals(value, null).Equals(false) && value.m_Type.Equals(Sdp.Lines.SessionConnectionLine.ConnectionType).Equals(false))
@@ -898,13 +898,13 @@ namespace Oragon.Media.Sdp
 
         #region Methods        
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TimeDescription GetTimeDescription(int index)
         {
             return m_TimeDescriptions[index];
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MediaDescription GetMediaDescription(int index)
         {
             return m_MediaDescriptions[index];
@@ -1156,7 +1156,7 @@ namespace Oragon.Media.Sdp
 
         #region Overrides
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(SessionDescription other)
         {
             return EnumerableExtensions.SequenceEquals(this, other);

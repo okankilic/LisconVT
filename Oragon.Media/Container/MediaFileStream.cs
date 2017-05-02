@@ -6,6 +6,7 @@ using Oragon.Classes.Text;
 using Oragon.Extensions;
 using Oragon.Media.Common.Extensions;
 using Oragon.Classes;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.Container
 {
@@ -26,7 +27,7 @@ namespace Oragon.Media.Container
 
         static Dictionary<string, MediaFileStream> m_ExtensionMap = new Dictionary<string, MediaFileStream>();
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static bool TryRegisterExtension(string extenstion, MediaFileStream implementation)
         {
             if (string.IsNullOrWhiteSpace(extenstion)) return false;
@@ -44,7 +45,7 @@ namespace Oragon.Media.Container
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static bool TryUnRegisterExtension(string extenstion)
         {
             if (string.IsNullOrWhiteSpace(extenstion)) return false;
@@ -54,12 +55,17 @@ namespace Oragon.Media.Container
             return m_ExtensionMap.Remove(extenstion);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static IEnumerable<string> GetRegisteredExtensions() { return m_ExtensionMap.Keys; }
 
         static Type MediaFileStreamType = typeof(MediaFileStream);
-
-        static Type[] ConstructorTypes = new Type[] { typeof(Microsoft.Win32.SafeHandles.SafeFileHandle), typeof(System.Uri), typeof(System.IO.FileAccess), typeof(bool), typeof(System.Action) }; //new Type[] { typeof(string), typeof(System.IO.FileAccess) };
+        static Type[] ConstructorTypes = new Type[] {
+            typeof(Microsoft.Win32.SafeHandles.SafeFileHandle),
+            typeof(Uri),
+            typeof(System.IO.FileAccess),
+            typeof(bool),
+            typeof(Action)
+        };
 
         public static MediaFileStream GetCompatbileImplementation(string fileName, AppDomain domain = null, System.IO.FileMode mode = System.IO.FileMode.Open, System.IO.FileAccess access = System.IO.FileAccess.ReadWrite)
         {
@@ -94,7 +100,7 @@ namespace Oragon.Media.Container
                 if (sharedFinalizer != null) sharedFinalizer = null;
             };
 
-            args = new object[] { fs, new System.Uri(fileName), access, false, sharedFinalizer };
+            args = new object[] { fs, new Uri(fileName), access, false, sharedFinalizer };
 
             //Get all loaded assemblies in the current application domain
             foreach (var assembly in (domain ?? AppDomain.CurrentDomain).GetAssemblies())
@@ -452,19 +458,19 @@ namespace Oragon.Media.Container
             FileInfo = null;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override void SetLength(long value) { base.SetLength(m_Length = value); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override long Seek(long offset, System.IO.SeekOrigin origin) { try { return m_Position = base.Seek(offset, origin); } finally { RefreshFileInfo(); } }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override int Read(byte[] buffer, int offset, int count) { try { int result = base.Read(buffer, offset, count); m_Position += result; return result; } finally { RefreshFileInfo(); } }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override int ReadByte() { try { int result = base.ReadByte(); if (result != -1) ++m_Position; return result; } finally { RefreshFileInfo(); } }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override void Write(byte[] array, int offset, int count)
         {
             try
@@ -477,7 +483,7 @@ namespace Oragon.Media.Container
             finally { RefreshFileInfo(); }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override void WriteByte(byte value)
         {
             try
@@ -508,7 +514,7 @@ namespace Oragon.Media.Container
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual byte[] ReadBytes(long count)
         {
             if (count <= 0) return MemorySegment.EmptyBytes; 
@@ -525,7 +531,7 @@ namespace Oragon.Media.Container
         /// </summary>
         /// <param name="count">The amount of bytes to skip.</param>
         /// <returns><see cref="Position"/></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual long Skip(long count) { return count /*<=*/== 0 ? Position : Position += count; } //Should also work in reverse... and without the branch although if == 0 is a good check
 
         /// <summary>
@@ -536,7 +542,7 @@ namespace Oragon.Media.Container
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns>The amount of bytes read</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual int ReadAt(long position, byte[] buffer, int offset, int count) { return ReadAt(position, buffer, offset, count, true); }
         public virtual int ReadAt(long position, byte[] buffer, int offset, int count, bool refreshFileInfo = true)
         {
@@ -561,7 +567,7 @@ namespace Oragon.Media.Container
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual void WriteAt(long position, byte[] buffer, int offset, int count) { WriteAt(position, buffer, offset, count, true); }
         public virtual void WriteAt(long position, byte[] buffer, int offset, int count, bool refreshFileInfo = true)
         {
@@ -585,13 +591,13 @@ namespace Oragon.Media.Container
         /// <param name="buffer">The data to write</param>
         /// <param name="offset">The offset in data to begin writing</param>
         /// <param name="count">The amount of bytes from <paramref name="offset"/> within <paramref name="data"/></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual void Append(byte[] buffer, int offset, int count) { WriteAt(Length, buffer, offset, count); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal protected long GetPosition() { return Position; }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal protected long GetLength() { return Length; }
 
         #endregion

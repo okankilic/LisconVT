@@ -36,6 +36,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Extensions
 {
     public static class ArrayExtensions
@@ -43,10 +45,10 @@ namespace Oragon.Extensions
         //Can be set via reflection
         readonly static System.Array EmptyArray = new object[0];
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrEmpty(this System.Array a, out long longLength) { return (longLength = (a ?? EmptyArray).LongLength) == 0; }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrEmpty(this System.Array a, out int length) { return (length = (a ?? EmptyArray).Length) == 0; }
 
         //ThreadLocal<long>
@@ -55,7 +57,7 @@ namespace Oragon.Extensions
 
         public static bool IsNullOrEmpty(this System.Array a) { return IsNullOrEmpty(a, out ArrayExtensions.longLength); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Contains<T>(this System.Array a, T t, out int index) { return (index = System.Array.IndexOf(a, t)) >= 0; }
 
         public static bool Contains<T>(this System.Array a, T t)

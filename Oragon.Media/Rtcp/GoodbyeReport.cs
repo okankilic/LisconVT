@@ -47,6 +47,7 @@ using Oragon.Classes.Binary;
 using Oragon.Classes;
 using Oragon.Extensions;
 using Oragon.Media.Rtp;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -223,7 +224,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public override int ReportBlockOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return Binary.Abs(BlockCount - 1) * RFC3550.SourceList.ItemSize;
@@ -235,7 +236,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public bool HasReasonForLeaving
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return ReasonForLeavingLength > 0; }
         }
 
@@ -245,7 +246,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public IEnumerable<byte> ReasonForLeavingData
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (IsDisposed || false == HasReasonForLeaving) return Enumerable.Empty<byte>();
@@ -260,7 +261,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int ReasonForLeavingLength
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return HasExtensionData ? ExtensionData.First() : 0;
@@ -295,7 +296,7 @@ namespace Oragon.Media.Rtcp
         /// Creates a <see cref="SourceList"/> from the information contained in the GoodbyeReport.
         /// </summary>
         /// <returns>The <see cref="SourceList"/> created.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RFC3550.SourceList GetSourceList() { return new RFC3550.SourceList(this); }
 
         //Packet has clone

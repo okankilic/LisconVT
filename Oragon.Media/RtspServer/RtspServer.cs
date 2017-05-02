@@ -56,6 +56,7 @@ using Oragon.Media.RtspServer.Interfaces;
 using Oragon.Media.RtspServer.Models;
 using Oragon.Media.Sdp;
 using static Oragon.Media.RtspServer.Models.SourceMedia;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.RtspServer
 {
@@ -279,15 +280,15 @@ namespace Oragon.Media.RtspServer
 
         public RtspStreamArchiver Archiver
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
         internal IEnumerable<ClientSession> Clients
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 try
@@ -306,9 +307,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         internal CredentialCache RequiredCredentials
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -317,9 +318,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public double Version
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Version; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set
             {
                 //Once set higher it cannot be set lower...
@@ -334,9 +335,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public bool RequireUserAgent
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -345,9 +346,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public string ServerName
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -357,9 +358,9 @@ namespace Oragon.Media.RtspServer
         /// <remarks>Probably should back this property and ensure that the value is !0</remarks>
         public TimeSpan RtspClientInactivityTimeout
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -370,9 +371,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int ReceiveTimeout
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_TcpServerSocket.ReceiveTimeout; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { m_TcpServerSocket.ReceiveTimeout = value; }
         }
 
@@ -381,26 +382,26 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int SendTimeout
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_TcpServerSocket.SendTimeout; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { m_TcpServerSocket.SendTimeout = value; }
         }
 
         //For controlling Port ranges, Provide events so Upnp support can be plugged in? PortClosed/PortOpened(ProtocolType, startPort, endPort?)
         public int? MinimumUdpPort
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
         internal int? MaximumUdpPort
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -409,9 +410,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int MaximumSessions
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MaximumSessions; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { if (value <= 0) throw new ArgumentOutOfRangeException(); m_MaximumSessions = value; }
         }
 
@@ -420,9 +421,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int MaximumConnections
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MaximumConnections; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { if (value <= 0) value = -1; m_MaximumConnections = value; }
         }
 
@@ -431,7 +432,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public TimeSpan Uptime
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Started.HasValue ? DateTime.UtcNow - m_Started.Value : TimeSpan.Zero; }
         }
 
@@ -441,7 +442,7 @@ namespace Oragon.Media.RtspServer
         /// <notes>m_TcpServerSocket.IsBound could also be another check or property.</notes>
         public bool IsRunning
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return false == IsDisposed &&
@@ -464,7 +465,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int ServerPort
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_ServerPort; }
         }
 
@@ -474,7 +475,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public IPEndPoint LocalEndPoint
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IsRunning && m_TcpServerSocket != null && m_TcpServerSocket.IsBound ? m_TcpServerSocket.LocalEndPoint as IPEndPoint : null; }
         }
 
@@ -485,7 +486,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public IEnumerable<IMedia> MediaStreams
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 try
@@ -504,7 +505,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int TotalStreamCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MediaStreams.Count; }
         }
 
@@ -513,7 +514,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int ActiveStreamCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {                
                 if (TotalStreamCount == 0) return 0;
@@ -526,7 +527,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public long TotalRtspBytesRecieved
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Recieved; }
         }
 
@@ -535,7 +536,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public long TotalRtspBytesSent
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Sent; }
         }
 
@@ -544,7 +545,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public long TotalStreamedBytes
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //Right now this counter only indicate rtp/rtcp traffic, rtsp or other protocol level counters are excluded.
@@ -562,7 +563,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public int ActiveConnections
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Sessions.Count; }
         }
 
@@ -571,9 +572,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public RtspServerLogger Logger
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -582,21 +583,21 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public RtspServerLogger ClientSessionLogger
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
         public bool HttpEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_HttpPort != -1; }
         }
 
         public bool UdpEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_UdpPort != -1; }
         }
 
@@ -869,7 +870,7 @@ namespace Oragon.Media.RtspServer
 
         #region Session Collection
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool TryAddSession(ClientSession session)
         {
             Exception any = null;
@@ -938,13 +939,13 @@ namespace Oragon.Media.RtspServer
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool ContainsSession(ClientSession session)
         {
             return m_Sessions.ContainsKey(session.Id);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal ClientSession GetSession(Guid id)
         {
             ClientSession result;
@@ -964,7 +965,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         /// <param name="rtspSessionId">The value which usually comes from the 'Session' header</param>
         /// <returns>Any clients which have been assigned the given <see cref="ClientSession.SessionId"/> </returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal IEnumerable<ClientSession> GetSessions(string rtspSessionId)
         {
             //If there was no id then nothing can be returned
@@ -977,7 +978,7 @@ namespace Oragon.Media.RtspServer
             return Clients.Where(c => string.Equals (rtspSessionId, c.SessionId));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal IEnumerable<ClientSession> GetSessions(System.IntPtr handle)
         {
             //Return all clients which match the given handle.
@@ -992,7 +993,7 @@ namespace Oragon.Media.RtspServer
         /// Adds a stream to the server. If the server is already started then the stream will also be started
         /// </summary>
         /// <param name="location">The uri of the stream</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryAddMedia(IMedia stream)
         {
             Exception any = null;
@@ -1031,7 +1032,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         /// <param name="streamId">The id of the stream</param>
         /// <returns>True if the stream is contained, otherwise false</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool ContainsMedia(Guid streamId)
         {
             return m_MediaStreams.ContainsKey(streamId);
@@ -1043,7 +1044,7 @@ namespace Oragon.Media.RtspServer
         /// <param name="streamId">The id of the stream</param>
         /// <param name="stop">True if the stream should be stopped when removed</param>
         /// <returns>True if removed, otherwise false</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryRemoveMedia(Guid streamId, bool stop = true)
         {
             Exception any = null;
@@ -1073,7 +1074,7 @@ namespace Oragon.Media.RtspServer
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IMedia GetStream(Guid streamId)
         {
             IMedia result;
@@ -1194,7 +1195,7 @@ namespace Oragon.Media.RtspServer
         /// <param name="source"></param>
         /// <param name="credential"></param>
         /// <param name="authType"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddCredential(IMedia source, NetworkCredential credential, string authType)
         {
             RequiredCredentials.Add(source.ServerLocation, authType, credential);
@@ -1205,7 +1206,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         /// <param name="source"></param>
         /// <param name="authType"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void RemoveCredential(IMedia source, string authType)
         {
             RequiredCredentials.Remove(source.ServerLocation, authType);
@@ -1217,7 +1218,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         internal void DisconnectAndRemoveInactiveSessions(object state = null) { DisconnectAndRemoveInactiveSessions(); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void DisconnectAndRemoveInactiveSessions()
         {
             //Allow some small varaince
@@ -1273,7 +1274,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         internal void RestartFaultedStreams(object state = null) { RestartFaultedStreams(); }
         
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void RestartFaultedStreams()
         {
             foreach (IMedia stream in MediaStreams.Where(s => s.State == StreamState.Started && s.Ready == false))
@@ -1897,7 +1898,7 @@ namespace Oragon.Media.RtspServer
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal void ProcessClientBuffer(ClientSession session, int received)
         {
             if (received <= 0 || IDisposedExtensions.IsNullOrDisposed(session) || session.IsDisconnected) return;
@@ -3555,21 +3556,21 @@ namespace Oragon.Media.RtspServer
 
         public Action<Socket> ConfigureSocket
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
         public Action<Thread> ConfigureThread
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         IEnumerable<Socket> ISocketReference.GetReferencedSockets()
         {
             if (IsDisposed) yield break;
@@ -3615,7 +3616,7 @@ namespace Oragon.Media.RtspServer
             ////}
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         IEnumerable<Thread> IThreadReference.GetReferencedThreads()
         {
              return LinqExtensions.Yield(m_ServerThread);

@@ -38,6 +38,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 using Oragon.Classes.Binary;
 using Oragon.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Extensions
 {
@@ -57,7 +58,7 @@ namespace Oragon.Extensions
         /// </summary>
         public static bool InException
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //See http://geekswithblogs.net/akraus1/archive/2008/04/08/121121.aspx
@@ -67,7 +68,7 @@ namespace Oragon.Extensions
         }
 
         //http://stackoverflow.com/questions/3007608/resuming-execution-of-code-after-exception-is-thrown-and-caught
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.Exception ResumeOnError(System.Action action)
         {
             try
@@ -94,7 +95,7 @@ namespace Oragon.Extensions
             /// </summary>
             public bool HasDisposed
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return object.ReferenceEquals(null, Disposed).Equals(false); }
             }
 
@@ -109,7 +110,7 @@ namespace Oragon.Extensions
 #endif
             public ArgumentNullOrDisposedException(IDisposed what) : this(string.Empty, what) { }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public ArgumentNullOrDisposedException(string paramName, IDisposed what)
                 : this(paramName)
             {

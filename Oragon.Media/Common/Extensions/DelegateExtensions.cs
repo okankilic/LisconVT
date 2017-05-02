@@ -39,6 +39,7 @@ namespace Oragon.Extensions
 {
     using Oragon.Media.Common.Extensions;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Provides extension methods which are useful for working with delegates
@@ -48,7 +49,7 @@ namespace Oragon.Extensions
 
         public static readonly System.Type TypeOfDelegate = typeof(System.Delegate);
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.Delegate ConvertTo(this System.Delegate self, System.Type type)
         {
             if (type == null) { throw new System.ArgumentNullException("type"); }
@@ -63,7 +64,7 @@ namespace Oragon.Extensions
                     .ToArray());
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CreateDelegate(ref System.Delegate self, System.Type type = null)
         {
             if(self != null) foreach(var inv in self.GetInvocationList())
@@ -82,13 +83,13 @@ namespace Oragon.Extensions
             return method.CreateDelegate(System.Linq.Expressions.Expression.GetDelegateType(method.GetParameters().Select(p => p.ParameterType).Concat(LinqExtensions.Yield(method.ReturnType)).ToArray()));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T ConvertTo<T>(this System.Delegate self)
         {
             return (T)(object)self.ConvertTo(typeof(T));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AppendTo<T>(this System.Delegate newDel, ref T baseDel) where T : class
         {
             baseDel = GenericExtensions.As<System.Delegate, T>(newDel);
@@ -100,7 +101,7 @@ namespace Oragon.Extensions
             } while (System.Threading.Interlocked.CompareExchange(ref baseDel, newBaseDel, oldBaseDel) != oldBaseDel);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SubtractFrom<T>(this System.Delegate newDel, ref T baseDel) where T : class
         {
             baseDel = GenericExtensions.As<System.Delegate, T>(newDel);

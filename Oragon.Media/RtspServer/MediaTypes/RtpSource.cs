@@ -37,6 +37,7 @@ using Oragon.Extensions;
 using Oragon.Interfaces;
 using Oragon.Media.Common.Extensions;
 using Oragon.Media.RtspServer.Models;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.RtspServer.MediaTypes
 {
@@ -52,9 +53,9 @@ namespace Oragon.Media.RtspServer.MediaTypes
         /// </summary>
         public bool RtcpDisabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_DisableQOS; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { m_DisableQOS = value; }
         }
 
@@ -66,9 +67,9 @@ namespace Oragon.Media.RtspServer.MediaTypes
         /// </remarks>
         public bool ForceTCP
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_ForceTCP; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { m_ForceTCP = value; }
         }
 
@@ -236,7 +237,7 @@ namespace Oragon.Media.RtspServer.MediaTypes
 
         #region IThreadReference
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         System.Collections.Generic.IEnumerable<System.Threading.Thread> IThreadReference.GetReferencedThreads()
         {
             return IDisposedExtensions.IsNullOrDisposed(RtpClient) ? null : LinqExtensions.Yield(RtpClient.m_WorkerThread);
@@ -244,9 +245,9 @@ namespace Oragon.Media.RtspServer.MediaTypes
 
         System.Action<System.Threading.Thread> IThreadReference.ConfigureThread
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return RtpClient.ConfigureThread; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { RtpClient.ConfigureThread = value; }
         }
 

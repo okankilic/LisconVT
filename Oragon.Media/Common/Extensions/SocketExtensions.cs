@@ -38,6 +38,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 using Oragon.Classes;
 using Oragon.Classes.Binary;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Extensions
 {
@@ -74,7 +75,7 @@ namespace Oragon.Extensions
         //    }
         //}
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static System.Net.Sockets.Socket ReservePort(System.Net.Sockets.SocketType socketType, System.Net.Sockets.ProtocolType protocol, System.Net.IPAddress localIp, int port)
         {
             System.Net.Sockets.Socket result = new System.Net.Sockets.Socket(localIp.AddressFamily, socketType, protocol);
@@ -93,7 +94,7 @@ namespace Oragon.Extensions
         /// <param name="even"></param>
         /// <param name="localIp"></param>
         /// <returns>-1 if no open ports were found or the next open port.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static int FindOpenPort(System.Net.Sockets.ProtocolType type, int start = 30000, bool even = true, System.Net.IPAddress localIp = null)
         {
             //As IP would imply either or Only Tcp or Udp please.
@@ -164,7 +165,7 @@ namespace Oragon.Extensions
         /// <param name="even"></param>
         /// <param name="localIp"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static int ProbeForOpenPort(System.Net.Sockets.ProtocolType type, int start = 30000, bool even = true, System.Net.IPAddress localIp = null)
         {
             if (object.ReferenceEquals(localIp, null)) localIp = GetFirstUnicastIPAddress(System.Net.Sockets.AddressFamily.InterNetwork); // System.Net.IPAddress.Any should give unused ports across all IP's?
@@ -640,14 +641,14 @@ namespace Oragon.Extensions
         //SetSocketOption_internal should be determined by OperatingSystemExtensions and RuntimeExtensions.
         //Will need to build a Map of names to values for those platforms and translate.        
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void SetTcpOption(System.Net.Sockets.Socket socket, System.Net.Sockets.SocketOptionName name, int value)
         {
             /*if (OperatingSystemExtensions.IsWindows) */socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel.Tcp, name, value);
             //else SetSocketOption_internal 
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void GetTcpOption(System.Net.Sockets.Socket socket, System.Net.Sockets.SocketOptionName name, byte[] buffer)
         {
             /*if (OperatingSystemExtensions.IsWindows) */socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel.Tcp, name, buffer);
@@ -689,7 +690,7 @@ namespace Oragon.Extensions
 
         static System.Net.Sockets.SocketOptionName TcpMaximumRetransmissionOptionName = (System.Net.Sockets.SocketOptionName)(OperatingSystemExtensions.IsWindows ? 5 : 18);
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetMaximumTcpRetransmissionTime(System.Net.Sockets.Socket socket, int amountInSeconds = 3)
         {
             //On windows this is TCP_MAXRT elsewhere USER_TIMEOUT
@@ -699,13 +700,13 @@ namespace Oragon.Extensions
             SetTcpOption(socket, TcpMaximumRetransmissionOptionName, amountInSeconds);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DisableTcpRetransmissions(System.Net.Sockets.Socket socket)
         {
             SetMaximumTcpRetransmissionTime(socket, 0);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void EnableTcpRetransmissions(System.Net.Sockets.Socket socket)
         {
             SetMaximumTcpRetransmissionTime(socket);
@@ -732,13 +733,13 @@ namespace Oragon.Extensions
 
         static System.Net.Sockets.SocketOptionName TcpMaximumSegmentSizeOptionName = (System.Net.Sockets.SocketOptionName)(OperatingSystemExtensions.IsWindows ? 4 : 2);
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void GetMaximumSegmentSize(System.Net.Sockets.Socket socket, out int result)
         {
             result = (int)socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel.Tcp, TcpMaximumSegmentSizeOptionName);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetMaximumSegmentSize(System.Net.Sockets.Socket socket, int size)
         {
             SetTcpOption(socket, TcpMaximumSegmentSizeOptionName, size);
@@ -878,7 +879,7 @@ namespace Oragon.Extensions
         //https://msdn.microsoft.com/en-us/library/windows/desktop/ms740102(v=vs.85).aspx
         //Typically such data is NOT handled in the same buffers unless told to do so with these options.        
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void EnableTcpOutOfBandDataInLine(System.Net.Sockets.Socket socket)
         {
             socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel.Socket, System.Net.Sockets.SocketOptionName.OutOfBandInline, true);
@@ -886,13 +887,13 @@ namespace Oragon.Extensions
             //SetTcpOption(socket, System.Net.Sockets.SocketOptionName.OutOfBandInline, 1);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DisableTcpOutOfBandDataInLine(System.Net.Sockets.Socket socket)
         {
             socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel.Socket, System.Net.Sockets.SocketOptionName.OutOfBandInline, false);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetIsTcpOutOfBandInLine(System.Net.Sockets.Socket socket)
         {
             int len = Binary.BytesPerInteger;
@@ -1188,7 +1189,7 @@ namespace Oragon.Extensions
         /// <param name="amount">The 0 based amount of bytes to receive, 0 will have no result, other values will be progressively used to determine exactly when an error occurs</param>
         /// <param name="socket">The socket to receive on</param>
         /// <returns>The amount of bytes recieved which will be equal to the amount paramter unless the data was unable to fit in the given buffer</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int AlignedReceive(byte[] buffer, int offset, int amount, System.Net.Sockets.Socket socket, out System.Net.Sockets.SocketError error) //RecieveAllOrTimeout
         {
             //Store any socket errors here incase non-blocking sockets are being used.
@@ -1266,7 +1267,7 @@ namespace Oragon.Extensions
         /// <param name="remote"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int SendTo(byte[] buffer, int offset, int size, System.Net.Sockets.Socket socket, System.Net.EndPoint remote, System.Net.Sockets.SocketFlags flags, out System.Net.Sockets.SocketError error)
         {
             error = System.Net.Sockets.SocketError.SocketError;

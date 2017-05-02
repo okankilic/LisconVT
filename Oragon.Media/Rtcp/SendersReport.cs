@@ -46,6 +46,7 @@ using System.Text;
 using Oragon.Classes.Binary;
 using Oragon.Classes;
 using Oragon.Media.Ntp;
+using System.Runtime.CompilerServices;
 
 #endregion
 namespace Oragon.Media.Rtcp
@@ -126,10 +127,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int NtpMSW
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)Binary.ReadU32(Payload.Array, Payload.Offset, Binary.IsLittleEndian); }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { Binary.Write32(Payload.Array, Payload.Offset, Binary.IsLittleEndian, (uint)value); }
         }
 
@@ -138,10 +139,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int NtpLSW
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)Binary.ReadU32(Payload.Array, Payload.Offset + 4, Binary.IsLittleEndian); }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { Binary.Write32(Payload.Array, Payload.Offset + 4, Binary.IsLittleEndian, (uint)value); }
         }
 
@@ -154,10 +155,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int RtpTimestamp
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)Binary.ReadU32(Payload.Array, Payload.Offset + 8, Binary.IsLittleEndian); }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { Binary.Write32(Payload.Array, Payload.Offset + 8, Binary.IsLittleEndian, (uint)value); }
         }
 
@@ -167,10 +168,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int SendersPacketCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)Binary.ReadU32(Payload.Array, Payload.Offset + 12, Binary.IsLittleEndian); }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { Binary.Write32(Payload.Array, Payload.Offset + 12, Binary.IsLittleEndian, (uint)value); }
         }
 
@@ -181,10 +182,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int SendersOctetCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)Binary.ReadU32(Payload.Array, Payload.Offset + 16, Binary.IsLittleEndian); }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { Binary.Write32(Payload.Array, Payload.Offset + 16, Binary.IsLittleEndian, (uint)value); }
         }
 
@@ -196,7 +197,7 @@ namespace Oragon.Media.Rtcp
         /// </remarks>
         public long NtpTimestamp
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (Binary.IsLittleEndian) return (long)((ulong)NtpMSW << 32 | (uint)NtpLSW);
@@ -204,7 +205,7 @@ namespace Oragon.Media.Rtcp
                 return (long)((ulong)NtpLSW << 32 | (uint)NtpMSW);
             }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set
             {
 
@@ -236,10 +237,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public DateTime NtpDateTime
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return NetworkTimeProtocol.NptTimestampToDateTime((ulong)NtpTimestamp); }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { NtpTimestamp = (long)NetworkTimeProtocol.DateTimeToNptTimestamp(ref value); }
         }
 
@@ -259,7 +260,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public override IEnumerable<byte> ReportData
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (false == HasReports || IsDisposed) return MemorySegment.Empty;
@@ -273,7 +274,7 @@ namespace Oragon.Media.Rtcp
 
         internal protected MemorySegment SendersInformationSegment
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return new MemorySegment(Payload.Array, Payload.Offset, SendersInformationSize);
@@ -286,7 +287,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public IEnumerable<byte> SendersInformation
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //Used to use Take to allow this to proceed without an exception

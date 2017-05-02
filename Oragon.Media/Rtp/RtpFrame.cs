@@ -127,9 +127,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool AllowsMultiplePayloadTypes
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -312,7 +312,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int PayloadType
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_PayloadType; }
             #region Unused set
             //internal protected set
@@ -343,9 +343,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int MarkerCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MarkerCount; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { m_MarkerCount = value; }
         }
 
@@ -356,7 +356,7 @@ namespace Oragon.Media.Rtp
         //Public means this can be disposed. virtual is not necessary
         public SegmentStream Buffer
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return HasBuffer ? m_Buffer : m_Buffer = new SegmentStream(Depacketized.Values); }
         }
 
@@ -365,9 +365,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int SynchronizationSourceIdentifier
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Ssrc; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set
             {
                 m_Ssrc = value;
@@ -381,9 +381,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int Timestamp
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Timestamp; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { m_Timestamp = value; }
         }
 
@@ -394,7 +394,7 @@ namespace Oragon.Media.Rtp
         /// <returns></returns>
         internal protected RtpPacket this[int index]
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Packets[index]; }
             #region Unused set
             /*private*/
@@ -409,7 +409,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool SpecifiedPayloadType
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_PayloadType >= 0; }
         }
 
@@ -418,7 +418,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HasDepacketized
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Depacketized == null ? false : Depacketized.Count > 0; }
         }
 
@@ -427,7 +427,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HasBuffer
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false == (m_Buffer == null) && m_Buffer.CanRead; }
         }
 
@@ -436,7 +436,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool Transferred
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IsEmpty ? false : Packets.All(p => p.Transferred.HasValue); }
         }
 
@@ -446,7 +446,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public virtual bool IsComplete
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false == IsDisposed && false == IsMissingPackets && HasMarker; }
         }
 
@@ -460,7 +460,7 @@ namespace Oragon.Media.Rtp
         /// <remarks>This function does not check <see cref="HasMarker"/></remarks>
         public bool IsMissingPackets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 int count = Count;
@@ -501,7 +501,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HasMarker
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MarkerCount > 0; }
         }
 
@@ -510,7 +510,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int Count
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Packets == null ? 0 : Packets.Count; }
         }
 
@@ -519,7 +519,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool IsEmpty
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Count.Equals(0); }
         }
         
@@ -529,7 +529,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int HighestSequenceNumber
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_HighestSequenceNumber; }
         }
 
@@ -539,7 +539,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int LowestSequenceNumber
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_LowestSequenceNumber; }
         }
 
@@ -631,7 +631,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="f">The frame to clonse</param>
         /// <param name="referencePackets">Indicate if contained packets should be referenced</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpFrame(RtpFrame f, bool referencePackets = false, bool referenceBuffer = false, bool shouldDispose = true)
             : base(shouldDispose) //If shouldDispose is true when referencePackets is true then Dispose will clear both lists.
         {
@@ -694,7 +694,7 @@ namespace Oragon.Media.Rtp
         /// Gets an enumerator of All Contained Packets at the time of the call
         /// </summary>
         /// <returns>The enumerator of the contained packets</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerator<RtpPacket> GetEnumerator() { return Packets.GetEnumerator(); }
 
         //Could also depacketize in place and only use memory available.
@@ -703,7 +703,7 @@ namespace Oragon.Media.Rtp
         /// If HasDepacketized is true then returns all data already depacketized otherwise all packets are iterated and depacketized and memory is reclaimed afterwards.
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerator<MemorySegment> GetDepacketizion(bool inplace = true)
         {
             //If there is already a Depacketizion use the memory in place.
@@ -747,7 +747,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="packet">The RtpPacket to Add</param>
         /// <param name="allowPacketsAfterMarker">Indicates if the packet shouldbe allowed even if the packet's sequence number is greater than or equal to <see cref="HighestSequenceNumber"/> and <see cref="IsComplete"/> is true.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(RtpPacket packet, 
             //Todo, should be Flags which indicate what is allowed to be added
             bool allowDuplicates = false, 
@@ -900,7 +900,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Calls <see cref="Add"/> and indicates if the operations was a success
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryAdd(RtpPacket packet, bool allowDuplicates = false, bool allowPacketsAfterMarker = true)
         {
             if (IsDisposed) return false;
@@ -1022,7 +1022,7 @@ namespace Oragon.Media.Rtp
         public RtpPacket Remove(int sequenceNumber) { return Remove(ref sequenceNumber); }
         
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket Remove(ref int sequenceNumber)
         {
             int count = Count;
@@ -1147,7 +1147,7 @@ namespace Oragon.Media.Rtp
         /// Disposes the buffer
         /// Clears the contained packets.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Clear()
         {
             if (Packets == null) return;
@@ -1197,7 +1197,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Disposes all contained packets. 
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void DisposeAllPackets()
         {
             //System.Linq.ParallelEnumerable.ForAll(Packets.AsParallel(), (t) => t.Dispose());
@@ -1251,7 +1251,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Depacketizes all contained packets ignoring <see cref="IsComplete"/>.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Depacketize() { Depacketize(true); }
 
         //Same here but allows dervived types to specify
@@ -1260,7 +1260,7 @@ namespace Oragon.Media.Rtp
         /// Depacketizes all contained packets if possible.
         /// </summary>
         /// <param name="allowIncomplete">Determines if <see cref="IsComplete"/> must be true</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual void Depacketize(bool allowIncomplete)
         {
             //May allow incomplete packets.
@@ -1293,7 +1293,7 @@ namespace Oragon.Media.Rtp
         /// Depacketizes a single packet
         /// </summary>
         /// <param name="packet"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual void Depacketize(RtpPacket packet) //bool if data was added.
         {
             if (IDisposedExtensions.IsNullOrDisposed(packet)) return;
@@ -1312,7 +1312,7 @@ namespace Oragon.Media.Rtp
         /// Takes all depacketized segments and writes them to the buffer.
         /// Disposes any existing buffer. Creates a new buffer.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void PrepareBuffer() //bool, persist, action pre pre write, post write
         {
             //Ensure there is something to write to the buffer
@@ -1347,7 +1347,7 @@ namespace Oragon.Media.Rtp
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <returns>The amount of bytes copied</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int CopyTo(byte[] buffer, int offset)
         {
             int total = 0;
@@ -1387,7 +1387,7 @@ namespace Oragon.Media.Rtp
         }
 
         //Todo, would be handled with other collection via remove...
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void FreeDepacketizedMemory(bool force = false)
         {
             if (Depacketized == null) return;
@@ -1412,17 +1412,17 @@ namespace Oragon.Media.Rtp
         //const uint OrderMask = 0xffff0000;
 
         //const int KeyMask = 0x0000ffff;
-        //[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         //internal protected int GetOrderNumber(ref int key) { return (int)((short)key & OrderMask); }
 
-        //[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         //[CLSCompliant(false)]
         //internal protected /*virtual*/ int GetPacketKey(ref int key)
         //{
         //    unchecked { return (short)key; }
         //}
 
-        //[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         //internal protected /*virtual*/ int GetPacketKey(int key)
         //{
         //    //Todo, could allow unsafe calls here to improve performance Int32ToInt16Bits
@@ -1442,7 +1442,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="key"></param>
         /// <param name="force"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void FreeDepacketizedMemory(ref int key, ref bool force)
         {
             //Needs a method to virtually determine the key of the packet.
@@ -1465,7 +1465,7 @@ namespace Oragon.Media.Rtp
 
         #endregion
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

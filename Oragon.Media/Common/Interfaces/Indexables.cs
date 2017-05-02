@@ -34,6 +34,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  * v//
  */
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Interfaces
 {
     /// <summary>
@@ -92,7 +94,7 @@ namespace Oragon.Interfaces
         /// </summary>
         public long UpperBound
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Count; }
         }
 
@@ -101,10 +103,10 @@ namespace Oragon.Interfaces
         /// </summary>
         public long LowerBound
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_LowerBound; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { m_LowerBound = value; }
         }
 
@@ -113,10 +115,10 @@ namespace Oragon.Interfaces
         /// </summary>
         public bool IsReadOnly
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_IsReadOnly; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { if (m_Mutable && false.Equals(m_IsReadOnly)) m_IsReadOnly = value; }
         }
 
@@ -125,10 +127,10 @@ namespace Oragon.Interfaces
         /// </summary>
         public bool IsWriteOnly
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_IsWriteOnly; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { if (m_Mutable && m_IsReadOnly.Equals(false) && m_IsWriteOnly.Equals(false)) m_IsWriteOnly = value; }
         }
 
@@ -137,10 +139,10 @@ namespace Oragon.Interfaces
         /// </summary>
         public bool Mutable
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Mutable; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { if (false.Equals(m_IsReadOnly) && m_Mutable) m_Mutable = value; }
         }
     }

@@ -99,7 +99,7 @@ namespace Oragon.Media.Rtp
         /// </remarks>
         public int ContributingSourceListOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { if (IsDisposed || Payload.Count.Equals(0)) return 0; return Binary.Clamp(Header.ContributingSourceCount * 4, 0, 60)/* Math.Min(60, Math.Max(0, Header.ContributingSourceCount * 4))*/; }
         }
@@ -111,7 +111,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int ExtensionOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get
             {
@@ -127,7 +127,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int HeaderOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { if (IsDisposed || Payload.Count.Equals(0)) return 0; return ContributingSourceListOctets + ExtensionOctets; }
         }
@@ -139,7 +139,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int PaddingOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { if (IsDisposed || false.Equals(Header.Padding)) return 0; return RFC3550.ReadPadding(Payload.Array, Payload.Offset + Payload.Count - 1, 1); }
         }
@@ -194,7 +194,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int Length
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return IsDisposed ? 0 : RtpHeader.Length + Payload.Count; }
         }
@@ -225,7 +225,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public IEnumerable<byte> PayloadData
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return PayloadDataSegment; }
         }
@@ -251,7 +251,7 @@ namespace Oragon.Media.Rtp
 
         public IEnumerable<byte> PaddingData
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return PaddingDataSegment; }
         }
@@ -262,7 +262,7 @@ namespace Oragon.Media.Rtp
         /// <param name="octets">The octets to add</param>
         /// <param name="offset">The offset to start copying</param>
         /// <param name="count">The amount of bytes to copy</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal protected virtual void AddBytesToPayload(IEnumerable<byte> octets, int offset = 0, int count = int.MaxValue)
         {
             if (IsReadOnly) throw new InvalidOperationException("Can only set the AddBytesToPayload when IsReadOnly is false.");
@@ -316,14 +316,14 @@ namespace Oragon.Media.Rtp
 
         #region Constructor
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket(int version, bool padding, bool extension, byte[] payload)
             : this(new RtpHeader(version, padding, extension), payload)
         {
 
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket(int version, bool padding, bool extension, bool marker, int payloadType, int csc, int ssrc, int seq, int timestamp, byte[] payload = null)
             : this(new RtpHeader(version, padding, extension, marker, payloadType, csc, ssrc, seq, timestamp), payload)
         {
@@ -335,7 +335,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="header">The header to utilize. When Dispose is called this header will be diposed if ownsHeader is true.</param>
         /// <param name="octets">The octets to project</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket(RtpHeader header, IEnumerable<byte> octets, bool shouldDispose = true) : base(shouldDispose)
         {
             if (header == null) throw new ArgumentNullException("header");
@@ -358,7 +358,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="header">The existing RtpHeader</param>
         /// <param name="payload">The data contained in the payload</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket(RtpHeader header, MemorySegment payload, bool shouldDispose = true) : base(shouldDispose)
         {
             if (header == null) throw new ArgumentNullException("header");
@@ -375,7 +375,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="buffer">The buffer which contains the binary RtpPacket to decode</param>
         /// <param name="offset">The offset to start copying</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket(byte[] buffer, int offset, int count, bool shouldDispose = true) : base(shouldDispose)
         {
             if (buffer == null || buffer.Length == 0 || count <= 0) throw new ArgumentException("Must have data in a RtpPacket");
@@ -402,7 +402,7 @@ namespace Oragon.Media.Rtp
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket(byte[] buffer, int offset, bool shouldDispose = true) : this(buffer, offset, buffer.Length - offset, shouldDispose) { }
 
         /// <summary>
@@ -410,7 +410,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="size"></param>
         /// <param name="shouldDispose"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket(int size, bool shouldDispose = true) 
             : base(shouldDispose)
         {
@@ -548,7 +548,7 @@ namespace Oragon.Media.Rtp
 
         public bool IsReadOnly
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false == m_OwnsHeader || m_OwnedOctets == null; }
         }
 
@@ -637,7 +637,7 @@ namespace Oragon.Media.Rtp
         /// Creates a new instance of the packet which contains new references to the <see cref="Header"/> and <see cref="Payload"/>
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpPacket Clone()
         {
             return new RtpPacket(new RtpHeader(Header), new MemorySegment(Payload)) { Transferred = Transferred };
@@ -684,7 +684,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Provides a sample implementation of what would be required to complete a RtpPacket that has the IsComplete property False.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual int CompleteFrom(System.Net.Sockets.Socket socket, MemorySegment buffer)
         {
             if (IsReadOnly) throw new InvalidOperationException("Cannot modify a RtpPacket when IsReadOnly is false.");
@@ -901,7 +901,7 @@ namespace Oragon.Media.Rtp
         }
 
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(RtpPacket other)
         {
             return other.Length.Equals(Length)
@@ -911,7 +911,7 @@ namespace Oragon.Media.Rtp
                  other.GetHashCode().Equals(GetHashCode());
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
             if (System.Object.ReferenceEquals(this, obj)) return true;
@@ -923,7 +923,7 @@ namespace Oragon.Media.Rtp
 
         //Packet equals...
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return Created.GetHashCode() ^ Header.GetHashCode(); }        
 
         /// <summary>
@@ -941,7 +941,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Calls <see cref="Update"/> on the <see cref="Payload"/> and <see cref="Synchronize"/> on the <see cref="Header"/>
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal protected void Synchronize()
         {
             //Should check IsContiguous
@@ -956,7 +956,7 @@ namespace Oragon.Media.Rtp
         /// Indicates if the <see cref="Header"/> and <see cref="Payload"/> belong to the same array.
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsContiguous()
         {
             return Header.IsContiguous() && Header.SegmentToLast10Bytes.Array == Payload.Array && Header.SegmentToLast10Bytes.Offset + Header.SegmentToLast10Bytes.Count == Payload.Offset;
@@ -966,24 +966,24 @@ namespace Oragon.Media.Rtp
 
         #region Operators
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(RtpPacket a, RtpPacket b)
         {
             return object.ReferenceEquals(b, null) ? object.ReferenceEquals(a, null) : a.Equals(b);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(RtpPacket a, RtpPacket b) { return (a == b).Equals(false); }
 
         #endregion
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         object ICloneable.Clone()
         {
             return this.Clone(true, true, true, true, false);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryGetBuffers(out System.Collections.Generic.IList<System.ArraySegment<byte>> buffer)
         {
             if (IsDisposed)

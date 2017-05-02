@@ -41,6 +41,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.RtspServer.Models
 {
@@ -101,7 +102,7 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public TimeSpan Uptime
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { if (m_StartedTimeUtc.HasValue) return DateTime.UtcNow - m_StartedTimeUtc.Value; return TimeSpan.MinValue; }
         }
 
@@ -110,9 +111,9 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public Guid Id
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Id; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { m_Id = value; }
         }
 
@@ -121,9 +122,9 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public virtual string Name
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Name; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("Name", "Cannot be null or consist only of whitespace"); m_Aliases.Add(m_Name); m_Name = value; }
         }
 
@@ -132,7 +133,7 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public virtual IEnumerable<string> Aliases
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Aliases; }
         }
 
@@ -141,9 +142,9 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public virtual NetworkCredential SourceCredential
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_SourceCred; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { m_SourceCred = value; }
         }
 
@@ -157,7 +158,7 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public virtual Uri ServerLocation
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new Uri(UriScheme + Id.ToString()); }
         }
 
@@ -171,7 +172,7 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public bool IsParent
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false == (this is ChildMedia); }
         }
 
@@ -180,9 +181,9 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public virtual Uri Source
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Source; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { m_Source = value; }
         }
 
@@ -191,9 +192,9 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public virtual bool Ready
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set;
         }
 
@@ -202,9 +203,9 @@ namespace Oragon.Media.RtspServer.Models
         /// </summary>
         public bool DecodeFrames
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set;
         }
 
@@ -297,7 +298,7 @@ namespace Oragon.Media.RtspServer.Models
 
         #endregion
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddAlias(string name)
         {
             if (m_Aliases.Any(a=> a.Equals(name, StringComparison.OrdinalIgnoreCase))) return;
@@ -305,13 +306,13 @@ namespace Oragon.Media.RtspServer.Models
             m_Aliases.Add(name);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void RemoveAlias(string alias)
         {
             m_Aliases.Remove(alias);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void ClearAliases()
         {
             m_Aliases.Clear();

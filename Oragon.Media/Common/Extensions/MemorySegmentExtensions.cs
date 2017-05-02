@@ -4,6 +4,7 @@ using Oragon.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace Oragon.Media.Common.Extensions
             return copy;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.ArraySegment<byte> ToByteArraySegment(this MemorySegment segment)
         {
             return new ArraySegment<byte>(segment.Array, segment.Offset, segment.Count);
@@ -56,7 +57,7 @@ namespace Oragon.Media.Common.Extensions
         /// <param name="dest"></param>
         /// <param name="destinationIndex">The offset in <paramref name="dest"/> to start copying</param>
         /// <param name="length">The amount of bytes to copy from <paramref name="segment"/></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyTo(this MemorySegment segment, byte[] dest, int destinationIndex, int length)
         {
             if (IDisposedExtensions.IsNullOrDisposed(segment)) return;
@@ -67,7 +68,7 @@ namespace Oragon.Media.Common.Extensions
         }
 
         //make Left / Right or expect the callers to use -length when they need to...
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MemorySegment Subset(this MemorySegment segment, int offset, int length, bool shouldDispose = true)
         {
             //Should propably enforce that offset and length do not supercede existing length or this is not a true subset.

@@ -126,7 +126,7 @@ namespace Oragon.Media.Rtp
         /// <param name="version">The version of the RtcpPacket to validate</param>
         /// <param name="payloadType">The optional payloadType to use in the calulcation. Defaults to 201</param>
         /// <returns>The value calulcated</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RtcpValidValue(int version, int payloadType = Rtcp.SendersReport.PayloadType)
         {
             //Always calulated in Big ByteOrder
@@ -139,7 +139,7 @@ namespace Oragon.Media.Rtp
         /// <param name="header"></param>
         /// <param name="version"></param>
         /// <returns>True if the values are equal, otherwise false</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidRtcpHeader(Rtcp.RtcpHeader header, int version = 2) { return (header.First16Bits & RtcpValidMask) == RtcpValidValue(version); }
 
         /// <summary>
@@ -507,7 +507,7 @@ namespace Oragon.Media.Rtp
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CalulcateJitter(ref TimeSpan arrivalDifference, ref uint existingJitter, ref uint existingTransit)
         {
             existingJitter += ((existingTransit = (uint)arrivalDifference.TotalMilliseconds) - ((existingTransit + 8) >> 4));
@@ -544,7 +544,7 @@ namespace Oragon.Media.Rtp
          
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool UpdateSequenceNumber(ref ushort sequenceNumber,
             //From 'source' or TransportContext
             ref uint RtpBaseSeq, ref ushort RtpMaxSeq, ref uint RtpBadSeq, ref uint RtpSeqCycles, ref uint RtpReceivedPrior, ref uint RtpProbation, ref uint RtpPacketsRecieved,
@@ -557,7 +557,7 @@ namespace Oragon.Media.Rtp
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool UpdateSequenceNumber(ref ushort sequenceNumber,
             //From 'source' or TransportContext
             ref uint RtpBaseSeq, ref ushort RtpMaxSeq, ref uint RtpBadSeq, ref uint RtpSeqCycles, ref uint RtpReceivedPrior, ref uint RtpProbation, ref uint RtpPacketsRecieved,
@@ -644,7 +644,7 @@ namespace Oragon.Media.Rtp
         }        
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ResetRtpValidationCounters(ref ushort sequenceNumber, ref uint RtpBaseSeq, ref ushort RtpMaxSeq, ref uint RtpBadSeq, ref uint RtpSeqCycles, ref uint RtpReceivedPrior, ref uint RtpPacketsRecieved)
         {
             RtpBaseSeq = RtpMaxSeq = (ushort)sequenceNumber;
@@ -655,7 +655,7 @@ namespace Oragon.Media.Rtp
         //CalculateFractionAndLoss (RTCP?)
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CalculateFractionAndLoss(ref uint RtpBaseSeq, ref ushort RtpMaxSeq, ref uint RtpSeqCycles, ref uint RtpPacketsRecieved, ref uint RtpReceivedPrior, ref uint RtpExpectedPrior, out uint fraction, out uint lost)
         {
             //Should be performed in the Conference level, these values here will only 
@@ -824,7 +824,7 @@ namespace Oragon.Media.Rtp
             /// <param name="extension">Indicates the value of the 3rd Bit</param>
             /// <param name="remainingBits">Bits 4, 5, 6, 7 and 8</param>
             /// <returns>The octet which has been composed as a result of packing the bit fields</returns>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte PackOctet(int version, bool padding, bool extension, byte remainingBits = 0)
             {
                 //Ensure the version is valid in a quarter bit
@@ -855,7 +855,7 @@ namespace Oragon.Media.Rtp
 
             //Should ensure remainingBits in BigEndian...
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte PacketOctet(int version, byte remainingBits)
             {
                 return (byte)(version << 6 | (byte)remainingBits);
@@ -867,7 +867,7 @@ namespace Oragon.Media.Rtp
             /// <param name="marker"></param>
             /// <param name="payloadTypeBits"></param>
             /// <returns></returns>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte PackOctet(bool marker, int payloadTypeBits)
             {
                 return ((byte)(marker ? (RtpMarkerMask | (byte)payloadTypeBits) : payloadTypeBits));
@@ -888,20 +888,20 @@ namespace Oragon.Media.Rtp
 
             internal byte First8Bits
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return m_Memory[0]; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 set { m_Memory[0] = value; }
             }
             
             internal byte Last8Bits
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return m_Memory[1]; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 set { m_Memory[1] = value; }
             }
@@ -912,12 +912,12 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int Version
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 //Only 1 shift is required to read the version and it shouldn't matter about the endian
                 get { return First8Bits >> 6; } //Binary.IsLittleEndian ? First8Bits >> 6 : First8Bits << 6; }
                 //get { return (int)Binary.ReadBitsMSB(m_Memory.Array, Binary.BitsToBytes(m_Memory.Offset), 2); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 set
                 {
@@ -944,7 +944,7 @@ namespace Oragon.Media.Rtp
             //Draft only
             internal int Channel
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return First8Bits & VersionMask; }
                 //set
@@ -955,12 +955,12 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool Padding
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 //Example 223 & 32 == 0
                 //Where 32 == PaddingMask and 223 == (11011111) Binary and would indicate a version 3 header with no padding, extension set and 15 CC
                 get { return (First8Bits & PaddingMask) > 0; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 internal set
                 {
@@ -974,7 +974,7 @@ namespace Oragon.Media.Rtp
             //Draft only
             internal bool OptionsPresent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return (Last8Bits >> 7) > 0; }
                 //set
@@ -985,14 +985,14 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool Extension
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 //There are 8 bits in a byte.
                 //Where 3 is the amount of unnecessary bits preceeding the Extension bit
                 //and 7 is amount of bits to discard to place the extension bit at the highest indicie of the octet (8)
                 //get { return First8Bits > 0 && (Binary.ReadBitsWithShift(First8Bits, 3, 7, Binary.IsBigEndian) & ExtensionMask) > 0; }
                 get { return (First8Bits & ExtensionMask) > 0; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 set { First8Bits = PackOctet((byte)Version, Padding, value, (byte)RtpContributingSourceCount); }
             }
@@ -1004,13 +1004,13 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int RtcpBlockCount
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 //Where 3 | PaddingMask = 224 (decimal) 11100000
                 //Example 255 & 244 = 31 which is the Maximum value which is able to be stored in this field.
                 //Where 255 = byte.MaxValue
                 get { return (byte)(First8Bits & Binary.FiveBitMaxValue); } // Binary.IsLittleEndian ? Binary.ReverseU8((byte)(First8Bits << 3)) : Binary.ReverseU8((byte)(First8Bits >> 3)); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 //get { return (int)Binary.ReadBitsMSB(m_Memory.Array, Binary.BytesToBits(m_Memory.Offset) + 3, 5); }
                 set
@@ -1040,7 +1040,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int RtpContributingSourceCount
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 //Contributing sources only exist in the highest half of the `leastSignificant` octet.
                 //Example 240 = 11110000 and would indicate 0 Contributing Sources etc.
@@ -1048,7 +1048,7 @@ namespace Oragon.Media.Rtp
                 //get { return Binary.IsLittleEndian ? Binary.ReverseU8((byte)(First8Bits << 4)) : First8Bits << 4;} // Binary.ReverseU8((byte)(First8Bits >> 4)); }
                 get { return (First8Bits & Binary.FourBitMaxValue); }
                 //get { return (int)Binary.ReadBitsMSB(m_Memory.Array, Binary.BytesToBits(m_Memory.Offset) + 4, 4); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 internal set
                 {
@@ -1069,10 +1069,10 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool RtpMarker
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return Last8Bits > Binary.SevenBitMaxValue; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 set { Last8Bits = PackOctet(value, (byte)RtpPayloadType); }
             }
@@ -1080,7 +1080,7 @@ namespace Oragon.Media.Rtp
             //Draft only
             internal bool EndOfSynchroniztionUnit
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return (Last8Bits & 64) > 0; }
                 //set
@@ -1091,13 +1091,13 @@ namespace Oragon.Media.Rtp
             /// </summary>            
             public int RtpPayloadType
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 //& Binary.SevenBitMaxValue may be faster
                 //get { return Last8Bits > 0 ? (byte)((Last8Bits << 1)) >> 1 : 0; }
                 get { return Last8Bits & Binary.SevenBitMaxValue; }
                 //get { return (int)Binary.ReadBitsMSB(m_Memory.Array, Binary.BytesToBits(m_Memory.Offset + 1) + 1, 7); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 set
                 {
@@ -1115,7 +1115,7 @@ namespace Oragon.Media.Rtp
             //Draft only
             internal int Format
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return (Last8Bits & VersionMask); }
                 //set
@@ -1130,10 +1130,10 @@ namespace Oragon.Media.Rtp
             /// </remarks>            
             public int RtcpPayloadType
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 get { return Last8Bits; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
                 set { Last8Bits = (byte)value; } //Check Marker before setting?
             }
@@ -1148,7 +1148,7 @@ namespace Oragon.Media.Rtp
             /// <param name="other">The CommonHeaderBits instance to copy</param>
             /// <param name="reference">indicates if this instance should reference the data of the other instance</param>
             /// <param name="shouldDispose">indicates if memory will disposed when <see cref="Dispose"/> is called</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public CommonHeaderBits(CommonHeaderBits other, bool reference = false, bool shouldDispose = true)
                 :base(shouldDispose)
             {
@@ -1181,7 +1181,7 @@ namespace Oragon.Media.Rtp
             /// <param name="one">The first byte</param>
             /// <param name="two">The second byte</param>
             /// <param name="shouldDispose">indicates if memory will disposed when <see cref="Dispose"/> is called</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public CommonHeaderBits(byte one, byte two, bool shouldDispose = true)
                 : base(shouldDispose)
             {
@@ -1198,7 +1198,7 @@ namespace Oragon.Media.Rtp
             /// <param name="data">The data</param>
             /// <param name="offset">The offset</param>
             /// <param name="shouldDispose">indicates if memory will disposed when <see cref="Dispose"/> is called
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public CommonHeaderBits(byte[] data, int offset, bool shouldDispose = true)
                 : base(shouldDispose)
             {
@@ -1210,7 +1210,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             /// <param name="memory">The memory</param>
             /// <param name="shouldDispose">indicates if memory will disposed when <see cref="Dispose"/> is called</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public CommonHeaderBits(MemorySegment memory, bool shouldDispose = true) //, int additionalOffset = 0)
                 : base(shouldDispose)
             {
@@ -1228,7 +1228,7 @@ namespace Oragon.Media.Rtp
             /// <param name="padding">The value of the Padding bit</param>
             /// <param name="extension">The value of the Extension bit</param>
             /// <param name="shouldDispose">indicates if memory will disposed when <see cref="Dispose"/> is called</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public CommonHeaderBits(int version, bool padding, bool extension, bool shouldDispose = true) //, int additionalOffset = 0)
                 : this(CommonHeaderBits.PackOctet(version, padding, extension), byte.MinValue, shouldDispose)
             {
@@ -1246,7 +1246,7 @@ namespace Oragon.Media.Rtp
             /// <param name="payloadTypeBits">The value of the PayloadType bits</param>
             /// <param name="otherbits">The value of the remaning bits which are not utilized. (4 bits)</param>
             /// <param name="shouldDispose">indicates if memory will disposed when <see cref="Dispose"/> is called
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public CommonHeaderBits(int version, bool padding, bool extension, bool marker, int payloadTypeBits, byte otherBits, bool shouldDispose = true)
                 : this(CommonHeaderBits.PackOctet(version, padding, extension, otherBits), CommonHeaderBits.PackOctet(marker, payloadTypeBits), shouldDispose)
             {
@@ -1259,7 +1259,7 @@ namespace Oragon.Media.Rtp
 
             #region IEnumerator Implementations
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public IEnumerator<byte> GetEnumerator()
             {
                 if (IsDisposed) yield break;
@@ -1297,16 +1297,16 @@ namespace Oragon.Media.Rtp
                 m_Memory.Dispose();
             }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public override int GetHashCode() { return (short)this; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public bool Equals(CommonHeaderBits other)
             {
                 return other.m_Memory.Equals(m_Memory) && GetHashCode().Equals(other.GetHashCode());
             }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public override bool Equals(object obj)
             {
                 if (System.Object.ReferenceEquals(this, obj)) return true;
@@ -1320,7 +1320,7 @@ namespace Oragon.Media.Rtp
 
             #region Methods
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public int CopyTo(byte[] dest, int offset)
             {
                 if (IsDisposed) return 0;
@@ -1334,16 +1334,16 @@ namespace Oragon.Media.Rtp
 
             #region Implicit Operators
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static implicit operator short(CommonHeaderBits bits) { return Binary.Read16(bits, 0, Binary.IsLittleEndian); }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool operator ==(CommonHeaderBits a, CommonHeaderBits b)
             {
                 return object.ReferenceEquals(b, null) ? object.ReferenceEquals(a, null) : a.Equals(b);
             }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool operator !=(CommonHeaderBits a, CommonHeaderBits b) { return (a == b).Equals(false); }
 
             #endregion
@@ -1406,7 +1406,7 @@ namespace Oragon.Media.Rtp
             #region Constructor
 
             [CLSCompliant(false)]
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public SourceList(uint ssrc) : this(LinqExtensions.Yield(ssrc)) { }
 
             /// <summary>
@@ -1414,7 +1414,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             /// <param name="sources"></param>
             /// <param name="start"></param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public SourceList(IEnumerable<uint> sources, int start = 0, bool shouldDispose = true)
                 : base(shouldDispose)
             {
@@ -1437,7 +1437,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             /// <param name="header">The <see cref="RtpHeader"/> to read the <see cref="RtpHeader.ContributingSourceCount"/> from</param>
             /// <param name="buffer">The buffer (which is vector of 32 bit values e.g. it will be read in increments of 32 bits per read)</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public SourceList(Media.Rtp.RtpHeader header, byte[] buffer, int offset = 0, bool shouldDispose = true)
                 : base(shouldDispose)
             {
@@ -1465,7 +1465,7 @@ namespace Oragon.Media.Rtp
             /// The SourceList owns ownly it's own resources and always should be disposed immediately.
             /// </summary>
             /// <param name="packet">The <see cref="RtpPacket"/> to create a SourceList from</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public SourceList(RtpPacket packet, bool shouldDispose = true)
                 : this(packet.Header, packet.Payload.Array, packet.Payload.Offset, shouldDispose)
             {
@@ -1477,7 +1477,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             /// <param name="sourceCount">The count of sources expected in the SourceList</param>
             /// <param name="data">The data contained in the SourceList.</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public SourceList(int sourceCount, bool shouldDispose = true) 
                 : base(shouldDispose)
             {
@@ -1492,7 +1492,7 @@ namespace Oragon.Media.Rtp
             /// Contains it's own reference to the payload and should be disposed of when no longer needed.
             /// </summary>
             /// <param name="goodbyeReport">The GoodbyeReport</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public SourceList(GoodbyeReport goodbyeReport, bool shouldDispose = true)
                 : base(shouldDispose)
             {
@@ -1545,13 +1545,13 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool IsComplete
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return false == IsDisposed && m_SourceCount * Binary.BytesPerInteger >= Size; }
             }
 
             uint IEnumerator<uint>.Current
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     //CheckDisposed();
@@ -1566,7 +1566,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int CurrentSource
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (m_Read <= 0) throw new InvalidOperationException("Enumeration has not started yet.");
@@ -1597,7 +1597,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int Count
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_SourceCount; }
             }
 
@@ -1606,7 +1606,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int Size
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_SourceCount * ItemSize; }
             }
 
@@ -1615,7 +1615,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int Remaining
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return Count - m_Read; }
             }
 
@@ -1624,7 +1624,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int Capacity
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_SourceCount; }
             }
 
@@ -1633,7 +1633,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int ItemIndex
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_Read; }
             }
 
@@ -1642,7 +1642,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public MemorySegment Memory
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_Binary; }
             }
 

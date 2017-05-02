@@ -177,10 +177,10 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int Version
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { /*CheckDisposed();*/ return First16Bits.Version; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ First16Bits.Version = value; }
         }
@@ -190,10 +190,10 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool Padding
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { /*CheckDisposed();*/ return First16Bits.Padding; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ First16Bits.Padding = value; }
         }
@@ -203,10 +203,10 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool Extension
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { /*CheckDisposed();*/ return First16Bits.Extension; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ First16Bits.Extension = value; }
         }
@@ -216,10 +216,10 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int ContributingSourceCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { /*CheckDisposed();*/ return First16Bits.RtpContributingSourceCount; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ First16Bits.RtpContributingSourceCount = value; }
         }
@@ -229,10 +229,10 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool Marker
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { /*CheckDisposed();*/ return First16Bits.RtpMarker; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ First16Bits.RtpMarker = value; }
         }
@@ -242,11 +242,11 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int PayloadType
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             //The value is revealed by clearing the 0th bit in the second octet.
             get { /*CheckDisposed();*/ return First16Bits.RtpPayloadType; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ First16Bits.RtpPayloadType = value; }
         }
@@ -260,7 +260,7 @@ namespace Oragon.Media.Rtp
 
         public bool IsCompressed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return SegmentToLast10Bytes.Count < 10; }
         }
@@ -275,11 +275,11 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int SequenceNumber
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             //The sequence number is stored in Netword Byte Order @ + 0x00 from the second octet (relative offset of 0x02 from the beginning of any header pointer)
             get { /*CheckDisposed();*/ return (ushort)Binary.ReadU16(SegmentToLast10Bytes.Array, SegmentToLast10Bytes.Offset, Binary.IsLittleEndian); }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ Binary.Write16(SegmentToLast10Bytes.Array, SegmentToLast10Bytes.Offset, Binary.IsLittleEndian, (ushort)value); }
         }
@@ -292,11 +292,11 @@ namespace Oragon.Media.Rtp
         /// </remarks>
         public int Timestamp
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             //The sequence number is stored in Netword Byte Order  @ + 0x02 from the second octet (relative offset of 0x04 from the beginning of any header pointer)
             get { /*CheckDisposed();*/ return (int)Binary.ReadU32(SegmentToLast10Bytes.Array, SegmentToLast10Bytes.Offset + 2, Binary.IsLittleEndian); } //Always read in reverse
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ Binary.Write32(SegmentToLast10Bytes.Array, SegmentToLast10Bytes.Offset + 2, Binary.IsLittleEndian, (uint)value); }
         }
@@ -306,11 +306,11 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int SynchronizationSourceIdentifier
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             //The sequence number is stored in Netword Byte Order @ + 0x06 from the second octet (relative offset of 0x08 from the beginning of any header pointer)
             get { /*CheckDisposed();*/ return (int)Binary.ReadU32(SegmentToLast10Bytes.Array, SegmentToLast10Bytes.Offset + 6, Binary.IsLittleEndian); }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { /*CheckDisposed();*/ Binary.Write32(SegmentToLast10Bytes.Array, SegmentToLast10Bytes.Offset + 6, Binary.IsLittleEndian, (uint)value); }
         }
@@ -327,7 +327,7 @@ namespace Oragon.Media.Rtp
         /// <param name="octets">A reference to a byte array which contains at least 12 octets to copy.</param>
         /// <param name="offset">the offset in <paramref name="octets"/> to start</param>
         /// <param name="shouldDispose">indicates if <see cref="SegmentToLast6Bytes"/> will disposed when <see cref="Dispose"/> is called</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpHeader(byte[] octets, int offset = 0, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -368,7 +368,7 @@ namespace Oragon.Media.Rtp
         /// <param name="other">The RtpHeader to copy</param>
         /// <param name="reference">A value indicating if the RtpHeader given should be referenced or copied.</param>
         /// <param name="shouldDispose">indicates if <see cref="SegmentToLast6Bytes"/> will disposed when <see cref="Dispose"/> is called</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpHeader(RtpHeader other, bool reference, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -392,7 +392,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="other">The other instance</param>
         /// <param name="shouldDispose">indicates if memory will disposed when <see cref="Dispose"/> is called</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpHeader(RtpHeader other, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -406,7 +406,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="memory">The memory</param>
         /// <param name="shouldDispose">indicates if <see cref="SegmentToLast6Bytes"/> will disposed when <see cref="Dispose"/> is called</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpHeader(MemorySegment memory, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -422,7 +422,7 @@ namespace Oragon.Media.Rtp
         /// <param name="padding"></param>
         /// <param name="extension"></param>
         /// <param name="shouldDispose">indicates if <see cref="SegmentToLast6Bytes"/> will disposed when <see cref="Dispose"/> is called</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpHeader(int version, bool padding, bool extension, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -453,7 +453,7 @@ namespace Oragon.Media.Rtp
         /// <param name="sequenceNumber"></param>
         /// <param name="timestamp"></param>
         /// <param name="shouldDispose">indicates if <see cref="SegmentToLast6Bytes"/> will disposed when <see cref="Dispose"/> is called</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtpHeader(int version, bool padding, bool extension, bool marker, int payloadTypeBits, int contributingSourceCount, int ssrc, int sequenceNumber, int timestamp, bool shouldDispose = true)
             :this(version, padding, extension, shouldDispose)
         {
@@ -484,7 +484,7 @@ namespace Oragon.Media.Rtp
         /// Updates the source array of the <see cref="First16Bits"/> and <see cref="SegmentToLast10Bytes"/>
         /// </summary>
         /// <param name="source"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void Synchronize(ref byte[] source)
         {
             //Should check IsContiguous
@@ -500,7 +500,7 @@ namespace Oragon.Media.Rtp
         /// Indicates if the <see cref="First16Bits"/> and <see cref="SegmentToLast10Bytes"/> belong to the same array.
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsContiguous()
         {
             return First16Bits.m_Memory.Array == SegmentToLast10Bytes.Array && First16Bits.m_Memory.Offset + First16Bits.m_Memory.Count == SegmentToLast10Bytes.Offset;
@@ -590,10 +590,10 @@ namespace Oragon.Media.Rtp
         /// Uses the first 2 bytes and the <see cref="SynchronizationSourceIdentifier"/> to create a HashCode which represents this header.
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return First16Bits ^ SynchronizationSourceIdentifier; }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(RtpHeader other)
         {
             return other.First16Bits.Equals(First16Bits)
@@ -601,7 +601,7 @@ namespace Oragon.Media.Rtp
                 other.SynchronizationSourceIdentifier.Equals(SynchronizationSourceIdentifier);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
             if (System.Object.ReferenceEquals(this, obj)) return true;

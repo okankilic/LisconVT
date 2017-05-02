@@ -42,6 +42,7 @@ using Oragon.Classes.Binary;
 using Oragon.Extensions;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Extensions
 {
@@ -59,7 +60,7 @@ namespace Oragon.Extensions
         /// <param name="encoding"></param>
         /// <param name="chars"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetByteCount(this System.Text.Encoding encoding, params char[] chars)
         {
             if (encoding == null) encoding = System.Text.Encoding.Default;

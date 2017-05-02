@@ -58,6 +58,7 @@ using Oragon.Media.Rtsp;
 using Oragon.Media.RtspServer.Interfaces;
 using Oragon.Media.Sdp;
 using Oragon.Media.Ntp;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.RtspServer
 {
@@ -231,37 +232,37 @@ namespace Oragon.Media.RtspServer
 
         internal bool HasRuningServer
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IDisposedExtensions.IsNullOrDisposed(m_Server).Equals(false) && m_Server.IsRunning; }
         }
 
         public Guid Id
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal set;
         }
 
         public string SessionId
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal set;
         }
 
         public RtspMessage LastRequest
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal set;
         }
 
         public IPEndPoint LocalEndPoint
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return (IPEndPoint)m_RtspSocket.LocalEndPoint;
@@ -270,15 +271,15 @@ namespace Oragon.Media.RtspServer
 
         public bool IsDisconnected
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_IsDisconnected; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal set { m_IsDisconnected = value; }
         }
 
         public bool SharesSocket
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //The socket is shared with the GC
@@ -310,9 +311,9 @@ namespace Oragon.Media.RtspServer
 
         public Socket RtspSocket
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_RtspSocket; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal set
             {
                 m_RtspSocket = value;
@@ -326,9 +327,9 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         public bool LeaveOpen
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -336,7 +337,7 @@ namespace Oragon.Media.RtspServer
 
         #region Constructor
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ClientSession(RtspServer server, Socket rtspSocket, MemorySegment buffer = null, bool startReceive = true, int interFrameGap = 0, bool shouldDispose = true)
             :base(shouldDispose)
         {
@@ -383,7 +384,7 @@ namespace Oragon.Media.RtspServer
 
         #region Methods
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void StartReceive()
         {
             //while the socket cannot read in m_SocketPollMicroseconds or less 
@@ -420,13 +421,13 @@ namespace Oragon.Media.RtspServer
             IsDisconnected = false;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SendRtspData(byte[] data)
         {
             SendRtspData(data, 0, data.Length, SocketFlags.None, RemoteEndPoint);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SendRtspData(byte[] data, int offset, int length, SocketFlags flags = SocketFlags.None, EndPoint other = null)
         {
             //Check response being sent twice sometimes..
@@ -496,7 +497,7 @@ namespace Oragon.Media.RtspServer
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void AssignSessionId()
         {
             //Assign the sessionId now if it has not been assigned before.
@@ -504,7 +505,7 @@ namespace Oragon.Media.RtspServer
                 string.IsNullOrWhiteSpace(SessionId)) SessionId = m_Id.GetHashCode().ToString();
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtpClient.TransportContext GetSourceContext(int ssrc)
         {
             try
@@ -520,7 +521,7 @@ namespace Oragon.Media.RtspServer
             return null;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtpClient.TransportContext GetSourceContext(RtpPacket packet)
         {
             try
@@ -536,7 +537,7 @@ namespace Oragon.Media.RtspServer
             return null;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtpClient.TransportContext GetSourceContext(Sdp.MediaDescription md)
         {
             try
@@ -557,7 +558,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         /// <param name="client">The RtpClient from which the packet arrived</param>
         /// <param name="packet">The packet which arrived</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void OnSourceRtpPacketRecieved(object client, RtpPacket packet = null, RtpClient.TransportContext tc = null)
         {
             //Check if both the packet and our client are null or disposed already.
@@ -660,7 +661,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         /// <param name="stream">The listener from which the packet arrived</param>
         /// <param name="packet">The packet which arrived</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void OnSourceRtcpPacketRecieved(object stream, RtcpPacket packet, Rtp.RtpClient.TransportContext tc = null)
         {
             if (IDisposedExtensions.IsNullOrDisposed(packet) 
@@ -720,7 +721,7 @@ namespace Oragon.Media.RtspServer
             //m_RtpClient.SendReports();
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void RemoveAllAttachmentsAndClearPlaying()
         {
             try
@@ -745,7 +746,7 @@ namespace Oragon.Media.RtspServer
         /// <summary>
         /// Sends the Rtcp Goodbye and detaches all sources
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected internal override void Dispose(bool disposing)
         {
             if (false.Equals(disposing)) return;
@@ -841,7 +842,7 @@ namespace Oragon.Media.RtspServer
         /// <param name="describeRequest">The request received from the server</param>
         /// <param name="source">Tje source stream to describe</param>
         /// <returns>A RtspMessage with a Sdp.SessionDescription in the Body and ContentType set to application/sdp</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtspMessage ProcessDescribe(RtspMessage describeRequest, IMedia source)
         {
             //Assign the session ID now to allow connections to be reduced when possible.
@@ -889,7 +890,7 @@ namespace Oragon.Media.RtspServer
             return describeResponse;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtspMessage ProcessPlay(RtspMessage playRequest, RtpSource source)
         {
 
@@ -1150,7 +1151,7 @@ namespace Oragon.Media.RtspServer
             return playResponse;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void OnSourceFrameChanged(object sender, RtpFrame frame = null, RtpClient.TransportContext tc = null, bool final = false)
         {
             if (IDisposedExtensions.IsNullOrDisposed(frame)) return;
@@ -1177,7 +1178,7 @@ namespace Oragon.Media.RtspServer
         /// Removes all packets from the PacketBuffer related to the given source and enqueues them on the RtpClient of this ClientSession
         /// </summary>
         /// <param name="source">The RtpSource to check for packets in the PacketBuffer</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ProcessPacketBuffer(RtpSource source)
         {
             //Process packets from the PacketBuffer relevent to the Range Header
@@ -1203,7 +1204,7 @@ namespace Oragon.Media.RtspServer
         /// <param name="sourceContext"></param>
         /// <returns></returns>
         /// //TODO Should be SourceMedia and SourceContext.
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtspMessage ProcessSetup(RtspMessage request, RtpSource sourceStream, RtpClient.TransportContext sourceContext)
         {
             //Assign the sessionId now if it has not been assigned before.
@@ -1634,7 +1635,7 @@ namespace Oragon.Media.RtspServer
             return response;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void ProcessClientSessionBuffer(object sender, byte[] data, int offset, int length)
         {
             //Process the data received
@@ -1653,7 +1654,7 @@ namespace Oragon.Media.RtspServer
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void m_RtpClient_RecievedRtp(object sender, RtpPacket packet, RtpClient.TransportContext tc = null)
         {
             if (IDisposedExtensions.IsNullOrDisposed(packet) || IDisposedExtensions.IsNullOrDisposed(tc)) return;
@@ -1675,7 +1676,7 @@ namespace Oragon.Media.RtspServer
             //m_Server.Logger.LogException(new Exception("Recieved PacketType: " + packet.PayloadType + " - " + implementation != null ? implementation.Name : string.Empty));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void m_RtpClient_RecievedRtcp(object sender, RtcpPacket packet, RtpClient.TransportContext tc = null)
         {
             if (IDisposedExtensions.IsNullOrDisposed(packet)) return;
@@ -1695,7 +1696,7 @@ namespace Oragon.Media.RtspServer
             //m_Server.Logger.LogException(new Exception("Recieved Rtcp PacketType: " + packet.PayloadType + " - " + implementation != null ? implementation.Name : string.Empty));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void m_RtpClient_SentRtcp(object sender, RtcpPacket packet, RtpClient.TransportContext tc = null)
         {
             if (IDisposedExtensions.IsNullOrDisposed(packet)) return;
@@ -1719,7 +1720,7 @@ namespace Oragon.Media.RtspServer
             //m_Server.Logger.LogException(new Exception("Sent Rtcp PacketType: " + packet.PayloadType + " - " + implementation != null ? implementation.Name : string.Empty));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void m_RtpClient_SentRtp(object sender, RtpPacket packet, RtpClient.TransportContext tc = null)
         {
             var context = tc ?? m_RtpClient.GetContextForPacket(packet);
@@ -1728,7 +1729,7 @@ namespace Oragon.Media.RtspServer
             else ILoggingExtensions.LogException(m_Server.ClientSessionLogger, new Exception("Sent (" + context.MediaDescription.MediaType + ") Rtp Packet Timestamp = " + packet.Timestamp + " SequenceNumber = " + packet.SequenceNumber + " , SenderSequenceNumber" + context.SendSequenceNumber + " , RecieveSequenceNumber" + context.RecieveSequenceNumber));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtspMessage ProcessPause(RtspMessage request, RtpSource source)
         {
             //Aggregate control..
@@ -1759,7 +1760,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         /// <param name="source">The SourceStream to detach</param>
         /// <param name="session">The session to detach from</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void RemoveSource(IMediaSource source)
         {
             if (source is RtpSource)
@@ -1786,7 +1787,7 @@ namespace Oragon.Media.RtspServer
         /// <param name="source"></param>
         /// <param name="md"></param>
         /// <param name="session"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void RemoveMedia(Sdp.MediaDescription md)
         {
             //Determine if we have a source which corresponds to the mediaDescription given
@@ -1810,7 +1811,7 @@ namespace Oragon.Media.RtspServer
         parameters are defined by the session description, a SETUP request
         has to be issued before the session can be played again.
          */
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtspMessage ProcessTeardown(RtspMessage request, RtpSource source)
         {
             //Determine if this is for only a single track or the entire shebang
@@ -1864,7 +1865,7 @@ namespace Oragon.Media.RtspServer
             return CreateRtspResponse(request);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool ReleaseUnusedResources()
         {
             if (IsDisposed) return false;
@@ -2062,7 +2063,7 @@ namespace Oragon.Media.RtspServer
             return released;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtspMessage ProcessRecord(RtspMessage request, IMedia source)
         {
             //Can't record when no Archiver is present
@@ -2086,7 +2087,7 @@ namespace Oragon.Media.RtspServer
         /// <returns>The RtspResponse created</returns>
         /// 
         //todo, should not allow body or should also allow content-type
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal RtspMessage CreateRtspResponse(RtspMessage request = null, RtspStatusCode statusCode = RtspStatusCode.OK, string reasonPhrase = null, string body = null)
         {
             RtspMessage response = new RtspMessage(RtspMessageType.Response);
@@ -2129,7 +2130,7 @@ namespace Oragon.Media.RtspServer
         /// </summary>
         /// <param name="stream">The source stream to create a SessionDescription for</param>
         /// <returns>The created SessionDescription</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal Sdp.SessionDescription CreateSessionDescription(IMedia stream)
         {
             //Todo, NullOrDisposedException,

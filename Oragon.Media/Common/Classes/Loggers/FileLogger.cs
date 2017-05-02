@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -105,14 +106,14 @@ namespace Oragon.Classes.Loggers
         /// Attempts to write the given message to the log file
         /// </summary>
         /// <param name="message"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override void Log(string message) { CoreWrite(message); }
 
         /// <summary>
         /// Attempts to write the given Exception to the log file.
         /// </summary>
         /// <param name="ex"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override void LogException(Exception ex) { CoreWrite(ex.Message); }
 
         protected internal override void Dispose(bool disposing)

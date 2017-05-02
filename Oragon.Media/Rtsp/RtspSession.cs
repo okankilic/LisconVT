@@ -39,6 +39,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 using Oragon.Classes.Disposables;
 using Oragon.Extensions;
 using Oragon.Media.Common.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.Rtsp
 {
@@ -127,7 +128,7 @@ namespace Oragon.Media.Rtsp
         /// </summary>
         public int ClientSequenceNumber
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_CSeq; }
         }
 
@@ -136,14 +137,14 @@ namespace Oragon.Media.Rtsp
         /// </summary>
         public int RemoteSequenceNumber
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_RCSeq; }
         }
 
         /// <summary>
         /// Increments and returns the current <see cref="ClientSequenceNumber"/>
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal int NextClientSequenceNumber() { return ++m_CSeq; }
 
         /// <summary>

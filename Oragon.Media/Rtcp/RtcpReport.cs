@@ -46,6 +46,7 @@ using System.Text;
 using Oragon.Classes.Binary;
 using Oragon.Media.Common.Extensions;
 using Oragon.Classes;
+using System.Runtime.CompilerServices;
 
 #endregion
 namespace Oragon.Media.Rtcp
@@ -84,7 +85,7 @@ namespace Oragon.Media.Rtcp
         /// <param name="blockCount"><see cref="RtcpHeader.BlockCount"/></param>
         /// <param name="blockSize">The size in bytes of each block in the RtcpReport</param>
         /// <param name="extensionSize">The size in bytes of any extension data contained in the report.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpReport(int version, int payloadType, int padding, int ssrc, int blockCount, int blockSize, int lengthInWords, int extensionSize = 0, bool shouldDispose = true)
             : base(version, payloadType, padding, ssrc, blockCount, lengthInWords, blockSize, extensionSize, shouldDispose)
         {
@@ -101,7 +102,7 @@ namespace Oragon.Media.Rtcp
         /// <param name="blockCount"><see cref="RtcpHeader.BlockCount"/></param>
         /// <param name="blockSize">The size in bytes of each block in the RtcpReport</param>
         /// <param name="extensionSize">The size in bytes of any extension data contained in the report.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpReport(int version, int payloadType, int padding, int ssrc, int blockCount, int blockSize, int extensionSize = 0, bool shouldDispose = true)
             : base(version, payloadType, padding, ssrc, blockCount,
             RtcpHeader.DefaultLengthInWords,
@@ -117,7 +118,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         /// <param name="header">The <see cref="RtcpHeader"/> of the instance</param>
         /// <param name="payload">The <see cref="RtcpPacket.Payload"/> of the instance.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpReport(RtcpHeader header, IEnumerable<byte> payload, bool shouldDispose = true)
             : base(header, payload, shouldDispose)
         {
@@ -130,7 +131,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         /// <param name="header">The <see cref="RtcpHeader"/> of the instance</param>
         /// <param name="payload">The <see cref="RtcpPacket.Payload"/> of the instance.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpReport(RtcpHeader header, MemorySegment payload, bool shouldDispose = true)
             : base(header, payload, shouldDispose)
         {
@@ -148,7 +149,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public virtual bool HasExtensionData
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return IsDisposed ? false : Payload.Count - ReportBlockOctets - PaddingOctets > 0; }
         }
@@ -159,7 +160,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public virtual bool HasReports
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return IsDisposed ? false : Header.BlockCount > 0; }
         }
@@ -170,7 +171,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public virtual int ReportBlockOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return false == IsDisposed && HasReports ? ReportBlock.ReportBlockSize * Header.BlockCount : 0; }
         }
@@ -218,7 +219,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public virtual int ExtensionDataOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return Payload.Count - ReportBlockOctets - PaddingOctets; }
         }
@@ -228,7 +229,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int ReportBlocksRemaining
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return IsDisposed ? 0 : Binary.FiveBitMaxValue - Header.BlockCount; }
         }
@@ -258,7 +259,7 @@ namespace Oragon.Media.Rtcp
 
         #region Instance Methods       
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected virtual IEnumerator<IReportBlock> GetEnumeratorInternal(int offset = 0)//, int blockSize = ReportBlock.ReportBlockSize)
         {
             //CheckDisposed();
@@ -283,7 +284,7 @@ namespace Oragon.Media.Rtcp
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual IEnumerator<IReportBlock> GetEnumerator()
         {
             return GetEnumeratorInternal(0);

@@ -45,6 +45,7 @@ using System.Text;
 using Oragon.Classes.Disposables;
 using Oragon.Classes.Binary;
 using Oragon.Classes;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -85,7 +86,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int Flags
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IsDisposed ? ushort.MinValue : Binary.ReadU16(m_MemorySegment.Array, m_MemorySegment.Offset, Binary.IsLittleEndian); }
             protected set { if (IsDisposed) return; Binary.Write16(m_MemorySegment.Array, m_MemorySegment.Offset, Binary.IsLittleEndian, (ushort)value); }
         }
@@ -95,7 +96,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int LengthInWords
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IsDisposed ? ushort.MinValue : Binary.ReadU16(m_MemorySegment.Array, m_MemorySegment.Offset + 2, Binary.IsLittleEndian); }
             protected set { if (IsDisposed) return; Binary.Write16(m_MemorySegment.Array, m_MemorySegment.Offset + 2, Binary.IsLittleEndian, (ushort)value); }
         }
@@ -128,7 +129,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool IsComplete
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { if (IsDisposed) return false; return m_MemorySegment.Count >= Size; }
         }
 
@@ -139,7 +140,7 @@ namespace Oragon.Media.Rtp
         {
             //get { return IsDisposed ? ushort.MinValue : (ushort)(MinimumSize + Binary.MachineWordsToBytes(LengthInWords)); }//LengthInWords * 4
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Binary.Min(MinimumSize + LengthInWords * 4, m_MemorySegment.Count); }
         }
 

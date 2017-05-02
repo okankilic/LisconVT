@@ -45,6 +45,7 @@ using Oragon.Media.Common.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -103,10 +104,10 @@ namespace Oragon.Classes
         /// </summary>
         public int Count
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)m_Length; }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { m_Length = value; }
         }
 
@@ -115,10 +116,10 @@ namespace Oragon.Classes
         /// </summary>
         public long LongLength
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Length; }
             
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { m_Length = value; }
         }
 
@@ -127,10 +128,10 @@ namespace Oragon.Classes
         /// </summary>
         public int Offset
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)m_Offset; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             //could just have a Resize method
             internal protected set { m_Offset = value; }
         }
@@ -140,10 +141,10 @@ namespace Oragon.Classes
         /// </summary>
         public long LongOffset
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Offset; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { m_Offset = value; }
         }
 
@@ -152,10 +153,10 @@ namespace Oragon.Classes
         /// </summary>
         public byte[] Array
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Array; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set { m_Array = value; } 
         }
 
@@ -181,7 +182,7 @@ namespace Oragon.Classes
         
         #region Chained
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MemorySegment(byte[] reference, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -219,7 +220,7 @@ namespace Oragon.Classes
         /// </summary>
         /// <param name="size"></param>
         /// <param name="shouldDispose"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MemorySegment(long size, bool shouldDispose = true) 
             : base(shouldDispose)
         {
@@ -243,7 +244,7 @@ namespace Oragon.Classes
         /// <param name="other"></param>
         /// <param name="force"></param>
         /// <param name="shouldDispose"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MemorySegment(MemorySegment other, bool force = false, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -284,7 +285,7 @@ namespace Oragon.Classes
 
         //Make an Enumerator implementation to help with Skip and Copy?
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         IEnumerator<byte> IEnumerable<byte>.GetEnumerator()
         {
             for (int i = 0; i < m_Length; ++i)
@@ -305,7 +306,7 @@ namespace Oragon.Classes
         //    }
         //}
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<byte>)this).GetEnumerator();
@@ -321,27 +322,27 @@ namespace Oragon.Classes
         public byte this[int index]
         {
 #if UNSAFE
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             //Could also use UnsafeAddrOfPinnedArrayElement
             //get { unsafe { return *(byte*)System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement<byte>(m_Array, m_Offset + index); } }
             get { unsafe { fixed (byte* p = &m_Array[m_Offset]) return *(p + index); } }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             //set { unsafe { *(byte*)System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement<byte>(m_Array, m_Offset + index) = value; } }
             set { unsafe { fixed (byte* p = &m_Array[m_Offset]) *(p + index) = value; } }
 #elif NATIVE
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return System.Runtime.InteropServices.Marshal.ReadByte(System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement<byte>(m_Array, (int)m_Offset + index)); }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { System.Runtime.InteropServices.Marshal.WriteByte(System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement<byte>(m_Array, (int)m_Offset + index), value); }
 #else
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return m_Array[m_Offset + index]; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             set { m_Array[m_Offset + index] = value; }
 #endif
@@ -374,10 +375,10 @@ namespace Oragon.Classes
 
         #region Methods
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MemorySegment Clone(bool force = false, bool shouldDispose = true) { return new MemorySegment(this, force, shouldDispose); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Update(ref byte[] source, ref int offset, ref int length)
         {
             if (IsDisposed) return;
@@ -389,7 +390,7 @@ namespace Oragon.Classes
             m_Length = length;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Update(ref byte[] source)
         {
             if (IsDisposed) return;
@@ -397,21 +398,21 @@ namespace Oragon.Classes
             m_Array = source;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Update(ref int offset) { m_Offset = offset; }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void IncreaseLength(long length) { m_Length += length; }
 
         #endregion
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             return (int)(m_Array.GetHashCode() ^ m_Offset ^ m_Length);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
             if (System.Object.ReferenceEquals(this, obj)) return true;
@@ -421,7 +422,7 @@ namespace Oragon.Classes
             return Equals(obj as MemorySegment);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(MemorySegment other)
         {
             return other.GetHashCode().Equals(GetHashCode());
@@ -429,20 +430,20 @@ namespace Oragon.Classes
 
         #region Operators
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(MemorySegment a, MemorySegment b)
         {
             return object.ReferenceEquals(b, null) ? object.ReferenceEquals(a, null) : a.Equals(b);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(MemorySegment a, MemorySegment b) { return a.Equals(b).Equals(false); }
 
         //>> , << etc
 
         #endregion
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         object ICloneable.Clone() { return Clone(); }
     }
 
@@ -471,32 +472,32 @@ namespace Oragon.Classes
 
         public int BitCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)m_BitCount; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { m_BitCount = value; }
         }
 
         public long LongBitCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_BitCount; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { m_BitCount = value; }
         }
 
         public int BitOffset
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (int)m_BitOffset; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set { m_BitOffset = value; }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public BitSegment(int bitSize, bool shouldDispose = true) : base(Binary.Binary.BitsToBytes(ref bitSize), shouldDispose) { m_BitCount = bitSize; }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public BitSegment(byte[] reference, int bitOffset, int bitCount, bool shouldDispose = true)
             : base(reference, Binary.Binary.BitsToBytes(ref bitOffset), Binary.Binary.BitsToBytes(ref bitCount), shouldDispose)
         {
@@ -506,10 +507,10 @@ namespace Oragon.Classes
         }
 
         //reference may be null
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public BitSegment(byte[] reference, int bitOffset, bool shouldDispose = true) : this(reference, bitOffset, Binary.Binary.BytesToBits(reference.Length) - bitOffset, shouldDispose) { }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public BitSegment(byte[] reference) : this(reference, 0, Binary.Binary.BytesToBits(reference.Length)) { }
 
 
@@ -538,7 +539,7 @@ namespace Oragon.Classes
         public fixed byte ByteArray[Binary.BytesPerInteger];
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FourBytes(byte* b, int offset, int length, bool reverse = false)
         {
             if (b == null) throw new System.ArgumentNullException();
@@ -547,7 +548,7 @@ namespace Oragon.Classes
             else fixed (byte* B = ByteArray) for (int i = 0; i < length; ++i) *((byte*)(B + i)) = *((byte*)(b + i + offset));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe FourBytes(byte[] bytes, int offset, int length, bool reverse = false)
             :this()
         {
@@ -560,7 +561,7 @@ namespace Oragon.Classes
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             fixed (byte* b = ByteArray)
@@ -569,13 +570,13 @@ namespace Oragon.Classes
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe override string ToString()
         {
             return ToString(null);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe string ToString(System.Text.Encoding encoding)
         {
             fixed (byte* b = ByteArray)
@@ -598,7 +599,7 @@ namespace Oragon.Classes
         public fixed byte ByteArray[Binary.BytesPerLong];
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe EightBytes(byte* b, int offset, int length, bool reverse = false)
         {
             if (b == null) throw new System.ArgumentNullException();
@@ -607,7 +608,7 @@ namespace Oragon.Classes
             else fixed (byte* B = ByteArray) for (int i = 0; i < length; ++i) *((byte*)(B + i)) = *((byte*)(b + i + offset));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             fixed (byte* b = ByteArray)
@@ -616,13 +617,13 @@ namespace Oragon.Classes
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe override string ToString()
         {
             return ToString(null);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe string ToString(System.Text.Encoding encoding)
         {
             fixed (byte* b = ByteArray)
@@ -675,7 +676,7 @@ namespace Oragon.Classes
         [System.Runtime.InteropServices.FieldOffset(3)]
         public byte Three;
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Word(byte[] value, int offset, int length)
             : this()
         {
@@ -684,7 +685,7 @@ namespace Oragon.Classes
             Bytes = new FourBytes(value, offset, length);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Word(int value)
             : this()
         {
@@ -692,14 +693,14 @@ namespace Oragon.Classes
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Word(uint value)
             : this()
         {
             UnsignedValue = value;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Word(byte zero, byte one, byte two, byte three)
             : this()
         {
@@ -736,21 +737,21 @@ namespace Oragon.Classes
         public Word Two;
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DoubleWord(uint value)
             : this()
         {
             One = new Word(value);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DoubleWord(int value)
             : this()
         {
             One = new Word(value);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DoubleWord(long value)
             : this()
         {
@@ -758,7 +759,7 @@ namespace Oragon.Classes
         }
 
         [CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DoubleWord(ulong value)
             : this()
         {
@@ -766,14 +767,14 @@ namespace Oragon.Classes
         }
 
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DoubleWord(byte zero, byte one, byte two, byte three)
             : this()
         {
             One = new Word(zero, one, two, three);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DoubleWord(byte zero, byte one, byte two, byte three, byte four, byte five, byte six, byte seven)
             : this(zero, one, two, three)
         {

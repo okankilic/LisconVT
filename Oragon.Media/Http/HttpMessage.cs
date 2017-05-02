@@ -91,7 +91,7 @@ namespace Oragon.Media.Http
 
     public static class HttpStatusCodeExtensions
     {
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string CreateReasonPhrase(HttpStatusCode code, bool includeSpaces = false)
         {
             if (includeSpaces.Equals(false)) return code.ToString();
@@ -325,9 +325,9 @@ namespace Oragon.Media.Http
 
         public string ParsedProtocol
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected internal set;
         }
 
@@ -336,7 +336,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public HttpMethod HttpMethod
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 HttpMethod parsed = HttpMethod.UNKNOWN;
@@ -345,7 +345,7 @@ namespace Oragon.Media.Http
 
                 return parsed;
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { MethodString = value.ToString(); }
         }
 
@@ -354,9 +354,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public string ReasonPhrase
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_ReasonPhrase; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 //Maybe should allow setting even though its not used...
@@ -369,12 +369,12 @@ namespace Oragon.Media.Http
         /// </summary>
         public bool IsPersistent
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return ShouldDispose.Equals(false);
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 ShouldDispose = value.Equals(false);
@@ -386,9 +386,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public string HeaderFormat
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_HeaderFormat; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set
             {
                 if (string.IsNullOrWhiteSpace(value)) throw new InvalidOperationException("The Header Format must not be null or consist only of Whitespace");
@@ -402,7 +402,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public bool HeadersParsed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_HeadersParsed; }
         }
 
@@ -411,16 +411,16 @@ namespace Oragon.Media.Http
         /// </summary>
         public bool StatusLineParsed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_StatusLineParsed; }
         }
 
         //Used for GetContentDecoder 
         public bool FallbackToDefaultEncoding
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -429,9 +429,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public bool AllowInvalidHeaders
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -446,9 +446,9 @@ namespace Oragon.Media.Http
 
         public int StatusCode
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_StatusCode; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 m_StatusCode = value;
@@ -459,7 +459,7 @@ namespace Oragon.Media.Http
 
         public virtual bool IsSuccessful
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return HttpStatusCode <= HttpStatusCode.BadRequest;
@@ -472,18 +472,18 @@ namespace Oragon.Media.Http
         /// </summary>
         public HttpStatusCode HttpStatusCode
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (HttpStatusCode)m_StatusCode; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { StatusCode = (int)value; }
         }
 
 
         public double Version
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Version; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { m_Version = value; }
         }
 
@@ -607,7 +607,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public virtual bool CanHaveBody
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //http://greenbytes.de/tech/webdav/rfc2616.html#rfc.section.4.4
@@ -631,9 +631,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public string Body
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Body; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 //Ensure the body is allowed
@@ -680,9 +680,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public HttpMessageType MessageType
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -691,14 +691,14 @@ namespace Oragon.Media.Http
         /// </summary>
         public int ContentLength
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 ParseContentLength(m_HeadersParsed);
 
                 return m_ContentLength;
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set
             {
                 //Use the unsigned representation
@@ -708,19 +708,19 @@ namespace Oragon.Media.Http
 
         public int HeaderCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_Headers.Count; }
         }
 
         public int EntityHeaderCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_EntityHeaders.Count; }
         }
 
         public int TotalHeaderCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return HeaderCount + EntityHeaderCount; }
         }
 
@@ -731,9 +731,9 @@ namespace Oragon.Media.Http
         /// <returns>The header value</returns>
         public string this[string header]
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return GetHeader(header); }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { SetHeader(header, value); }
         }        
 
@@ -743,9 +743,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public Encoding HeaderEncoding
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_HeaderEncoding; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (IsDisposed && false.Equals(IsPersistent)) return;
@@ -780,9 +780,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public Encoding ContentEncoding
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return ParseContentEncoding(false == m_HeadersParsed, FallbackToDefaultEncoding); }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (m_ContentDecoder == value) return;
@@ -798,9 +798,9 @@ namespace Oragon.Media.Http
         /// </summary>
         public DateTime? Transferred
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -809,7 +809,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public virtual bool IsComplete
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //Disposed is complete 
@@ -851,7 +851,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public string NewLine
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_StringEndLine; }
         }
 
@@ -860,7 +860,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public string WhiteSpace
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_StringWhiteSpace; }
         }
 
@@ -869,7 +869,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public string Colon
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_StringColon; }
         }
 
@@ -878,7 +878,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public string Comma
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_StringComma; }
         }
 
@@ -887,7 +887,7 @@ namespace Oragon.Media.Http
         /// </summary>
         public string SemiColon
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_StringSemiColon; }
         }
 
@@ -895,7 +895,7 @@ namespace Oragon.Media.Http
 
         #region Constructor
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining | System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.Synchronized)]
         static HttpMessage()
         {
             if (false == UriParser.IsKnownScheme(HttpMessage.TransportScheme))
@@ -908,7 +908,7 @@ namespace Oragon.Media.Http
         /// <summary>
         /// Reserved
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected HttpMessage(string protocol = HttpMessage.MessageIdentifier, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -919,7 +919,7 @@ namespace Oragon.Media.Http
         /// Constructs a HttpMessage
         /// </summary>
         /// <param name="messageType">The type of message to construct</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public HttpMessage(HttpMessageType messageType, double? version = DefaultVersion, Encoding contentEncoding = null, bool shouldDispse = true, string protocol = HttpMessage.MessageIdentifier)
             : base(shouldDispse)
         {
@@ -945,7 +945,7 @@ namespace Oragon.Media.Http
 
         public HttpMessage(MemorySegment data, Encoding encoding = null) : this(data.Array, data.Offset, data.Count, encoding) { }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public HttpMessage(byte[] data, int offset, int length, Encoding contentEncoding = null, bool shouldDispose = true, string protocol = HttpMessage.MessageIdentifier)
             : base(shouldDispose)
         {
@@ -1028,7 +1028,7 @@ namespace Oragon.Media.Http
         /// Creates a HttpMessage by copying the properties of another.
         /// </summary>
         /// <param name="other">The other HttpMessage</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public HttpMessage(HttpMessage other, bool shouldDispose = true)
             :base(shouldDispose)
         {
@@ -1049,7 +1049,7 @@ namespace Oragon.Media.Http
 
         #region Methods
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void CacheStrings()
         {
             m_StringWhiteSpace = m_HeaderEncoding.GetString(m_HeaderEncoding.GetBytes(m_EncodedWhiteSpace));
@@ -1063,7 +1063,7 @@ namespace Oragon.Media.Http
             m_StringEndLine = m_HeaderEncoding.GetString(m_HeaderEncoding.GetBytes(m_EncodedLineEnds));
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected void DisposeBuffer()
         {
             if (false.Equals(m_Buffer == null) && m_Buffer.CanWrite) m_Buffer.Dispose();
@@ -2549,7 +2549,7 @@ namespace Oragon.Media.Http
             return Created.GetHashCode() ^ (int)((int)MessageType | (int)HttpMethod ^ (int)HttpStatusCode) ^ (string.IsNullOrWhiteSpace(m_Body) ? Length : m_Body.GetHashCode()) ^ (m_Headers.Count);
         }
         
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(HttpMessage other)
         {
             //Fast path doesn't show true equality.
@@ -2598,26 +2598,26 @@ namespace Oragon.Media.Http
 
         public virtual bool IsCompressed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false; }
         }
 
         DateTime IPacket.Created
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Created; }
         }
 
 
         bool IPacket.IsReadOnly
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return false; }
         }
 
         long IPacket.Length
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return (long)Length; }
         }
 
@@ -2627,7 +2627,7 @@ namespace Oragon.Media.Http
         /// <param name="socket"></param>
         /// <param name="buffer"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual int CompleteFrom(System.Net.Sockets.Socket socket, MemorySegment buffer)
         {
             if (IsDisposed && IsPersistent.Equals(false)) return 0;
@@ -2755,7 +2755,7 @@ namespace Oragon.Media.Http
             return received;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         int ParseChunk(ref int offset, int length) //out string extensions
         {
         //Top:

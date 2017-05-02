@@ -45,6 +45,7 @@ using System.Text;
 
 using Oragon.Classes;
 using Oragon.Extensions;
+using System.Runtime.CompilerServices;
 
 #endregion
 namespace Oragon.Media.Rtcp
@@ -166,7 +167,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public virtual byte[] Name
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Payload.Take(NameSize).ToArray(); }
             //set
             //{
@@ -187,13 +188,13 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public virtual bool HasApplicationDependentData
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return HasExtensionData; }
         }
 
         public virtual int ApplicationDependentOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return ExtensionDataOctets;

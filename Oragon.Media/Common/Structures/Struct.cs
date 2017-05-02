@@ -36,6 +36,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Structures
 {
 
@@ -245,7 +247,7 @@ namespace Oragon.Structures
 
         #region Methods
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Struct that)
         {
             //Weird that @that cannot be used because `that` is already used.
@@ -285,13 +287,13 @@ namespace Oragon.Structures
             return IStructExtensions.ToIStructString(ref @this);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Struct @this, IStruct that)
         {
             return object.ReferenceEquals(@this, null) ? object.ReferenceEquals(@that, null) : object.ReferenceEquals(@this, that);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(Struct @this, IStruct that)
         {
             return (object.ReferenceEquals(@this, null) ? object.ReferenceEquals(@that, null) : object.ReferenceEquals(@this, that)).Equals(false);

@@ -162,7 +162,7 @@ namespace Oragon.Media.Rtcp
         /// <param name="header">The header to utilize.</param>
         /// <param name="octets">The octets to project</param>
         /// <param name="shouldDispose">Indicates if the header should be disposed.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket(RtcpHeader header, IEnumerable<byte> octets, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -223,7 +223,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         /// <param name="header">The existing RtpHeader (which is now owned by this instance)</param>
         /// <param name="payload">The data contained in the payload</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket(RtcpHeader header, MemorySegment payload, bool shouldDispose = true)
             : base(shouldDispose)
         {
@@ -242,7 +242,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         /// <param name="buffer">The buffer which contains the binary RtcpPacket to decode</param>
         /// <param name="offset">The offset to start decoding</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket(byte[] buffer, int offset, int count, bool shouldDispose = true) : base(shouldDispose)
         {
             //The instance owns the header
@@ -291,7 +291,7 @@ namespace Oragon.Media.Rtcp
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket(byte[] buffer, int offset, bool shouldDispose = true) 
             :this (buffer, offset, buffer.Length - offset, shouldDispose)
         {
@@ -309,7 +309,7 @@ namespace Oragon.Media.Rtcp
         /// <param name="ssrc">Sets <see cref="SendersSyncrhonizationSourceIdentifier"/></param>
         /// <param name="blockCount">Sets <see cref="BlockCount"/> </param>
         /// <param name="lengthInWords">Sets <see cref="RtcpHeader.LengthInWordsMinusOne"/></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket(int version, int payloadType, int padding, int ssrc, int blockCount, int lengthInWords, int blockSize, int extensionSize, bool shouldDispose = true)
             :base(shouldDispose)
         {
@@ -356,14 +356,14 @@ namespace Oragon.Media.Rtcp
             if (padding > 0) m_OwnedOctets[Binary.Min(octetsLength - 1, Binary.BytesPerLong + (Payload.Offset + Payload.Count - 1))] = (byte)padding;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket(int version, int payloadType, int padding, int ssrc, int lengthInWords, int blockCount, bool shouldDispose = true)
             :this(version, payloadType, padding, ssrc, blockCount, lengthInWords, 0, 0, shouldDispose)
         {
             
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket(int version, int payloadType, int padding, int blockCount, int ssrc, int lengthInWords, byte[] payload, int index, int count, bool shouldDispose = true)
             :this(version, payloadType, padding, ssrc, blockCount, lengthInWords, shouldDispose)
         {
@@ -399,7 +399,7 @@ namespace Oragon.Media.Rtcp
 
         public bool IsReadOnly
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return false == m_OwnsHeader; }
         }
@@ -416,7 +416,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int PaddingOctets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return IsDisposed || false.Equals(Header.Padding) ? 0 : RFC3550.ReadPadding(Payload.Array, Payload.Offset + Payload.Count - 1, 1); }
         }
@@ -428,7 +428,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int Length
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get
             {
@@ -442,7 +442,7 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public bool IsComplete
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return IsDisposed || Header.IsDisposed ? false : Length >= ((ushort)((Header.LengthInWordsMinusOne + 1) * Binary.BytesPerInteger)) - Header.Size; }    //((ushort)((Header.LengthInWordsMinusOne + 1) * Binary.BytesPerInteger)) - RtcpHeader.Length; }
         }
@@ -452,10 +452,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int Version
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return Header.Version; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             internal protected set
             {
@@ -469,10 +469,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public bool Padding
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return Header.Padding; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             internal protected set
             {
@@ -486,10 +486,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int PayloadType
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return Header.PayloadType; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             internal protected set
             {
@@ -503,10 +503,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int BlockCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return Header.BlockCount; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             internal protected set
             {
@@ -520,10 +520,10 @@ namespace Oragon.Media.Rtcp
         /// </summary>
         public int SynchronizationSourceIdentifier
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             get { return Header.SendersSynchronizationSourceIdentifier; }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
             internal protected set
             {
@@ -584,7 +584,7 @@ namespace Oragon.Media.Rtcp
         /// <param name="octets">The octets to add</param>
         /// <param name="offset">The offset to start copying</param>
         /// <param name="count">The amount of bytes to copy</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal protected virtual void AddBytesToPayload(IEnumerable<byte> octets, int offset = 0, int count = int.MaxValue, bool setLength = true) //overload for padd if necessary?
         {
             if (IsReadOnly) throw new InvalidOperationException("Can only set the AddBytesToPayload when IsReadOnly is false.");
@@ -638,7 +638,7 @@ namespace Oragon.Media.Rtcp
             if(setLength) SetLengthInWordsMinusOne();
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal protected void Synchronize()
         {
 
@@ -650,7 +650,7 @@ namespace Oragon.Media.Rtcp
             Header.Synchronize(ref m_OwnedOctets);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsContiguous()
         {
             return Header.IsContiguous() && Header.SegmentToLast6Bytes.Array == Payload.Array && Header.SegmentToLast6Bytes.Offset + Header.SegmentToLast6Bytes.Count == Payload.Offset;
@@ -758,7 +758,7 @@ namespace Oragon.Media.Rtcp
         /// Creates a new instance of the packet which contains new references to the <see cref="Header"/> and <see cref="Payload"/>
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RtcpPacket Clone()
         {
             return new RtcpPacket(new RtcpHeader(Header), new MemorySegment(Payload)) { Transferred = Transferred };
@@ -767,7 +767,7 @@ namespace Oragon.Media.Rtcp
         /// <summary>
         /// Provides a sample implementation of what would be required to complete a RtpPacket that has the IsComplete property False.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual int CompleteFrom(System.Net.Sockets.Socket socket, MemorySegment buffer)
         {
             if (IsReadOnly) throw new InvalidOperationException("Cannot modify a RtcpPacket when IsReadOnly is false.");
@@ -1001,7 +1001,7 @@ namespace Oragon.Media.Rtcp
             m_OwnedOctets = null;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(RtcpPacket other)
         {
             return other.Length.Equals(Length)
@@ -1011,7 +1011,7 @@ namespace Oragon.Media.Rtcp
                other.GetHashCode().Equals(GetHashCode());
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
             if (System.Object.ReferenceEquals(this, obj)) return true;
@@ -1023,31 +1023,31 @@ namespace Oragon.Media.Rtcp
 
         //Packet equals...
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return Created.GetHashCode() ^ Header.GetHashCode(); }
 
         #endregion
 
         #region Operators
         
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(RtcpPacket a, RtcpPacket b)
         {
             return object.ReferenceEquals(b, null) ? object.ReferenceEquals(a, null) : a.Equals(b);
         }
         
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(RtcpPacket a, RtcpPacket b) { return (a == b).Equals(false); }
 
         #endregion
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         object ICloneable.Clone()
         {
             return this.Clone(true, true, false);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryGetBuffers(out System.Collections.Generic.IList<System.ArraySegment<byte>> buffer)
         {
             if (IsDisposed)

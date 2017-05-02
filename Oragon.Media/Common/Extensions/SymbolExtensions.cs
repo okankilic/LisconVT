@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System;
 using Oragon.Extensions;
+using System.Runtime.CompilerServices;
 
 #region References
 
@@ -71,7 +72,7 @@ namespace Oragon.Extensions
 
         static readonly PropertyInfo TypedConstantExpressionValueProperty;
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized | System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.Synchronized | MethodImplOptions.AggressiveInlining)]
         static SymbolExtensions()
         {
             //Ensure not already ran.
@@ -110,7 +111,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="method"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MethodCallExpression CreateMethodCallExpression(MethodInfo method)
         {
             if (method == null)
@@ -132,7 +133,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TypeInfo GetTypeInfo(Expression<Action> expression) //Expression<Action> allows the syntax () => where Expression would require a Delgate.
         {
             Expression body = expression.Body;
@@ -214,7 +215,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MemberInfo GetMemberInfo(LambdaExpression expression)
         {
             MemberExpression outermostExpression = ((expression.Body as MethodCallExpression).Object as MemberExpression);
@@ -262,7 +263,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MethodInfo GetMethodInfo(LambdaExpression expression)
         {
             MethodCallExpression outermostExpression = expression.Body as MethodCallExpression;

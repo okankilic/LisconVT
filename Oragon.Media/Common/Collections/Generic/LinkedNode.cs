@@ -36,6 +36,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Collections.Generic
 {
     /// <summary>
@@ -57,7 +59,7 @@ namespace Oragon.Collections.Generic
         /// <param name="node"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static LinkedNode<T> InsertBefore(LinkedNode<T> node, ref T value)
         {
             LinkedNode<T> result = new LinkedNode<T>(ref value);
@@ -79,7 +81,7 @@ namespace Oragon.Collections.Generic
         /// <param name="node"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static LinkedNode<T> AddAfter(LinkedNode<T> node, ref T value)
         {
             LinkedNode<T> result = new LinkedNode<T>(ref value);
@@ -129,7 +131,7 @@ namespace Oragon.Collections.Generic
         /// </remarks>
         public int State
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return (int)Flags;
@@ -144,7 +146,7 @@ namespace Oragon.Collections.Generic
         /// Constructs the instance
         /// </summary>
         /// <param name="data"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkedNode(ref T data)
         {
             this.Value = data;

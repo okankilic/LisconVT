@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1256,7 +1257,7 @@ namespace Oragon.Media.Rtp
             #endregion
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected internal void OnOutOfBandData(byte[] data, int offset, int length)
         {
             if (IsDisposed) return;
@@ -1281,7 +1282,7 @@ namespace Oragon.Media.Rtp
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ParallelOutOfBandData(PacketBase packet = null)
         {
             if (IsDisposed) return;
@@ -1306,7 +1307,7 @@ namespace Oragon.Media.Rtp
         /// Raises the RtpPacket Handler for Recieving
         /// </summary>
         /// <param name="packet">The packet to handle</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected internal void OnRtpPacketReceieved(RtpPacket packet, TransportContext tc = null)
         {
             if (IsDisposed || false.Equals(IncomingRtpPacketEventsEnabled)) return;
@@ -1347,7 +1348,7 @@ namespace Oragon.Media.Rtp
         /// Raises the RtcpPacketHandler for Recieving
         /// </summary>
         /// <param name="packet">The packet to handle</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected internal void OnRtcpPacketReceieved(RtcpPacket packet = null, TransportContext tc = null)
         {
             if (IsDisposed || false.Equals(IncomingRtcpPacketEventsEnabled) || IsDisposed) return;
@@ -1389,7 +1390,7 @@ namespace Oragon.Media.Rtp
         /// Raises the RtpFrameHandler for the given frame if FrameEvents are enabled
         /// </summary>
         /// <param name="frame">The frame to raise the RtpFrameHandler with</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void OnRtpFrameChanged(RtpFrame frame = null, TransportContext tc = null, bool final = false)
         {
             if (IsDisposed || false.Equals(FrameChangedEventsEnabled) || IsDisposed) return;
@@ -1423,7 +1424,7 @@ namespace Oragon.Media.Rtp
             if (final && shouldDispose && IDisposedExtensions.IsNullOrDisposed(frame).Equals(false) && frame.ShouldDispose.Equals(false)) SetShouldDispose(frame, true, false);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ParallelRtpFrameChanged(RtpFrame frame = null, TransportContext tc = null, bool final = false)
         {
             if (IsDisposed || false.Equals(FrameChangedEventsEnabled) || IsDisposed) return;
@@ -1450,7 +1451,7 @@ namespace Oragon.Media.Rtp
 
         //IPacket overload could reduce code but would cost time to check type.
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ParallelRtpPacketRecieved(RtpPacket packet = null, TransportContext tc = null)
         {
             if (IsDisposed || false.Equals(HandleIncomingRtpPackets) || IsDisposed) return;
@@ -1471,7 +1472,7 @@ namespace Oragon.Media.Rtp
             //BaseDisposable.SetShouldDispose(packet, true, false);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ParallelRtpPacketSent(RtpPacket packet = null, TransportContext tc = null)
         {
             if (IsDisposed || false == HandleOutgoingRtpPackets || IsDisposed) return;
@@ -1492,7 +1493,7 @@ namespace Oragon.Media.Rtp
             //BaseDisposable.SetShouldDispose(packet, true, false);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ParallelRtcpPacketRecieved(RtcpPacket packet = null, TransportContext tc = null)
         {
             if (IsDisposed || false.Equals(HandleIncomingRtcpPackets) || IsDisposed) return;
@@ -1514,7 +1515,7 @@ namespace Oragon.Media.Rtp
             //BaseDisposable.SetShouldDispose(packet, true, false);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ParallelRtcpPacketSent(RtcpPacket packet = null, TransportContext tc = null)
         {
             if (IsDisposed || false == HandleOutgoingRtcpPackets || IsDisposed) return;
@@ -1541,7 +1542,7 @@ namespace Oragon.Media.Rtp
         /// Raises the RtpPacket Handler for Sending
         /// </summary>
         /// <param name="packet">The packet to handle</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void OnRtpPacketSent(RtpPacket packet, TransportContext tc = null)
         {
             if (IsDisposed || false == OutgoingRtpPacketEventsEnabled || IsDisposed) return;
@@ -1577,7 +1578,7 @@ namespace Oragon.Media.Rtp
         /// Raises the RtcpPacketHandler for Sending
         /// </summary>
         /// <param name="packet">The packet to handle</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void OnRtcpPacketSent(RtcpPacket packet, TransportContext tc = null)
         {
             if (IsDisposed || false == OutgoingRtcpPacketEventsEnabled || IsDisposed) return;
@@ -1621,9 +1622,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int MaximumOutgoingPackets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -1632,7 +1633,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public int OutgoingRtpPacketCount
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return m_OutgoingRtpPackets.Count;
@@ -1644,13 +1645,13 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool IListSockets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return m_IListSockets;
             }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 //Todo, the objects may be in use on the curent call
@@ -1669,10 +1670,10 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool ThreadEvents //Enable
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized | System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.Synchronized | MethodImplOptions.AggressiveInlining)]
             get { return m_ThreadEvents; }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized | System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.Synchronized | MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (false.Equals(IsActive)) return;
@@ -1737,9 +1738,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public double AverageMaximumRtcpBandwidthPercentage
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1761,9 +1762,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool IncomingRtpPacketEventsEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1772,9 +1773,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool IncomingRtcpPacketEventsEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1783,9 +1784,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool OutgoingRtpPacketEventsEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1794,9 +1795,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool OutgoingRtcpPacketEventsEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1805,9 +1806,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HandleIncomingRtpPackets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1816,9 +1817,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HandleIncomingRtcpPackets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1827,9 +1828,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HandleOutgoingRtpPackets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1838,9 +1839,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HandleOutgoingRtcpPackets
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1849,9 +1850,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool FrameChangedEventsEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1860,9 +1861,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool HandleFrameChanges
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1871,9 +1872,9 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public string ClientName
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -1887,7 +1888,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public virtual bool IsActive
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return IsDisposed.Equals(false) &&
@@ -1902,7 +1903,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool RtcpEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return TransportContexts.Any(c => c.IsRtcpEnabled); }
         }
 
@@ -1911,7 +1912,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool RtpEnabled
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return TransportContexts.Any(c => c.IsRtpEnabled); }
         }
 
@@ -1920,7 +1921,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         public bool AverageRtcpBandwidthExceeded
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (false.Equals(RtcpEnabled) || IsDisposed) return true;
@@ -2109,7 +2110,7 @@ namespace Oragon.Media.Rtp
         /// Throws a RtpClientException if the given context conflicts in channel either data or control with that of one which is already owned by the instance.
         /// </summary>
         /// <param name="context">The context to add</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ void AddContext(TransportContext context, bool checkDataChannel = true, bool checkControlChannel = true, bool checkLocalIdentity = true, bool checkRemoteIdentity = true)
         {
             if (checkDataChannel || checkControlChannel || checkLocalIdentity || checkRemoteIdentity) foreach (TransportContext c in TransportContexts)
@@ -2180,7 +2181,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ bool TryRemoveContext(TransportContext context)
         {
             try
@@ -2197,7 +2198,7 @@ namespace Oragon.Media.Rtp
         /// Gets any <see cref="TransportContext"/> used by this instance.
         /// </summary>
         /// <returns>The <see cref="TransportContexts"/> used by this instance.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ IEnumerable<TransportContext> GetTransportContexts()
         {
             //if (IsDisposed) return Enumerable.Empty<TransportContext>();
@@ -2224,7 +2225,7 @@ namespace Oragon.Media.Rtp
         /// <param name="checkBandwidth">Indicates if the bandwidth of the RtpCliet or Context given should be checked.</param>
         /// <param name="storeReports">Indicates if the reports created should be stored on the corresponding properties of the instace.</param>
         /// <returns>The RtcpReport created.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<Rtcp.RtcpReport> PrepareReports(TransportContext context, bool checkBandwidth = true, bool storeReports = true)
         {
             //Start with a sequence of empty packets
@@ -2278,7 +2279,7 @@ namespace Oragon.Media.Rtp
         /// Sends any reports required for all owned TransportContexts using <see cref="SendReports"/>
         /// </summary>
         /// <returns>A value indicating if reports were immediately sent</returns>        
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ bool SendReports()
         {
             if (m_StopRequested) return false;
@@ -2300,7 +2301,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Sends a Goodbye to for all contained TransportContext, which will also stop the process sending or receiving after the Goodbye is sent
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ void SendGoodbyes()
         {
             foreach (RtpClient.TransportContext tc in TransportContexts)
@@ -2315,7 +2316,7 @@ namespace Oragon.Media.Rtp
         /// <param name="ssrc">The optional identity to use in the report.</param>
         /// <param name="force">Indicates if the call should be forced. <see cref="IsRtcpEnabled"/>, when true the report will also not be stored</param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ int SendGoodbye(TransportContext context, byte[] reasonForLeaving = null, int? ssrc = null, bool force = false, RFC3550.SourceList sourceList = null, bool empty = false)
         {
             //Check if the Goodbye can be sent.
@@ -2350,7 +2351,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Sends a <see cref="Rtcp.SendersReport"/> for each TranportChannel if allowed by the <see cref="MaximumRtcpBandwidth"/>
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ void SendSendersReports()
         {
             if (false == IsDisposed && false == m_StopRequested) foreach (TransportContext tc in TransportContexts) SendSendersReport(tc);
@@ -2361,7 +2362,7 @@ namespace Oragon.Media.Rtp
         /// Return the amount of bytes sent when sending the reports.
         /// </summary>
         /// <param name="context">The context</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining | System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.Synchronized)]
         internal protected /*virtual*/ int SendSendersReport(TransportContext context, bool force = false)
         {
             //Determine if the SendersReport can be sent.
@@ -2388,7 +2389,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Send any <see cref="ReceiversReports"/> required by this RtpClient instance.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ void SendReceiversReports()
         {
             if (false.Equals(IsDisposed) && false.Equals(m_StopRequested)) foreach (TransportContext tc in TransportContexts) SendReceiversReport(tc);
@@ -2399,7 +2400,7 @@ namespace Oragon.Media.Rtp
         /// Return the amount of bytes sent when sending the reports.
         /// </summary>
         /// <param name="context">The context</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ int SendReceiversReport(TransportContext context, bool force = false)
         {
             //Determine if the ReceiversReport can be sent.
@@ -2435,7 +2436,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="sourceId"></param>
         /// <returns>The context which was identified or null if no context was found.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ TransportContext GetContextBySourceId(int sourceId)
         {
             if (IsDisposed) return null;
@@ -2470,7 +2471,7 @@ namespace Oragon.Media.Rtp
         ////    return null;
         ////}
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ TransportContext GetContextByChannels(params byte[] channels)
         {
             if (IsDisposed) return null;
@@ -2495,7 +2496,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="packet"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ TransportContext GetContextForPacket(RtcpPacket packet)
         {
             if (IsDisposed || IDisposedExtensions.IsNullOrDisposed(packet)) return null;
@@ -2506,7 +2507,7 @@ namespace Oragon.Media.Rtp
             return null;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ void EnquePacket(RtcpPacket packet)
         {
             if (IsDisposed || m_StopRequested || IDisposedExtensions.IsNullOrDisposed(packet) || MaximumOutgoingPackets > 0 && m_OutgoingRtpPackets.Count > MaximumOutgoingPackets)
@@ -2530,7 +2531,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="packets"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ int SendRtcpPackets(IEnumerable<RtcpPacket> packets, TransportContext context, out System.Net.Sockets.SocketError error)
         {
             error = SocketError.SocketError;
@@ -2742,7 +2743,7 @@ namespace Oragon.Media.Rtp
         /// <param name="error"></param>
         /// <param name="force"></param>
         /// <returns>A value indicating if reports were sent</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal /*virtual*/ bool SendReports(TransportContext context, out System.Net.Sockets.SocketError error, bool force = false)
         {
             //Ensure set
@@ -2773,7 +2774,7 @@ namespace Oragon.Media.Rtp
         /// <param name="lastActivity">The time the lastActivity has occured on the context (sending or recieving)</param>
         /// <param name="context">The context to check against</param>
         /// <returns>True if the connection is inactive and a Goodebye was attempted to be sent to the remote party</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal /*virtual*/ bool SendGoodbyeIfInactive(System.DateTime lastActivity, TransportContext context)
         {
             bool inactive = false;
@@ -2830,7 +2831,7 @@ namespace Oragon.Media.Rtp
 
         #region Rtp
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TransportContext GetContextForMediaDescription(Sdp.MediaDescription mediaDescription)
         {
             if (IDisposedExtensions.IsNullOrDisposed(mediaDescription)) return null;
@@ -2859,7 +2860,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="packet"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual */ TransportContext GetContextForPacket(RtpPacket packet)
         {
             if (IDisposedExtensions.IsNullOrDisposed(packet)) return null;
@@ -2875,7 +2876,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="packet"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual */ TransportContext GetContextForFrame(RtpFrame frame)
         {
             if (IDisposedExtensions.IsNullOrDisposed(frame)) return null;
@@ -2888,7 +2889,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="payloadType"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual */ TransportContext GetContextByPayloadType(int payloadType)
         {
             RtpClient.TransportContext c = null;
@@ -2912,7 +2913,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="payloadType"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual */ TransportContext GetContextBySocketHandle(System.IntPtr socketHandle)
         {
             RtpClient.TransportContext c = null;
@@ -2934,7 +2935,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="payloadType"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual */ TransportContext GetContextBySocket(System.Net.Sockets.Socket socket)
         {
             return socket == null ? null : GetContextBySocketHandle(socket.Handle);
@@ -2944,7 +2945,7 @@ namespace Oragon.Media.Rtp
         /// Adds a packet to the queue of outgoing RtpPackets
         /// </summary>
         /// <param name="packet">The packet to enqueue</param> (used to take the RtpCLient too but we can just check the packet payload type
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual */ void EnquePacket(RtpPacket packet)
         {
             if (IsDisposed || m_StopRequested || IDisposedExtensions.IsNullOrDisposed(packet)) return;
@@ -2953,7 +2954,7 @@ namespace Oragon.Media.Rtp
             m_OutgoingRtpPackets.Add(packet);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual */ void EnqueFrame(RtpFrame frame)
         {
             if (IsDisposed || m_StopRequested || IDisposedExtensions.IsNullOrDisposed(frame)) return;
@@ -2966,7 +2967,7 @@ namespace Oragon.Media.Rtp
             foreach (RtpPacket packet in frame) EnquePacket(packet);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SendRtpFrame(RtpFrame frame, out System.Net.Sockets.SocketError error, int? ssrc = null)
         {
             error = SocketError.SocketError;
@@ -3000,7 +3001,7 @@ namespace Oragon.Media.Rtp
         /// Sends a RtpPacket to the connected client.
         /// </summary>
         /// <param name="packet">The RtpPacket to send</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int SendRtpPacket(RtpPacket packet, TransportContext transportContext, out System.Net.Sockets.SocketError error, int? ssrc = null) //Should be compatible with the Prepare signature.
         {
             error = SocketError.SocketError;
@@ -3136,7 +3137,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Creates and starts a worker thread which will send and receive data as required.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public /*virtual*/ void Activate()
         {
             try
@@ -3190,7 +3191,7 @@ namespace Oragon.Media.Rtp
         /// <summary>
         /// Sends the Rtcp Goodbye and signals a stop in the worker thread.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Deactivate()
         {
             if (IsDisposed || false == IsActive) return;
@@ -3226,7 +3227,7 @@ namespace Oragon.Media.Rtp
         /// <param name="raisedEvent">Indicates if an event was raised</param>
         /// <param name="buffer">The optional buffer to use.</param>
         /// <returns>The amount of bytes the frame data SHOULD have</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         int ReadApplicationLayerFraming(ref int received, ref int sessionRequired, ref int offset, out byte frameChannel, out RtpClient.TransportContext context, out bool raisedEvent, byte[] buffer = null)
         {
             //There is no relevant TransportContext assoicated yet.
@@ -3331,7 +3332,7 @@ namespace Oragon.Media.Rtp
         /// <param name="useFrameControl"></param>
         /// <param name="useChannelId"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ int SendData(byte[] data, int offset, int length, byte? channel, System.Net.Sockets.Socket socket, System.Net.EndPoint remote, out System.Net.Sockets.SocketError error, int pollTime = 0, bool useFrameControl = true, bool useChannelId = true)
         {
             error = SocketError.SocketError;
@@ -3469,7 +3470,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="socket">The socket to receive data on</param>
         /// <returns>The number of bytes recieved</returns>             
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ int ReceiveData(System.Net.Sockets.Socket socket, ref System.Net.EndPoint remote, out System.Net.Sockets.SocketError error, bool expectRtp = true, bool expectRtcp = true, MemorySegment buffer = null)
         {
             //Nothing bad happened yet.
@@ -3557,7 +3558,7 @@ namespace Oragon.Media.Rtp
         /// <param name="count"></param>
         /// <param name="socket"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ int ProcessFrameData(byte[] buffer, int offset, int count, System.Net.Sockets.Socket socket)
         {
             if (count <= 0) return Binary.Zero;
@@ -4021,7 +4022,7 @@ namespace Oragon.Media.Rtp
         /// </summary>
         /// <param name="memory">The memory to parse</param>
         /// <param name="from">The socket which received the data into memory and may be used for packet completion.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected /*virtual*/ void ParseAndHandleData(MemorySegment memory, ref bool parseRtcp, ref bool parseRtp, ref int remaining, ref int expected)
         {
 
@@ -4107,7 +4108,7 @@ namespace Oragon.Media.Rtp
             return;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void HandleEvent()
         {
             //Dequeue the event frame
@@ -5332,9 +5333,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool AllowDuplicatePackets
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -5343,9 +5344,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool AllowsMultiplePayloadTypes
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -5354,9 +5355,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool AllowOutOfOrderPackets
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -5365,9 +5366,9 @@ namespace Oragon.Media.Rtp
             ///// </summary>
             //public int MaximumRemoteIdentities
             //{
-            //    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            //    [MethodImpl(MethodImplOptions.AggressiveInlining)]
             //    get;
-            //    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            //    [MethodImpl(MethodImplOptions.AggressiveInlining)]
             //    set;
             //}
 
@@ -5376,17 +5377,17 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int RecieveBufferSizeMultiplier
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
             public Action<Socket> ConfigureSocket
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -5395,9 +5396,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public Object ApplicationContext
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -5406,9 +5407,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public MemorySegment ContextMemory
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -5417,9 +5418,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int MinimumPacketSize
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return (int)m_MimumPacketSize; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { m_MimumPacketSize = (ushort)value; }
             }
 
@@ -5428,22 +5429,22 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int MaximumPacketSize
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return (int)m_MaximumPacketSize; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { m_MaximumPacketSize = (ushort)value; }
             }
 
             public bool HasAnyRecentActivity
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return HasRecentRtpActivity || HasRecentRtcpActivity; }
             }
 
 
             public bool HasRecentRtpActivity
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     //Check for Rtp Receive Activity if receiving
@@ -5455,7 +5456,7 @@ namespace Oragon.Media.Rtp
 
             public bool HasRecentRtcpActivity
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     //Check for Rtcp Receive Activity if receiving
@@ -5467,7 +5468,7 @@ namespace Oragon.Media.Rtp
 
             public bool HasReceivedRtpWithinReceiveInterval
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return TotalRtpPacketsReceieved >= 0 &&
@@ -5479,7 +5480,7 @@ namespace Oragon.Media.Rtp
 
             public bool HasSentRtpWithinSendInterval
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return IsActive && TotalRtpPacketsSent >= 0 &&
@@ -5491,7 +5492,7 @@ namespace Oragon.Media.Rtp
 
             public bool HasReceivedRtcpWithinReceiveInterval
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return TotalRtcpPacketsReceieved >= 0 &&
@@ -5503,7 +5504,7 @@ namespace Oragon.Media.Rtp
 
             public bool HasSentRtcpWithinSendInterval
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return TotalRtcpPacketsSent >= 0 &&
@@ -5518,7 +5519,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             internal bool InDiscovery
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return ValidRtpPacketsReceived < MinimumSequentialValidRtpPackets && RemoteSynchronizationSourceIdentifier.Equals(Binary.Zero); }
             }
 
@@ -5527,37 +5528,37 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool LeaveOpen
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
             //Any frames for this channel
             public RtpFrame CurrentFrame
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set;
             }
 
             public RtpFrame LastFrame
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
 
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set;
             }
 
             //for testing purposes
             //internal RtpFrame Holding
             //{
-            //    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            //    [MethodImpl(MethodImplOptions.AggressiveInlining)]
             //    get;
 
-            //    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            //    [MethodImpl(MethodImplOptions.AggressiveInlining)]
             //    internal protected set;
             //}
 
@@ -5566,9 +5567,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public Socket RtpSocket
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set;
             }
 
@@ -5577,9 +5578,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public Socket RtcpSocket
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set;
             }
 
@@ -5588,7 +5589,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool IsActive
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (IsRtpEnabled)
@@ -5609,10 +5610,10 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public double MaximumRtcpBandwidthPercentage
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
 
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -5621,7 +5622,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool RtcpBandwidthExceeded
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (false.Equals(IsRtcpEnabled) || IsDisposed) return true;
@@ -5648,7 +5649,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan TimeSending
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return IsDisposed || m_FirstPacketSent.Equals(DateTime.MinValue) ?
@@ -5663,7 +5664,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan TimeReceiving
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return IsDisposed || m_FirstPacketReceived.Equals(DateTime.MinValue) ?
@@ -5689,9 +5690,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan MediaStartTime
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_StartTime; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set { m_StartTime = value; }
             }
 
@@ -5700,15 +5701,15 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan MediaEndTime
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_EndTime; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set { m_EndTime = value; }
             }
 
             public TimeSpan MediaDuration
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsContinious ? TimeSpanExtensions.InfiniteTimeSpan : m_EndTime - m_StartTime; }
             }
 
@@ -5717,7 +5718,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool IsContinious
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_EndTime == Extensions.TimeSpanExtensions.InfiniteTimeSpan; }
             }
 
@@ -5727,7 +5728,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan TimeRemaining
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsContinious ? m_EndTime : TimeSpan.FromTicks(m_EndTime.Ticks - (Math.Max(TimeReceiving.Ticks, TimeSending.Ticks))); }
             }
 
@@ -5736,9 +5737,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan SendInterval
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_SendInterval; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { m_SendInterval = value; }
             }
 
@@ -5747,9 +5748,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan ReceiveInterval
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_ReceiveInterval; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { m_ReceiveInterval = value; }
             }
 
@@ -5758,7 +5759,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan InactiveTime
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_InactiveTime; }
             }
 
@@ -5768,7 +5769,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan LastRtcpReportSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return m_LastRtcpOut.Equals(DateTime.MinValue) ? TimeSpan.MinValue : DateTime.UtcNow - m_LastRtcpOut;
@@ -5780,7 +5781,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan LastRtcpReportReceived
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return m_LastRtcpIn.Equals(DateTime.MinValue) ? TimeSpan.MinValue : DateTime.UtcNow - m_LastRtcpIn;
@@ -5792,7 +5793,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan LastRtpPacketReceived
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return m_LastRtpIn.Equals(DateTime.MinValue) ? TimeSpan.MinValue : DateTime.UtcNow - m_LastRtpIn;
@@ -5804,7 +5805,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan LastRtpPacketSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return m_LastRtpOut.Equals(DateTime.MinValue) ? TimeSpan.MinValue : DateTime.UtcNow - m_LastRtpOut;
@@ -5816,7 +5817,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public TimeSpan TimeActive
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return m_Initialized.Equals(DateTime.MinValue) ? TimeSpan.MinValue : DateTime.UtcNow - m_Initialized;
@@ -5828,7 +5829,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int FailedRtcpTransmissions
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_FailedRtcpTransmissions; }
             }
 
@@ -5837,7 +5838,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int FailedRtpTransmissions
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_FailedRtpTransmissions; }
             }
 
@@ -5846,7 +5847,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int FailedRtcpReceptions
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_FailedRtcpReceptions; }
             }
 
@@ -5855,7 +5856,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int FailedRtpReceptions
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_FailedRtpReceptions; }
             }
 
@@ -5864,9 +5865,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int SynchronizationSourceIdentifier
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set;
             }
 
@@ -5876,9 +5877,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int RemoteSynchronizationSourceIdentifier
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set;
             }
 
@@ -5887,9 +5888,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public Sdp.MediaDescription MediaDescription
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set;
             }
 
@@ -5898,7 +5899,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public /*virtual*/ bool IsValid
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return ValidRtpPacketsReceived >= MinimumSequentialValidRtpPackets; }
             }
 
@@ -5907,7 +5908,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool LocalMultiplexing
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed || IsRtcpEnabled.Equals(false) || object.ReferenceEquals(LocalRtp, null) ? false : LocalRtp.Equals(LocalRtcp); }
             }
 
@@ -5916,7 +5917,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool RemoteMultiplexing
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed || IsRtcpEnabled.Equals(false) || object.ReferenceEquals(RemoteRtp, null) ? false : RemoteRtp.Equals(RemoteRtcp); }
             }
 
@@ -5925,7 +5926,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public bool IsDuplexing
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (IsDisposed) return false;
@@ -5939,9 +5940,9 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public ReceiversReport ReceiversReport
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
@@ -5950,27 +5951,27 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public SendersReport SendersReport
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
             /// The last <see cref="SourceDescriptionReport"/> sent or received by this RtpClient.
             public SourceDescriptionReport SourceDescription
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
             /// The last <see cref="GoodbyeReport"/> sent or received by this RtpClient.
             public GoodbyeReport Goodbye
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
@@ -5979,7 +5980,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalPacketsReceived
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return RtpPacketsReceived + RtcpPacketsReceived; }
             }
 
@@ -5988,7 +5989,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalPacketsSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return RtpPacketsSent + RtcpPacketsSent; }
             }
 
@@ -5997,7 +5998,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtpPacketsSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtpPacketsSent; }
             }
 
@@ -6006,7 +6007,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long RtpPayloadBytesSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtpBytesSent; }
             }
 
@@ -6015,7 +6016,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long RtpPayloadBytesRecieved
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtpBytesRecieved; }
             }
 
@@ -6024,7 +6025,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtpBytesSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtpBytesSent + RtpHeader.Length * RtpPacketsSent; }
             }
 
@@ -6033,7 +6034,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtpBytesReceieved
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtpBytesRecieved + RtpHeader.Length * RtpPacketsSent; }
             }
 
@@ -6042,7 +6043,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtpPacketsReceieved
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtpPacketsReceived; }
             }
 
@@ -6051,7 +6052,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtcpPacketsSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtcpPacketsSent; }
             }
 
@@ -6060,7 +6061,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtcpBytesSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtcpBytesSent; }
             }
 
@@ -6069,7 +6070,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalBytesReceieved
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : TotalRtcpBytesReceieved + TotalRtpBytesReceieved; }
             }
 
@@ -6078,7 +6079,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalBytesSent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : TotalRtcpBytesSent + TotalRtpBytesSent; }
             }
 
@@ -6087,7 +6088,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtcpPacketsReceieved
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtcpPacketsReceived; }
             }
 
@@ -6096,7 +6097,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long TotalRtcpBytesReceieved
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return IsDisposed ? 0 : RtcpBytesRecieved; }
             }
 
@@ -6105,34 +6106,34 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public int RecieveSequenceNumber
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return (short)m_SequenceNumber; }
 
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set { m_SequenceNumber = (ushort)value; }
             }
 
             public int SendSequenceNumber
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return (short)m_LastSentSequenceNumber; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set { m_LastSentSequenceNumber = (ushort)value; }
             }
 
             public int RtpTimestamp
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
             public int SenderRtpTimestamp
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
@@ -6141,17 +6142,17 @@ namespace Oragon.Media.Rtp
             /// </summary>
             public long NtpTimestamp
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
             public long SenderNtpTimestamp
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set;
             }
 
@@ -6159,17 +6160,17 @@ namespace Oragon.Media.Rtp
 
             public long NtpOffset
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
             public long SenderNtpOffset
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get;
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set;
             }
 
@@ -6186,7 +6187,7 @@ namespace Oragon.Media.Rtp
             /// <param name="rtcpEnabled"></param>
             /// <param name="senderSsrc"></param>
             /// <param name="minimumSequentialRtpPackets"></param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public TransportContext(byte dataChannel, byte controlChannel, int ssrc, bool rtcpEnabled = true, int senderSsrc = 0, int minimumSequentialRtpPackets = 2, Action<System.Net.Sockets.Socket> configure = null, bool shouldDispose = true)
                 : base(shouldDispose)
             {
@@ -6226,14 +6227,14 @@ namespace Oragon.Media.Rtp
                 RecieveBufferSizeMultiplier = DefaultRecieveBufferSizeMultiplier;
             }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public TransportContext(byte dataChannel, byte controlChannel, int ssrc, Sdp.MediaDescription mediaDescription, bool rtcpEnabled = true, int senderSsrc = 0, int minimumSequentialRtpPackets = 2, bool shouldDispose = true)
                 : this(dataChannel, controlChannel, ssrc, rtcpEnabled, senderSsrc, minimumSequentialRtpPackets, null, shouldDispose)
             {
                 MediaDescription = mediaDescription;
             }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public TransportContext(byte dataChannel, byte controlChannel, int ssrc, Sdp.MediaDescription mediaDescription, Socket socket, bool rtcpEnabled = true, int senderSsrc = 0, int minimumSequentialRtpPackets = 2, bool shouldDispose = true)
                 : this(dataChannel, controlChannel, ssrc, mediaDescription, rtcpEnabled, senderSsrc, minimumSequentialRtpPackets, shouldDispose)
             {
@@ -6248,7 +6249,7 @@ namespace Oragon.Media.Rtp
             /// Assigns a Non Zero value to <see cref="SynchronizationSourceIdentifier"/> to a random value based on the given seed.
             /// The value will also be different than <see cref="RemoteSynchronizationSourceIdentifier"/>.
             /// </summary>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected void AssignIdentity(int seed = SendersReport.PayloadType)
             {
                 if (SynchronizationSourceIdentifier.Equals(Binary.Zero))
@@ -6263,7 +6264,7 @@ namespace Oragon.Media.Rtp
             /// Calculates RTP Interarrival Jitter as specified in RFC 3550 6.4.1.
             /// </summary>
             /// <param name="packet">RTP packet.</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void UpdateJitterAndTimestamp(RtpPacket packet)//bool sent
             {
                 //Determine to update sent or received values
@@ -6303,7 +6304,7 @@ namespace Oragon.Media.Rtp
             /// Resets the variables used in packets validation based on the given parameter.
             /// </summary>
             /// <param name="sequenceNumber">The sequence number to reset to.</param>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void ResetRtpValidationCounters(int sequenceNumber)
             {
                 ushort val = (ushort)sequenceNumber;
@@ -6445,7 +6446,7 @@ namespace Oragon.Media.Rtp
             /// </summary>
             /// <param name="sequenceNumber">The sequenceNumber to check.</param>
             /// <returns>True if in state, otherwise false.</returns>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             [System.CLSCompliant(false)]
             public bool UpdateSequenceNumber(ref int sequenceNumber)
             {
@@ -6464,7 +6465,7 @@ namespace Oragon.Media.Rtp
             /// <summary>
             /// Randomizes the SequenceNumber
             /// </summary>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void RandomizeSequenceNumber()
             {
                 RecieveSequenceNumber = Utility.Random.Next();
@@ -6493,7 +6494,7 @@ namespace Oragon.Media.Rtp
                 Initialize(new IPEndPoint(localIp, localRtpPort), new IPEndPoint(remoteIp, remoteRtpPort), new IPEndPoint(localIp, localRtcpPort), new IPEndPoint(remoteIp, remoteRtcpPort), punchHole);
             }
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Initialize(IPEndPoint localRtp, IPEndPoint remoteRtp, IPEndPoint localRtcp, IPEndPoint remoteRtcp, bool punchHole = true)
             {
                 if (IsDisposed || IsActive) return;
@@ -6696,7 +6697,7 @@ namespace Oragon.Media.Rtp
             /// <param name="rtpSocket"></param>
             /// <param name="rtcpSocket"></param>
             //TODO Must allow leaveOpen for existing sockets
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Initialize(Socket rtpSocket, Socket rtcpSocket)
             {
                 if (IsDisposed || IsActive) return;
@@ -6805,7 +6806,7 @@ namespace Oragon.Media.Rtp
             /// <summary>
             /// Closes the Rtp and Rtcp Sockets
             /// </summary>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void DisconnectSockets()
             {
                 if (IsActive.Equals(false) || IsDisposed) return;
@@ -6849,7 +6850,7 @@ namespace Oragon.Media.Rtp
             /// <summary>
             /// Resets the RemoteSynchronizationSourceIdentifier and packet counters values.
             /// </summary>
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal void ResetState()
             {
                 //if (RemoteSynchronizationSourceIdentifier.HasValue) RemoteSynchronizationSourceIdentifier = null;// default(int);
@@ -6886,7 +6887,7 @@ namespace Oragon.Media.Rtp
 
             #endregion
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             IEnumerable<Socket> ISocketReference.GetReferencedSockets()
             {
                 if (IsDisposed) yield break;

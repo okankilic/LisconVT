@@ -4,6 +4,7 @@ using Oragon.Extensions;
 using Oragon.Interfaces;
 using Oragon.Media.Common.Extensions;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Classes
 {
@@ -70,7 +71,7 @@ namespace Oragon.Classes
 
         public byte[] Data
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return m_OwnedOctets;
@@ -79,15 +80,15 @@ namespace Oragon.Classes
 
         public System.DateTime Created
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return base.CreatedUtc.DateTime; }
         }
 
         public System.DateTime? Transferred
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -96,9 +97,9 @@ namespace Oragon.Classes
         /// </summary>
         public bool IsComplete
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -107,9 +108,9 @@ namespace Oragon.Classes
         /// </summary>
         public bool IsCompressed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -118,9 +119,9 @@ namespace Oragon.Classes
         /// </summary>
         public bool IsReadOnly
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -129,9 +130,9 @@ namespace Oragon.Classes
         /// </summary>
         public long Length
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -348,9 +349,9 @@ namespace Oragon.Classes
         /// </summary>
         public System.Func<System.Net.Sockets.Socket, MemorySegment, int> Completer //Name sucks, should probably be an Interface
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
@@ -380,16 +381,16 @@ namespace Oragon.Classes
 
         public IPacket Holding
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal protected set;
         }
 
 
         public bool IsHolding
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IDisposedExtensions.IsNullOrDisposed(Holding).Equals(false); }
         }
 
@@ -429,7 +430,7 @@ namespace Oragon.Classes
 
         bool IPacket.IsComplete
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (object.ReferenceEquals(Completer, null)) return StaticCompleteFrom(null, null).Equals(int.MinValue);
@@ -437,7 +438,7 @@ namespace Oragon.Classes
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         System.Collections.Generic.IEnumerable<byte> IPacket.Prepare()
         {
             if (IsDisposed) return null;
@@ -445,7 +446,7 @@ namespace Oragon.Classes
             return m_OwnedOctets ?? Holding.Prepare();
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         bool IPacket.TryGetBuffers(out System.Collections.Generic.IList<System.ArraySegment<byte>> buffer)
         {
             if (IsHolding) return Holding.TryGetBuffers(out buffer);
@@ -467,7 +468,7 @@ namespace Oragon.Classes
         
         long IPacket.Length
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (IsHolding) return Holding.Length;
@@ -482,7 +483,7 @@ namespace Oragon.Classes
 
         bool IPacket.IsReadOnly
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (IsHolding) return Holding.IsReadOnly;
@@ -493,7 +494,7 @@ namespace Oragon.Classes
 
         bool IPacket.IsCompressed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (IsHolding) return Holding.IsCompressed;

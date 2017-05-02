@@ -37,6 +37,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #endregion
 
 using Oragon.Classes.Disposables;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Classes
 {
@@ -319,7 +320,7 @@ namespace Oragon.Classes
         public static System.Reflection.ProcessorArchitecture AssemblyNameProcessorArchitecture
         {
 
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_AssemblyNameProcessorArchitecture; }
         }
 
@@ -331,7 +332,7 @@ namespace Oragon.Classes
 
         public static System.Reflection.PortableExecutableKinds CodeType
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_CodeType; }
         }
 
@@ -342,7 +343,7 @@ namespace Oragon.Classes
 
         public static System.Reflection.ImageFileMachine MachineType
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_MachineType; }
         }
 
@@ -361,7 +362,7 @@ namespace Oragon.Classes
         /// </summary>
         public static int BitPatternSize
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_BitPatternSize; }
         }
 
@@ -370,7 +371,7 @@ namespace Oragon.Classes
         /// </summary>
         public static int NativePointeSize
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_NativePointeSize; }
         }
 
@@ -381,7 +382,7 @@ namespace Oragon.Classes
         /// </summary>
         public static BinaryRepresentation SystemBinaryRepresentation
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return m_SystemBinaryRepresentation; }
         }
 
@@ -393,14 +394,14 @@ namespace Oragon.Classes
         /// Indicates if the Machine has a finite bit pattern.
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasFiniteBitPattern() { return BitPatternSize > 0; }        
 
         /// <summary>
         /// Indicates if the Machine can execute ARM instructions
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsArm()
         {
             //Directly uses the CPU Bit Pattern Space if compilation supports
@@ -411,7 +412,7 @@ namespace Oragon.Classes
         /// Indicates if the Machine can execute x86 instructions
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]        
         public static bool IsX86()
         {
             return 1 == (((uint)1) << Binary.Binary.BitsPerInteger);
@@ -421,7 +422,7 @@ namespace Oragon.Classes
         /// Indicates if the Machine can execute x64 instructions
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsX64()
         {
             return 4294967296 == (((ulong)1) << 96); //Should always be 96
@@ -432,7 +433,7 @@ namespace Oragon.Classes
         /// </summary>
         /// <returns>The size in bytes of the pointer type the processor uses natively.</returns>
         /// <remarks>As opposed to <see cref="System.IntPtr.Size"/></remarks>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetNativePointerSize()
         {
             //Todo, determine with native uint/int or native float
@@ -460,7 +461,7 @@ namespace Oragon.Classes
         /// <param name="ptrSize">The size of the pointer</param>
         /// <returns></returns>
         /// <remarks>Even in 32 bit builds, if the processor is truly 64 bit then that will take precedence.</remarks>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CalulcateAlignedSize(ref long size, ref int ptrSize)
         {
             //Equal
@@ -483,7 +484,7 @@ namespace Oragon.Classes
         /// </summary>
         /// <param name="bitOrder"></param>
         /// <param name="byteOrder"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ProbeBitOrderAndByteOrder(ref Binary.Binary.BitOrder bitOrder, ref Binary.Binary.ByteOrder byteOrder)
         {
             //Don't use unsafe code because eventually .Net MF will be completely supported.
@@ -558,13 +559,13 @@ namespace Oragon.Classes
             }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsLittleEndian()
         {
             return IsByteOrder(Binary.Binary.ByteOrder.Little);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsBigEndian()
         {
             return IsByteOrder(Binary.Binary.ByteOrder.Big);
@@ -573,7 +574,7 @@ namespace Oragon.Classes
         public static bool IsByteOrder(Binary.Binary.ByteOrder byteOrder) { return IsByteOrder(ref byteOrder); }
 
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsByteOrder(ref Binary.Binary.ByteOrder byteOrder)
         {
             var bitOrder = Binary.Binary.BitOrder.Unknown;
@@ -598,7 +599,7 @@ namespace Oragon.Classes
         /// <param name="value">A value in two's complement</param>
         /// <returns>The one's complement representation of <paramref name="value"/></returns>
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int OnesComplement(ref int value) { return (~value); }
 
         /// <summary>
@@ -609,7 +610,7 @@ namespace Oragon.Classes
         public static int TwosComplement(int value) { return TwosComplement(ref value); }
 
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TwosComplement(ref int value) { unchecked { return (~value + Binary.Binary.One); } }
 
         public static int SignedMagnitude(int value) { int sign; return SignedMagnitude(ref value, out sign); }
@@ -624,7 +625,7 @@ namespace Oragon.Classes
         /// <param name="sign">The sign of <paramref name="value"/></param>
         /// <returns>The signed magnitude representation of <paramref name="value"/></returns>
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int SignedMagnitude(ref int value, out int sign)
         {
             unchecked
@@ -653,7 +654,7 @@ namespace Oragon.Classes
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TwosComplementToSignedMagnitude(ref int value)
         {
             unchecked
@@ -671,7 +672,7 @@ namespace Oragon.Classes
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long SignedMagnitudeToTwosComplement(ref int value)
         {
             unchecked
@@ -685,7 +686,7 @@ namespace Oragon.Classes
         /// Indicates if the architecture utilizes two's complement binary representation
         /// </summary>
         /// <returns>True if two's complement is used, otherwise false</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsTwosComplement()
         {
             //return Convert.ToSByte(byte.MaxValue.ToString(Oragon.Classes.Extensions.StringExtensions.HexadecimalFormat), Binary.Binary.Sēdecim) == -Binary.Binary.Ūnus;
@@ -697,7 +698,7 @@ namespace Oragon.Classes
         /// Indicates if the architecture utilizes one's complement binary representation
         /// </summary>
         /// <returns>True if ones's complement is used, otherwise false</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOnesComplement()
         {
             //return Convert.ToSByte(sbyte.MaxValue.ToString(Oragon.Classes.Extensions.StringExtensions.HexadecimalFormat), Binary.Binary.Sēdecim) == -Binary.Binary.Ūnus;
@@ -709,7 +710,7 @@ namespace Oragon.Classes
         /// Indicates if the architecture utilizes sign and magnitude representation
         /// </summary>
         /// <returns>True if sign and magnitude representation is used, otherwise false</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsSignedMagnitude()
         {
             return unchecked(((Binary.Binary.Three & -Binary.Binary.One) == Binary.Binary.One)); //&& false == IsTwosComplement
@@ -724,7 +725,7 @@ namespace Oragon.Classes
 
         #region Constructor
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized | System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.Synchronized | MethodImplOptions.AggressiveInlining)]
         static Machine()
         {
             //Ensure not already called.

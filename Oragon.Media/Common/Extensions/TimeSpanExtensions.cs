@@ -37,6 +37,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #endregion
 
 using Oragon.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Extensions
 {
@@ -107,7 +108,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="ts"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double TotalMicroseconds(this System.TimeSpan ts) { return ts.TotalMilliseconds * MicrosecondsPerMillisecond; }
 
         /// <summary>
@@ -115,16 +116,16 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="ts"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double TotalNanoseconds(this System.TimeSpan ts) { return ts.TotalMilliseconds * NanosecondsPerMillisecond; }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.TimeSpan FromMicroseconds(double microSeconds) { return System.TimeSpan.FromTicks((long)(microSeconds * OneMicrosecond.Ticks)); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.TimeSpan FromNanoseconds(double nanoSeconds) { return System.TimeSpan.FromTicks((long)(nanoSeconds / NanosecondsPerTick)); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [System.CLSCompliant(false)]
         public static System.TimeSpan Min(ref System.TimeSpan a, ref System.TimeSpan b)
         {
@@ -133,7 +134,7 @@ namespace Oragon.Extensions
         
         public static System.TimeSpan Min(System.TimeSpan a, System.TimeSpan b) { return Min(ref a, ref b); }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [System.CLSCompliant(false)]
         public static System.TimeSpan Max(ref System.TimeSpan a, ref System.TimeSpan b)
         {

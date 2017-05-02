@@ -36,6 +36,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Extensions
 {
     public static class ObjectExtensions
@@ -55,7 +57,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.Array ToArray(params object[] array) { return array; }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace Oragon.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="tArray"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] ToArray<T>(params T[] tArray) { return tArray; }
         
     }

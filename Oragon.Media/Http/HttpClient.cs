@@ -604,7 +604,7 @@ namespace Oragon.Media.Http
         /// Creates any required client socket stored the time the call was made and calls <see cref="ProcessEndConnect"/> unless an unsupported Proctol is specified.
         /// </summary>
         /// <param name="force">Indicates if a previous existing connection should be disconnected.</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual void Connect(bool force = false)
         {
             try
@@ -674,7 +674,7 @@ namespace Oragon.Media.Http
             catch { throw; }
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual void Disconnect(bool disconnectSocket = false)
         {
             if (disconnectSocket) DisconnectSocket();
@@ -685,7 +685,7 @@ namespace Oragon.Media.Http
         /// Disconnects the RtspSocket if Connected and <see cref="LeaveOpen"/> is false.  
         /// Sets the <see cref="ConnectionTime"/> to <see cref="Utility.InfiniteTimepan"/> so IsConnected is false.
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public virtual void DisconnectSocket(bool force = false)
         {
             //If not connected and not forced return

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace Oragon.Classes.Disposables
         /// Creates an instance
         /// </summary>
         /// <param name="shouldDispose">Indicates if <see cref="Dispose"/> will change the state of the instance</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CommonDisposable(bool shouldDispose = true) : base(shouldDispose) { }
     }
 

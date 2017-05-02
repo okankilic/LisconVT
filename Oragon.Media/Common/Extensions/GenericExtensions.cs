@@ -4,6 +4,8 @@
 //http://stackoverflow.com/questions/2173107/what-exactly-is-an-open-generic-type-in-net
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Extensions
 {
     /// <summary>
@@ -22,7 +24,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int MetadataToken<T>(T t) { return typeof(T).MetadataToken; }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace Oragon.Extensions
         /// <typeparam name="U"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static U As<T, U>(T t) where U : class { return t as U; }
 
         //These projects use IL Weaving to allow Enum and Delegate as constraints in a where clause.

@@ -44,6 +44,7 @@ using Oragon.Media.Rtsp;
 using Oragon.Media.Common.Extensions;
 using Oragon.Classes.Text;
 using Oragon.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.RtspServer.MediaTypes
 {
@@ -72,9 +73,9 @@ namespace Oragon.Media.RtspServer.MediaTypes
         /// </summary>
         public virtual RtspClient RtspClient
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set;
         }
 
@@ -83,18 +84,18 @@ namespace Oragon.Media.RtspServer.MediaTypes
         /// </summary>
         public override Rtp.RtpClient RtpClient
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return  IsDisposed ? null : IDisposedExtensions.IsNullOrDisposed(RtspClient) ? null : RtspClient.Client; }
         }
 
         public override NetworkCredential SourceCredential
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return base.SourceCredential;
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (RtspClient != null) RtspClient.Credential = value;
@@ -104,12 +105,12 @@ namespace Oragon.Media.RtspServer.MediaTypes
 
         public override AuthenticationSchemes SourceAuthenticationScheme
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return base.SourceAuthenticationScheme;
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (RtspClient != null) RtspClient.AuthenticationScheme = value;
@@ -122,7 +123,7 @@ namespace Oragon.Media.RtspServer.MediaTypes
         /// </summary>
         public override Sdp.SessionDescription SessionDescription
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return RtspClient.SessionDescription; }
         }
 
@@ -131,12 +132,12 @@ namespace Oragon.Media.RtspServer.MediaTypes
         /// </summary>
         public override Uri Source
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return base.Source;
             }
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 //Experimental support for Unreliable and Http enabled with this line commented out
@@ -162,7 +163,7 @@ namespace Oragon.Media.RtspServer.MediaTypes
         /// </summary>
         public override bool Ready
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return base.Ready && false.Equals(IDisposedExtensions.IsNullOrDisposed(RtspClient)) && RtspClient.IsPlaying; }
         }
 

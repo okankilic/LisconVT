@@ -38,6 +38,7 @@ using Oragon.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Oragon.Media.Sdp
@@ -122,7 +123,7 @@ namespace Oragon.Media.Sdp
         //static char[] char4 = new char[] { default(char), SessionDescription.EqualsSign, SessionDescription.NewLine, SessionDescription.LineFeed };
 
         ////Ugly but saves a little memory at the cost of contention.
-        //[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        //[MethodImpl(MethodImplOptions.Synchronized)]
         //static int CalucateRequiredLength(Encoding enc, char type)
         //{            
         //    char4[0] = type;
@@ -222,13 +223,13 @@ namespace Oragon.Media.Sdp
 
         //Todo, add string[] field for state, keep all parts contigious
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected virtual void ClearState(int part)
         {
             //part < 0 == all state, otherwise the state for the given part
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SessionDescriptionLine Clone()
         {
             return new SessionDescriptionLine(this, false, m_Seperator);
@@ -239,7 +240,7 @@ namespace Oragon.Media.Sdp
         /// </summary>
         /// <param name="index">The index</param>
         /// <returns>String.Empty if the result was out of range, otherwise the value at the specified index.</returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal string GetPart(int index)
         {
             return m_Parts.Count > index ? m_Parts[index] : string.Empty;
@@ -251,7 +252,7 @@ namespace Oragon.Media.Sdp
         /// </summary>
         /// <param name="index">The index</param>
         /// <param name="value">The value</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void SetPart(int index, string value)
         {
             if (value == null) value = string.Empty;
@@ -259,7 +260,7 @@ namespace Oragon.Media.Sdp
             if (m_Parts.Count > index) m_Parts[index] = value;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void EnsureParts(int count)
         {
             while (m_Parts.Count < count) m_Parts.Add(string.Empty);
@@ -267,21 +268,21 @@ namespace Oragon.Media.Sdp
             //if(count > Count) Array.Resize(ref m_Parts, count);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void Insert(int index, string part)
         {
             //ArrayHelpers
             m_Parts.Insert(index, part);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void Add(string part)
         {
             //ArrayHelpers
             m_Parts.Add(part);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void RemoveAt(int index)
         {
             //ArrayHelpers
@@ -298,7 +299,7 @@ namespace Oragon.Media.Sdp
         /// <param name="other"></param>
         /// <param name="reference">The instance to copy or reference, when true changes to this instance will be reflected in other also.</param>
         /// <param name="seperator">The optional new seperator of the instance</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SessionDescriptionLine(SessionDescriptionLine other, bool reference = true, string seperator = null)
         {
             if (other == null) throw new ArgumentNullException();
@@ -318,7 +319,7 @@ namespace Oragon.Media.Sdp
         /// Constructs a new SessionDescriptionLine with the given type
         /// </summary>
         /// <param name="type">The type of the line</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SessionDescriptionLine(char type, int partCount = 0)
         {
             m_Parts = new List<string>(partCount);
@@ -347,7 +348,7 @@ namespace Oragon.Media.Sdp
         /// Parses and creates a SessionDescriptionLine from the given line
         /// </summary>
         /// <param name="line">The line from a SessionDescription</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SessionDescriptionLine(string line, string seperator = null, int partCount = -1)
         {
             //Trim the line (Trim Line Value)?
@@ -408,7 +409,7 @@ namespace Oragon.Media.Sdp
             return m_Type ^ m_Parts.GetHashCode();
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(SessionDescriptionLine other)
         {
             return other.Encoding.Equals(m_Encoding)

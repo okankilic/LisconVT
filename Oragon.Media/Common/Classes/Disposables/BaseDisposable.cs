@@ -43,6 +43,7 @@ using Oragon.Media.Common.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 #endregion
@@ -76,7 +77,7 @@ namespace Oragon.Classes.Disposables
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected static void SetShouldDisposeIfSenderIsBaseDisposableAndDisposeNow(object sender, EventArgs e)
         {
             if (false.Equals(sender == null) && sender is BaseDisposable) SetShouldDispose((sender as BaseDisposable), true, true);
@@ -88,7 +89,7 @@ namespace Oragon.Classes.Disposables
         /// <param name="toDispose"></param>
         /// <param name="value"></param>
         /// <param name="callDispose"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetShouldDispose(BaseDisposable toDispose, bool value, bool callDispose = false)
         {
             if (IDisposedExtensions.IsNullOrDisposed(toDispose)) return;
@@ -117,7 +118,7 @@ namespace Oragon.Classes.Disposables
         /// Constructs a new BaseDisposable with <see cref="ShouldDispose"/> set to the given value.
         /// </summary>
         /// <param name="shouldDispose">The value of <see cref="ShouldDispose"/></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected BaseDisposable(bool shouldDispose)
         {
             //Todo, should add flag for suppression?
@@ -130,7 +131,7 @@ namespace Oragon.Classes.Disposables
         /// Finalizes the BaseDisposable, calls <see cref="Dispose"/> with the value of <see cref="ShouldDispose"/>.
         /// </summary>
         /// <remarks>If ever, only called when there are no more references to the object during a GC Collection.</remarks>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         ~BaseDisposable()
         {
             //Write state in Finalizer
@@ -153,7 +154,7 @@ namespace Oragon.Classes.Disposables
         /// </summary>
         internal bool IsUndisposed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //return System.Threading.Thread.VolatileRead(ref State) == Undisposed;
@@ -166,7 +167,7 @@ namespace Oragon.Classes.Disposables
         /// </summary>
         internal bool IsFinalized
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 //return System.Threading.Thread.VolatileRead(ref State) == Finalized;
@@ -194,7 +195,7 @@ namespace Oragon.Classes.Disposables
         /// <summary>
         /// Throws a System.ObjectDisposedException if <see cref="IsDisposed"/> is true and the Finalizer has yet not been called
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected void CheckDisposed() { if (false.Equals(IsUndisposed) || IsFinalized || IsDisposed) throw new ObjectDisposedException(GetType().Name); }
 
         //ReleaseResources
@@ -202,7 +203,7 @@ namespace Oragon.Classes.Disposables
         /// Allows derived implemenations a chance to destory manged or unmanged resources.
         /// </summary>
         /// <param name="disposing">Indicates if resources should be destroyed</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected virtual void Dispose(bool disposing)
         {
             //Do not dispose when ShouldDispose is false.
@@ -234,7 +235,7 @@ namespace Oragon.Classes.Disposables
         /// <summary>
         /// if <see cref="IsDisposed"/> returns, otherwise calls <see cref="Dispose"/> with the value of <see cref="ShouldDispose"/> and <see cref="GC.SuppressFinalize"/>
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void Destruct()
         {
             //Call Dispose
@@ -251,7 +252,7 @@ namespace Oragon.Classes.Disposables
         /// Allows derived implemenations a chance to destory manged or unmanged resources.
         /// Calls <see cref="Destruct"/> if not <see cref="IsFinalized"/>, <see cref="IsUndisposed"/>, <see cref="ShoulDispose"/>, and not <see cref="IsDisposed"/>
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual void Dispose()
         {
             if (false.Equals(IsUndisposed) || IsFinalized || false.Equals(ShouldDispose) || IsDisposed) return;
@@ -273,7 +274,7 @@ namespace Oragon.Classes.Disposables
         /// Allows derived implemenations a chance to destory manged or unmanged resources.
         /// Calls <see cref="Dispose"/> with the value of <see cref="ShouldDispose"/>
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void IDisposable.Dispose()
         {
             Destruct();
@@ -284,7 +285,7 @@ namespace Oragon.Classes.Disposables
         /// </summary>
         bool IDisposed.IsDisposed
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return IsUndisposed && false.Equals(IsFinalized) ? false : IsDisposed; }
         }
 
@@ -293,7 +294,7 @@ namespace Oragon.Classes.Disposables
         /// </summary>
         bool IDisposed.ShouldDispose
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return IsUndisposed && false.Equals(IsFinalized) ? false.Equals(IsDisposed) && ShouldDispose : false;

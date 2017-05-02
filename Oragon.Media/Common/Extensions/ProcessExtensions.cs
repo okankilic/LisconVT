@@ -36,6 +36,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Extensions
 {
     public static class ProcessExtensions
@@ -47,7 +49,7 @@ namespace Oragon.Extensions
         /// <param name="affinityFlags"><see href="https://msdn.microsoft.com/en-us/library/system.diagnostics.processthread.processoraffinity.aspx">MSDN</see></param>
         /// <param name="threads">The number of threads</param>
         /// <param name="idealProcessor">The ideal processor for execution</param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAffinity(this System.Diagnostics.Process process, long affinityFlags, int threads = 0, int idealProcessor = -1)
         {
             //use the process or the current process.

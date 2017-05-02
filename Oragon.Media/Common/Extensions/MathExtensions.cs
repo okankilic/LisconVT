@@ -37,13 +37,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #endregion
 
 using Oragon.Classes.Binary;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Extensions
 {
     public static class MathExtensions
     {
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GreatestCommonDivisor(ref long a, ref long b)
         {
             //Until a approaches 0
@@ -67,7 +68,7 @@ namespace Oragon.Extensions
         public static int GreatestCommonDivisor(int a, int b) { return (int)GreatestCommonDivisor((long)a, (long)b); }
 
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long LeastCommonMultiple(ref long a, ref long b)
         {
             return a * b / GreatestCommonDivisor(a, b);
@@ -78,7 +79,7 @@ namespace Oragon.Extensions
         public static int LeastCommonMultiple(int a, int b) { return (int)LeastCommonMultiple((long)a, (long)b); }
 
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GreatestCommonMultiple(ref long a, ref long b)
         {
             //store any remainder

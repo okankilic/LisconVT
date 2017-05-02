@@ -42,6 +42,7 @@ using Oragon.Media.Ntp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Oragon.Media.Sdp
@@ -720,9 +721,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public string VersionToken
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value); }
             }
 
@@ -731,7 +732,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public int Version
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     int result;
@@ -740,7 +741,7 @@ namespace Oragon.Media.Sdp
 
                     return result;
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     VersionToken = value.ToString();
@@ -769,31 +770,31 @@ namespace Oragon.Media.Sdp
 
             public string Username
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value); }
             }
 
             public string SessionId
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(1); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(1, value); }
             }
 
             public string VersionToken
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(2); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(2, value); }
             }
 
             public long SessionVersion
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     string part = VersionToken;
@@ -806,23 +807,23 @@ namespace Oragon.Media.Sdp
                     return part[0].Equals((char)ASCII.HyphenSign) ? long.Parse(part) : (long)ulong.Parse(part);
                 }
                 //set { VersionToken = value.ToString(); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(2, value.ToString()); }
             }
 
             public string NetworkType
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(3); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(3, value); }
             }
 
             public string AddressType
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(4); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(4, value); }
             }
 
@@ -848,9 +849,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public string Address
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(5); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(5, value); }
             }
 
@@ -917,9 +918,9 @@ namespace Oragon.Media.Sdp
 
             public string SessionName
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value); }
             }
 
@@ -970,9 +971,9 @@ namespace Oragon.Media.Sdp
 
             public string SessionName
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0);}
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value); }
             }
 
@@ -1012,9 +1013,9 @@ namespace Oragon.Media.Sdp
 
             public string PhoneNumber
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value); }
             }
 
@@ -1052,9 +1053,9 @@ namespace Oragon.Media.Sdp
 
             public string Email
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value); }
             }
             
@@ -1114,7 +1115,7 @@ namespace Oragon.Media.Sdp
 
             public Uri Location
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     Uri result;
@@ -1124,7 +1125,7 @@ namespace Oragon.Media.Sdp
 
                     return result;
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { m_Parts.Clear(); m_Parts.Add(value.ToString()); }
             }
 
@@ -1180,7 +1181,7 @@ namespace Oragon.Media.Sdp
             /// <remarks>An adjustment time consists of a date and offset pair</remarks>
             public int AdjustmentTimesCount
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return m_Parts.Count + 1 >> 1;
@@ -1192,7 +1193,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public IEnumerable<double> AdjustmentValues
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     foreach (var part in m_Parts)
@@ -1200,7 +1201,7 @@ namespace Oragon.Media.Sdp
                         yield return SessionDescription.ParseTime(part).TotalSeconds;
                     }
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     //Remove existing entries
@@ -1370,9 +1371,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public string MediaToken
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal protected set { SetPart(0, value); }
             }
 
@@ -1382,10 +1383,10 @@ namespace Oragon.Media.Sdp
             public MediaType MediaType
             {
                                                                                       
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                                                                                                         //Unbounded split
                 get { return (MediaType)Enum.Parse(typeof(MediaType), MediaToken.Split(SessionDescription.Space).First(), true); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value.ToString()); }
             }
 
@@ -1395,9 +1396,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public string PortToken
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(1); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(1, value); }
             }
 
@@ -1406,9 +1407,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public int MediaPort
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return int.Parse(PortToken.Split(SessionDescription.ForwardSlashSplit).FirstOrDefault(), System.Globalization.CultureInfo.InvariantCulture); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     if (value < ushort.MinValue || value > ushort.MaxValue) throw new ArgumentOutOfRangeException("The port value cannot be less than 0 or exceed 65535");
@@ -1424,7 +1425,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public bool HasMultiplePorts
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return NumberOfPorts + 1 > 2;
@@ -1437,7 +1438,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public int NumberOfPorts
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     foreach (string part in PortToken.Split(SessionDescription.ForwardSlash).Skip(1))
@@ -1449,7 +1450,7 @@ namespace Oragon.Media.Sdp
 
                     return 1;
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     if (value < ushort.MinValue || value > ushort.MaxValue) throw new ArgumentOutOfRangeException("A value less than 0 or greater than 65535 is not valid.");
@@ -1497,9 +1498,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public string MediaProtocol
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(2); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(2, value); }
             }
 
@@ -1510,9 +1511,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public string MediaFormat
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(3); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     SetPart(3, value);
@@ -1535,7 +1536,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public IEnumerable<int> PayloadTypes
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (object.ReferenceEquals(PayloadTypeTokens, null))
@@ -1556,7 +1557,7 @@ namespace Oragon.Media.Sdp
                     return ParsedPayloadTypes;
 
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     ////Proto token index
@@ -1697,9 +1698,9 @@ namespace Oragon.Media.Sdp
 
             public string StartTimeToken
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(0); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(0, value); }
             }
 
@@ -1710,9 +1711,9 @@ namespace Oragon.Media.Sdp
             /// <remarks>These values are the decimal representation of Network Time Protocol (NTP) time values in seconds since 1900 </remarks>
             public long StartTime
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return (long)StartTimeSpan.TotalSeconds; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set { SetPart(0, value.ToString()); }
             }
 
@@ -1721,17 +1722,17 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public TimeSpan StartTimeSpan
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return SessionDescription.ParseTime(GetPart(0)); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set { SetPart(0, value.ToString()); }//Format, see above.
             }
 
             public string StopTimeToken
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return GetPart(1); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set { SetPart(1, value); }
             }
 
@@ -1742,9 +1743,9 @@ namespace Oragon.Media.Sdp
             /// <remarks>These values are the decimal representation of Network Time Protocol (NTP) time values in seconds since 1900 </remarks>
             public long StopTime
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return (long)StopTimeSpan.TotalSeconds; }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set { SetPart(1, value.ToString()); }
             }
 
@@ -1753,9 +1754,9 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public TimeSpan StopTimeSpan
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return SessionDescription.ParseTime(GetPart(1)); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set { SetPart(1, value.ToString()); }//Format
             }
 
@@ -1765,12 +1766,12 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public DateTime NtpStartDateTime
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return NetworkTimeProtocol.UtcEpoch1900.AddSeconds(StartTime);// - NetworkTimeProtocol.NtpDifferenceUnix);
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set
                 {
                     //Convert to SDP timestamp
@@ -1787,12 +1788,12 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public DateTime NtpStopDateTime
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return NetworkTimeProtocol.UtcEpoch1900.AddSeconds(StopTime);// - NetworkTimeProtocol.NtpDifferenceUnix);
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 internal set
                 {
                     //Convert to SDP timestamp
@@ -1809,7 +1810,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public bool IsPermanent
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return StartTimeSpan == TimeSpan.Zero && StopTimeSpan == TimeSpan.Zero; }
             }
 
@@ -1820,7 +1821,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public bool Unbounded
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return StartTimeSpan == TimeSpan.Zero; }
             }
 
@@ -1843,7 +1844,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public IEnumerable<TimeSpan> RepeatTimes
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     foreach (var part in m_Parts)
@@ -1851,7 +1852,7 @@ namespace Oragon.Media.Sdp
                         yield return SessionDescription.ParseTime(part);
                     }
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     RepeatValues = value.Select(v => v.TotalSeconds);
@@ -1863,7 +1864,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public TimeSpan RepeatTimeSpan
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return TimeSpan.FromSeconds(RepeatTimeValue); }
                 //set { } //[Clear parts and] Format value.
 
@@ -1878,7 +1879,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public IEnumerable<double> RepeatValues
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     foreach (var repeatTime in RepeatTimes)
@@ -1886,7 +1887,7 @@ namespace Oragon.Media.Sdp
                         yield return repeatTime.TotalSeconds;
                     }
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     //Remove existing entries
@@ -1902,7 +1903,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public double RepeatTimeValue
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return RepeatValues.Sum(); }
                 //set { RepeatTimeSpan = TimeSpan.FromSeconds(value); }
             }
@@ -2021,7 +2022,7 @@ namespace Oragon.Media.Sdp
 
             public IEnumerable<string> FormatParts
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (false.Equals(object.ReferenceEquals(m_FormatParts, null))) return m_FormatParts;
@@ -2038,18 +2039,18 @@ namespace Oragon.Media.Sdp
 
             internal int FormatPartCount
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return FormatParts.Count(); }
             }
 
             public string FormatToken
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     return FormatParts.FirstOrDefault();
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     if (value.Equals(FormatToken, StringComparison.OrdinalIgnoreCase)) return;
@@ -2067,7 +2068,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public int FormatValue
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (ParsedFormatToken >= 0) return ParsedFormatToken;
@@ -2082,7 +2083,7 @@ namespace Oragon.Media.Sdp
 
             public bool HasFormatSpecificParameters
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return m_Parts.Count >= 1 && FormatSpecificParametersCount > 0; }
             }
 
@@ -2091,12 +2092,12 @@ namespace Oragon.Media.Sdp
             {
                 //get { return GetPart(1); }
                 //set { SetPart(1, value); }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {                    
                     return FormatParts.Skip(1).Take(1).FirstOrDefault();
                 }
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
                     if (value.Equals(m_FormatParts[1], StringComparison.OrdinalIgnoreCase)) return;
@@ -2114,7 +2115,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public IEnumerable<string> FormatSpecificParameters
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (false.Equals(object.ReferenceEquals(m_FormatSpecificParameters, null))) return m_FormatSpecificParameters;
@@ -2130,7 +2131,7 @@ namespace Oragon.Media.Sdp
             /// </summary>
             public int FormatSpecificParametersCount
             {
-                [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get { return FormatSpecificParameters.Count(); }
             }
 

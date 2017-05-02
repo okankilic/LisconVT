@@ -43,6 +43,7 @@ using Oragon.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -121,7 +122,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         public long Count
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return System.Threading.Interlocked.Read(ref m_Count); }
         }
         
@@ -130,7 +131,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         public bool IsEmpty
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Count.Equals(Binary.LongZero); }
         }
 
@@ -141,7 +142,7 @@ namespace Oragon.Collections.Generic
         /// <summary>
         /// Constructs a LinkedStack
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
         public ConcurrentLinkedStackSlim()
         {
@@ -158,7 +159,7 @@ namespace Oragon.Collections.Generic
         /// <param name="t"></param>
         /// <returns></returns>
         /// <remarks>Space Complexity S(5), Time Complexity O(2-7)</remarks>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryPop(out T t)
         {
             //Keep the read node on the stack
@@ -196,7 +197,7 @@ namespace Oragon.Collections.Generic
         /// <param name="t"></param>
         /// <returns></returns>
         /// <remarks>Space Complexity S(1), Time Complexity O(2)</remarks>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryPeek(ref T t)
         {
             if (Object.ReferenceEquals(First, Node.Null)) return false;
@@ -210,7 +211,7 @@ namespace Oragon.Collections.Generic
         /// Push an element by repeatedly calling <see cref="TryPush"/> until the operation succeeds.
         /// </summary>
         /// <param name="t"></param>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Push(T t)
         {
             bool added = false;
@@ -220,7 +221,7 @@ namespace Oragon.Collections.Generic
         }
 
         [System.CLSCompliant(false)]
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         /// <remarks>Space Complexity S(2), Time Complexity O(3)</remarks>
         public bool TryPush(ref T t)
         {
@@ -242,7 +243,7 @@ namespace Oragon.Collections.Generic
         /// Sets First and Last to null and Count = 0.
         /// </summary>
         /// <remarks>Space Complexity S(6), Time Complexity O(6 - Count)</remarks>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void Clear(bool all, out Node head, out Node tail)
         {
             if (false.Equals(all))
@@ -276,7 +277,7 @@ namespace Oragon.Collections.Generic
         /// Enumerates the elements.
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         IEnumerator<T> GetEnumerator()
         {
             Node Current = Last;
@@ -316,7 +317,7 @@ namespace Media.UnitTests
 
         int ThreadCount = Environment.ProcessorCount;
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void TestsPush()
         {
             if (LinkedStack.IsEmpty != true) throw new System.Exception("IsEmpty Not True");
@@ -340,7 +341,7 @@ namespace Media.UnitTests
             if (LinkedStack.Last == null) throw new System.Exception("Last is null");
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void TestsPop()
         {
             if (LinkedStack == null) throw new System.Exception("LinkedStack is null");
@@ -383,7 +384,7 @@ namespace Media.UnitTests
             if (LinkedStack.Count != 0) throw new System.Exception("LinkedStack Count Not 0");
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void TestsThreading()
         {
             System.Threading.ManualResetEvent mre = new System.Threading.ManualResetEvent(false);
@@ -492,7 +493,7 @@ namespace Media.UnitTests
             System.Console.WriteLine("Count: " + LinkedStack.Count);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void TestsMultiThreading()
         {
             int MultiThreadAmount = Amount * 10;
@@ -667,7 +668,7 @@ namespace Media.UnitTests
             System.Console.WriteLine("Count: " + LinkedStack.Count);
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void TestZThreading()
         {
             System.Linq.ParallelEnumerable.ForAll(new Action[] { TestsPush, TestsPop, TestsThreading, TestsMultiThreading }.AsParallel(), (a) =>
@@ -685,7 +686,7 @@ namespace Media.UnitTests
             });
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void TestZZFar()
         {
             try

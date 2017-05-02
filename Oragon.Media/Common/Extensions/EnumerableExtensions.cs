@@ -36,11 +36,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Extensions
 {
     public static class EnumerableExtensions
     {
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool SequenceEquals(this System.Collections.IEnumerable left, System.Collections.IEnumerable right)
         {
             if (object.ReferenceEquals(left, null)) return object.ReferenceEquals(right, null);
@@ -78,7 +80,7 @@ namespace Oragon.Extensions
         }
 
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool SequenceEquals<T>(this System.Collections.Generic.IEnumerable<T> left, System.Collections.Generic.IEnumerable<T> right)
         {
             if (object.ReferenceEquals(left, null)) return object.ReferenceEquals(right, null);

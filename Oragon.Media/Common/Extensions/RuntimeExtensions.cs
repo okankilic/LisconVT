@@ -36,11 +36,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Oragon.Extensions
 {
     public static class RuntimeExtensions
     {
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool NamespaceExists(string @namespace, System.Collections.Generic.IEnumerable<System.Reflection.Assembly> assemblies = null, System.StringComparison comparisonType = System.StringComparison.InvariantCultureIgnoreCase)
         {
             if (string.IsNullOrWhiteSpace(@namespace)) return false;
@@ -60,7 +62,7 @@ namespace Oragon.Extensions
 
         public static bool IsMono
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return MonoType != null; }
         }
 
@@ -68,7 +70,7 @@ namespace Oragon.Extensions
 
         public static bool IsMonoMac
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return MonoMacType != null; }
         }
 
@@ -78,7 +80,7 @@ namespace Oragon.Extensions
 
         public static bool IsiOS
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return MonoTouchObjCRuntimeType != null; }
         }
 
@@ -100,7 +102,7 @@ namespace Oragon.Extensions
 
         public static bool IsAndroid
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return AndroidOSType != null /*|| HasAndroidOS*/; }
         }
 
@@ -111,7 +113,7 @@ namespace Oragon.Extensions
         /// </summary>
         public static bool IsWatchKit
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return WatchKitType != null; }
         }
 

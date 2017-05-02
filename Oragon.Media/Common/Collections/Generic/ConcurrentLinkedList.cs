@@ -40,6 +40,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //https://github.com/mono/mono/blob/d70777a3332af2d630d24adf620c2e548b92b56a/mcs/class/referencesource/System/compmod/system/collections/generic/linkedlist.cs
 
 using Oragon.Classes.Binary;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Collections.Generic
 {
@@ -66,9 +67,9 @@ namespace Oragon.Collections.Generic
         /// </summary>
         public int Capacity
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected set;
         }
 
@@ -77,7 +78,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         public long Count
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return System.Threading.Interlocked.Read(ref m_Count); }
         }
 
@@ -86,7 +87,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         public bool IsEmpty
         {
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return Count.Equals(Binary.LongZero); }
         }
 
@@ -95,7 +96,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryAddFirst(ref T data)
         {
             long count = Count;
@@ -117,7 +118,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryAddLast(ref T data)
         {
             long count = Count;
@@ -139,7 +140,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected LinkedNode<T> AddFirst(ref T value)
         {
             if (object.ReferenceEquals(Head, LinkedNode<T>.Null))
@@ -161,7 +162,7 @@ namespace Oragon.Collections.Generic
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected LinkedNode<T> AddLast(ref T value)
         {
             if (object.ReferenceEquals(Head, LinkedNode<T>.Null))
@@ -206,7 +207,7 @@ namespace Oragon.Collections.Generic
         /// 
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected System.Collections.Generic.IEnumerator<T> EnumeratorImplemenation()
         {
             LinkedNode<T> Current = Head;
@@ -231,7 +232,7 @@ namespace Oragon.Collections.Generic
         /// 
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
         {
             return EnumeratorImplemenation();
@@ -241,7 +242,7 @@ namespace Oragon.Collections.Generic
         /// 
         /// </summary>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return EnumeratorImplemenation();
@@ -250,7 +251,7 @@ namespace Oragon.Collections.Generic
         /// <summary>
         /// 
         /// </summary>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ConcurrentLinkedList()
         {
             //Reserved

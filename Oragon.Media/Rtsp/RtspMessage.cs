@@ -46,6 +46,7 @@ using Oragon.Extensions;
 using Oragon.Classes.Binary;
 using Oragon.Media.Common.Extensions;
 using Oragon.Classes.Text;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Media.Rtsp
 {
@@ -735,7 +736,7 @@ namespace Oragon.Media.Rtsp
         /// <param name="socket"></param>
         /// <param name="buffer"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public override int CompleteFrom(System.Net.Sockets.Socket socket, MemorySegment buffer)
         {
             if (IsDisposed && false.Equals(IsPersistent)) return 0;

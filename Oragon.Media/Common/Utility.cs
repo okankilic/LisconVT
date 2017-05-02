@@ -44,6 +44,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -77,7 +78,7 @@ namespace Oragon.Media.Common
         /// the position within the buffer reletive to the start position in which the first occurance of octets given the octetStart and octetCount was matched.
         /// If more than 1 octet is required for a match and the buffer does not encapsulate the entire match start will still reflect the occurance of the partial match.
         /// </returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ContainsBytes(byte[] buffer, ref int start, ref int count, byte[] octets, int octetStart, int octetCount)
         {
             //If the buffer or the octets are null no dice
@@ -155,7 +156,7 @@ namespace Oragon.Media.Common
         /// <param name="startIndex"></param>
         /// <param name="sourceLength"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Find(byte[] array, byte[] needle, int startIndex, int sourceLength)
         {
             int needleLen = needle.Length;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +42,7 @@ namespace Oragon.Classes.Disposables
 #endif
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SuppressedFinalizerDisposable(bool shouldDispose)
             : base(shouldDispose) //Suppress Finalize may not be called more than once without a matching Reregister
         {
@@ -56,7 +57,7 @@ namespace Oragon.Classes.Disposables
 #endif
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal protected override void Dispose(bool disposing)
         {
             //If already disposed or disposing and should not dispose return.

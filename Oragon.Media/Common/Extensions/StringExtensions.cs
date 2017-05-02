@@ -40,6 +40,7 @@ using Oragon.Classes;
 using Oragon.Classes.Binary;
 using Oragon.Classes.Text;
 using Oragon.Media.Common.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Oragon.Extensions
 {
@@ -59,7 +60,7 @@ namespace Oragon.Extensions
 
         //https://github.com/dotnet/corefx/issues/10013
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte HexCharToByte(char c, bool upperCase = false)
         {
             c = char.ToUpperInvariant(c); return (byte)(upperCase ? char.ToUpperInvariant((char)(c > '9' ? c - 'A' + 10 : c - '0')) : (c > '9' ? c - 'A' + 10 : c - '0'));
@@ -122,7 +123,7 @@ namespace Oragon.Extensions
 
         //http://stackoverflow.com/questions/272633/add-spaces-before-capital-letters
         //Before I ever saw the above I came up with the below... I did modify one thing after
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string AddSpacesBeforeCapitols(string value, int offset = 0, int count = -1)
         {
             if (string.IsNullOrWhiteSpace(value)) return value;
@@ -180,7 +181,7 @@ namespace Oragon.Extensions
         /// </summary>
         /// <param name="hex"></param>
         /// <returns></returns>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] ConvertToBytes(this string hex) { return string.IsNullOrWhiteSpace(hex) ? MemorySegment.EmptyBytes : HexStringToBytes(hex); }
 
         public static string Substring(this string source, string pattern, System.StringComparison comparison = System.StringComparison.OrdinalIgnoreCase)
@@ -202,7 +203,7 @@ namespace Oragon.Extensions
         /// Otherwise the <see cref="System.String"/> which does not include the <paramref name="pattern"/>
         /// </returns>
         /// <remarks>8 bytes in worst case space complexity, time complexity is O(count) in worst cast</remarks>
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         //refs
         public static string Substring(this string source, int startIndex, int count, string pattern, System.StringComparison comparison = System.StringComparison.OrdinalIgnoreCase) //Ordinal is faster.
         {
@@ -232,7 +233,7 @@ namespace Oragon.Extensions
             return startIndex >= Binary.Zero && startIndex <= sourceLength ? source.Substring(startIndex + patternLength) : string.Empty;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] SplitTrim(this string ex, string[] seperator, int count, System.StringSplitOptions options)
         {
             if (count.Equals(Binary.Zero) || ArrayExtensions.IsNullOrEmpty(seperator)) return new string[Binary.Zero];
@@ -244,7 +245,7 @@ namespace Oragon.Extensions
             return results;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] SplitTrim(this string ex, char[] seperator, int count, System.StringSplitOptions options)
         {
             if (count.Equals(Binary.Zero) || ArrayExtensions.IsNullOrEmpty(seperator)) return new string[0];
@@ -256,7 +257,7 @@ namespace Oragon.Extensions
             return results;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] SplitTrimEnd(this string ex, string[] seperator, int count, System.StringSplitOptions options)
         {
             if (count.Equals(Binary.Zero) || ArrayExtensions.IsNullOrEmpty(seperator)) return new string[Binary.Zero];
@@ -268,7 +269,7 @@ namespace Oragon.Extensions
             return results;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] SplitTrimEnd(this string ex, char[] seperator, int count, System.StringSplitOptions options)
         {
             if (count.Equals(Binary.Zero) || ArrayExtensions.IsNullOrEmpty(seperator)) return new string[Binary.Zero];
@@ -280,7 +281,7 @@ namespace Oragon.Extensions
             return results;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] SplitTrimStart(this string ex, string[] seperator, int count, System.StringSplitOptions options)
         {
             if (count.Equals(Binary.Zero) || ArrayExtensions.IsNullOrEmpty(seperator)) return new string[Binary.Zero];
@@ -292,7 +293,7 @@ namespace Oragon.Extensions
             return results;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] SplitTrimStart(this string ex, char[] seperator, int count, System.StringSplitOptions options)
         {
             if (count.Equals(Binary.Zero) || ArrayExtensions.IsNullOrEmpty(seperator)) return new string[Binary.Zero];
